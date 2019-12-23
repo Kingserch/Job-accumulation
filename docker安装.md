@@ -3,9 +3,14 @@
 ```
 yum search docker 
 ```   
-####  二,没有docker就安装,不是相应的版本就移除
+####  二,移除操作
 ```
 yum remove docker
+```  
+####  三,为了方便添加软件源，支持devicemapper存储类型,安装如下软件包
+```
+yum update -y
+yum install -y yum-utils device-mapper-persistent-data lvm2
 ```   
 
 
