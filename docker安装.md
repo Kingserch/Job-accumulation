@@ -10,6 +10,7 @@ yum remove docker
 ####  三,为了方便添加软件源，支持devicemapper存储类型,安装如下软件包
 ```
 yum update -y
+yum makecache fast
 yum install -y yum-utils device-mapper-persistent-data lvm2
 ```   
 
