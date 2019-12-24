@@ -80,11 +80,17 @@ I am running!
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS               NAMES
 436d39f3ffa3        centos:7            "echo 'I am running!'"   10 seconds ago      Exited (0) 9 seconds ago                        nice_dirac
 7b2a90fe3ad8        centos:7            "/bin/bash"              41 minutes ago      Exited (0) 40 minutes ago                       reverent_albattani
-[root@42-m ~]# 
-
+[root@42-m ~]# docker rmi 436d39f3ffa3 #正确的做法是先删除正在运行的容器，然后在根据ID来删除镜像
+```
+`清理镜像docker image prune命令进行清理`
+<ul>
+  <li>-f,--filter filter:只清理符合给定过滤器的镜像</li>
+  <li>-a,all:删除所有无用镜像，不光是临时镜像</li>
+  <li>-f,-force:强制删除镜像。</li>
+</ul>
+```
 
 ```
-	
 	
 	
 
