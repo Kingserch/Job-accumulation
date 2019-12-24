@@ -65,7 +65,15 @@ NAME                DESCRIPTION                STARS               OFFICIAL     
 nginx               Official build of Nginx.   12375               [OK]                
 [root@42-m ~]# 
 ```
-	
++ ### 删除和清理镜像
+`使用docker rmi 或docker image rm 命令可以删除镜像,-f,force:强制删除;-no-prune:不要清理未带标签的父镜像`
+```
+[root@42-m ~]# docker rmi mycentos:7		#删除一个镜像，但是这个镜像有多个名字的，只要有标签指向这个镜像就没彻底删除，
+Untagged: mycentos:7
+[root@42-m ~]# docker image ls
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+centos              7                   5e35e350aded        6 weeks ago         203MB
+```
 	
 	
 	
