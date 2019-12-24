@@ -96,8 +96,8 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 `docker image prune -f #这个命令会自动清理临时遗留镜像文件层，最后会提示释放的空间大小`  
 
 + ### 创建镜像
-1.基于已有容器创建
-`docker [container]commit[options] container [repository][:TAG]`  
+1.基于已有容器创建  
+`语法格式:docker [container]commit[options] container [repository][:TAG]`  
 <ul>
   <li>-a,--author="":作者信息</li>
   <li>-c,--change=[]:提交的时候执行dockerfile指令,包括CMD|ENTRYPOINT|E NV|EXPOSE|LABEL|ONBUILD|USER|VOLUME等</li>
