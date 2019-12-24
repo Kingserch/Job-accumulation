@@ -88,11 +88,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
   <li>-a,all:删除所有无用镜像，不光是临时镜像</li>
   <li>-f,-force:强制删除镜像。</li>
 </ul>
-```
-[root@42-m ~]# docker image prune -f
-Total reclaimed space: 0B
 
-```
 	
 	
 
@@ -102,3 +98,6 @@ Total reclaimed space: 0B
 	
 + ### 坑位
     + [坑位](https://github.com/Kiaccumulation/blob/Docker/docker%E5%AE%89%E8%A3%85.md)
+	
+	
+	
