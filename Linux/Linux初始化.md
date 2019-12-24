@@ -13,3 +13,8 @@ default via 192.168.31.2 dev ens33 proto dhcp metric 100
 search localdomain
 nameserver 192.168.31.2
 ```
+#### 1.更新yum源
+```
+[root@like /]# curl -s -o/etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+[root@like /]# curl -s -o /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+```
