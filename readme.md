@@ -3,7 +3,7 @@
     + [Docker](#Docker使用)
     + [Devops](#devops使用)
 	
-	
+	linux 坑位
 + ### Linux
     + [docker安装](https://github.com/Kingserch/Job-accumulation/blob/Docker/docker%E5%AE%89%E8%A3%85.md)
 + ### Docker使用
