@@ -123,6 +123,7 @@ centos              7                   5e35e350aded        6 weeks ago         
 dockerfile待请教
 ```  
 + ### 存出和载入镜像
+1.存出镜像
 
 	
 
