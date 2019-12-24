@@ -3,7 +3,7 @@
     + [查看镜像images,tag,inspect,history](#查看镜像)
     + [搜寻镜像search](#搜寻镜像)
     + [创建镜像commit,import,build](#创建镜像)
-    + [坑位](#坑位)
+    + [存出和载入镜像save,load](#存出和载入镜像)
     + [坑位](#坑位)
     + [坑位](#坑位)
     + [坑位](#坑位)
@@ -124,7 +124,14 @@ dockerfile待请教
 ```  
 + ### 存出和载入镜像
 1.存出镜像
+如果要导出镜像到本地文件，用docker [image] save 命令,-o,-output string，导出镜像到指定的文件中  
+```
+[root@42-m ~]# docker image ls
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+test                1                   027bb2937462        21 minutes ago      203MB
+centos              7                   5e35e350aded        6 weeks ago         203MB
 
+```
 	
 
 
