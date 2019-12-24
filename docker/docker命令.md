@@ -58,7 +58,8 @@ IMAGE               CREATED             CREATED BY                              
   <li>--limit int:限制输出结果的个数，默认为25个</li>
   <li>--no-trunc:不截断输出结果</li>
 </ul>
-`例如:搜索官方提供带nginx关键字的镜像`   
+`例如:搜索官方提供带nginx关键字的镜像`
+***
 ```
 [root@42-m ~]# docker search --filter=is-official=true nginx
 NAME                DESCRIPTION                STARS               OFFICIAL            AUTOMATED
