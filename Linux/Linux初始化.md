@@ -18,3 +18,8 @@ nameserver 192.168.31.2
 [root@like /]# curl -s -o/etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
 [root@like /]# curl -s -o /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
 ```
+#### 2.安装工作中需要的工具
+```
+[root@like /]# yum install tree nmap dos2unix lrzsz nc lsof wget tcpdump htop iftop iotop sysstat nethogs  vim  tig  jq -y
+[root@like /]# yum install axel -y	#多线程下载工具，可替代curl、wget。
+```
