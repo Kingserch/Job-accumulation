@@ -1,9 +1,9 @@
 + ### Docker命令
-    + [Docker命令](#docker命令)
+    + [pull命令](#pull命令)
     + [坑位](#坑位)
     + [坑位](#坑位)
     + [坑位](#坑位)
-+ ### docker命令
++ ### pull命令
     + [pull](https://github.com/Kingserch/Job-accumulation/blob/Docker/docker%E5%AE%89%E8%A3%85.md)
 	
 	
