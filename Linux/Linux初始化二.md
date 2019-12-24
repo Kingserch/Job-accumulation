@@ -41,4 +41,4 @@ export JAVA_HOME PATH CLASSPATH CATALINA_HOME
 ```
 在浏览器上访问ip+8080端口，可以看到以下页面，证明tomcat安装成功
 ![](https://github.com/Kingserch/Job-accumulation/blob/Linux/images/tomcat.png)
-11
+***
