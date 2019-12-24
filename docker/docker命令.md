@@ -1,7 +1,7 @@
 + ### Docker命令
     + [获取镜像pull](#获取镜像)
     + [查看镜像images,tag,inspect,history](#查看镜像)
-    + [搜寻镜像](#搜寻镜像)
+    + [搜寻镜像search](#搜寻镜像)
     + [坑位](#坑位)
 + ### 获取镜像
 `docker [image] pull NAME[:TAG]`   
