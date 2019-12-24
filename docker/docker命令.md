@@ -69,11 +69,20 @@ nginx               Official build of Nginx.   12375               [OK]
 + ### 删除和清理镜像
 `使用docker rmi 或docker image rm 命令可以删除镜像,-f,force:强制删除;-no-prune:不要清理未带标签的父镜像`
 ```
-[root@42-m ~]# docker rmi mycentos:7		#删除一个镜像，但是这个镜像有多个名字的，只要有标签指向这个镜像就没彻底删除，
+[root@42-m ~]# docker rmi mycentos:7	#删除一个镜像，但是这个镜像有多个名字的，只要有标签指向这个镜像就没彻底删除，
 Untagged: mycentos:7
-[root@42-m ~]# docker image ls
+[root@42-m ~]# docker image ls			#也可以用rmi 加ID删除，这样删除会先删除指向这个ID的所有标签，在删除ID
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 centos              7                   5e35e350aded        6 weeks ago         203MB
+[root@42-m ~]# docker run centos:7 echo 'I am running!'		#用centos:7输入一段话
+I am running!
+[root@42-m ~]# docker ps -a 	#可以看到后台存在一个退出状态的容器，试图删除该容易，docker会提示容器正在运行，无法删除。-f可以强制删除
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS               NAMES
+436d39f3ffa3        centos:7            "echo 'I am running!'"   10 seconds ago      Exited (0) 9 seconds ago                        nice_dirac
+7b2a90fe3ad8        centos:7            "/bin/bash"              41 minutes ago      Exited (0) 40 minutes ago                       reverent_albattani
+[root@42-m ~]# 
+
+
 ```
 	
 	
