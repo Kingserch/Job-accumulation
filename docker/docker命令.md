@@ -134,7 +134,12 @@ centos              7                   5e35e350aded        6 weeks ago         
 ```
 2.载入镜像
 用docker [image] load 将导出tar文件再导入本地镜像库，-i input string，从指定文件中读入镜像内容
-
+```
+[root@42-m ~]# docker load -i centos_7.tar	#将导入镜像及其相关的元数据信息(包括标签)
+Loaded image: centos:7
+[root@42-m ~]# docker load < centos_7.tar	#导入的另一种写法
+Loaded image: centos:7
+```
 	
 
 
