@@ -13,6 +13,11 @@ ab5ef0e58194: Pull complete
 Digest: sha256:4a701376d03f6b39b8c2a8f4a8e499441b0d567f9ab9d58e4991de4472fb813c
 Status: Downloaded newer image for centos:7
 docker.io/library/centos:7
+[root@42-m ~]# docker run -it centos:7 /bin/bash
+[root@7b2a90fe3ad8 /]# echo "docker"
+docker
+[root@7b2a90fe3ad8 /]# exit
+exit
 [root@42-m ~]# 
 ```
 
