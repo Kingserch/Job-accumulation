@@ -96,7 +96,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 `docker image prune -f #这个命令会自动清理临时遗留镜像文件层，最后会提示释放的空间大小`  
 
 + ### 创建镜像
-基于已有容器创建
+1.基于已有容器创建
 `docker [container]commit[options] container [repository][:TAG]`  
 <ul>
   <li>-a,--author="":作者信息</li>
@@ -105,7 +105,17 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 </ul>
 
 ```
-ss
+[root@42-m ~]# docker run -it centos:7 /bin/bash	#先运行一个容器
+[root@a8beb3a9e1fe /]# touch test
+[root@a8beb3a9e1fe /]# exit
+[root@42-m ~]# docker commit -m "add a new file" -a "king" a8beb3a9e1fe test:1	#用docker commit来创建一个新镜像
+sha256:027bb2937462dbdb8a0b2231f294c3dae121b771c8ad588ab19aceb8a883c0bd	#新镜像的ID
+[root@42-m ~]# docker images		#可以看到创建的新镜像
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+test                1                   027bb2937462        9 seconds ago       203MB
+centos              7                   5e35e350aded        6 weeks ago         203MB
+[root@42-m ~]# 
+
 ```
 
 	
