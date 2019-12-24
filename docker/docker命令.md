@@ -51,7 +51,7 @@ IMAGE               CREATED             CREATED BY                              
 [root@42-m ~]# 
 ```
 + ### 搜寻镜像
-语法:`docker search [option] keyword`   
+`语法:docker search [option] keyword`   
 <ul>
   <li>-f,--filter filter:过滤输出内容</li>
   <li>--format string:格式化输出内容</li>
