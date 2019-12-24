@@ -89,8 +89,9 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
   <li>-f,-force:强制删除镜像。</li>
 </ul>
 ```
-[root@42-m ~]# docker image prune -f	#自动清理临时的遗留镜像文件层，最后会提示释放的空间大小
+[root@42-m ~]# docker image prune -f
 Total reclaimed space: 0B
+[root@42-m ~]## 
 ```
 	
 	
