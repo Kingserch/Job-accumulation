@@ -91,7 +91,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 ```
 [root@42-m ~]# docker image prune -f
 Total reclaimed space: 0B
-[root@42-m ~]#
+
 ```
 	
 	
