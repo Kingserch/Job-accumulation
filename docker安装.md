@@ -22,6 +22,7 @@ yum makecache fast
 yum install docker-ce -y
 ```  
 ####  六,为docker添加一个json
+[json文件地址](https://github.com/Kingserch/Job-accumulation/blob/Docker/json/daemon.json)   
 ```
 [root@42-m /]# systemctl start docker
 [root@42-m /]# systemctl enable docker
@@ -35,7 +36,7 @@ rz waiting to receive.
 daemon.json  key.json
 [root@42-m docker]#
 ```
-[json文件地址](https://github.com/Kingserch/Job-accumulation/blob/Docker/json/daemon.json)   
+
 `[root@42-m docker]# systemctl restart docker`
 
 
