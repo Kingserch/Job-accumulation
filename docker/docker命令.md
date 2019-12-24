@@ -133,6 +133,8 @@ centos              7                   5e35e350aded        6 weeks ago         
 [root@42-m ~]# docker save  -o centos_7.tar centos:7	#可以通过centos_7.tar来分享
 ```
 2.载入镜像
+用docker [image] load 将导出tar文件再导入本地镜像库，-i input string，从指定文件中读入镜像内容
+
 	
 
 
