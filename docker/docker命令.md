@@ -130,8 +130,9 @@ dockerfile待请教
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 test                1                   027bb2937462        21 minutes ago      203MB
 centos              7                   5e35e350aded        6 weeks ago         203MB
-
+[root@42-m ~]# docker save  -o centos_7.tar centos:7	#可以通过centos_7.tar来分享
 ```
+2.载入镜像
 	
 
 
