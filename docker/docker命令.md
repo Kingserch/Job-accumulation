@@ -2,7 +2,12 @@
     + [获取镜像pull](#获取镜像)
     + [查看镜像images,tag,inspect,history](#查看镜像)
     + [搜寻镜像search](#搜寻镜像)
+    + [创建镜像commit,import,build](#创建镜像)
     + [坑位](#坑位)
+    + [坑位](#坑位)
+    + [坑位](#坑位)
+    + [坑位](#坑位)
+    + [坑位](#坑位)	
 + ### 获取镜像
 `docker [image] pull NAME[:TAG]`   
 `NAME是镜像仓库名称，用来区分镜像，TAG是镜像的标签，用来表示版本信息，docker拉取一个官方镜像，例如:`   
@@ -89,7 +94,8 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
   <li>-f,-force:强制删除镜像。</li>
 </ul>
 `docker image prune -f #这个命令会自动清理临时遗留镜像文件层，最后会提示释放的空间大小`
-	
++ ### 创建镜像
+
 	
 
 
