@@ -35,7 +35,7 @@ rz waiting to receive.
 daemon.json  key.json
 [root@42-m docker]#
 ```
-[json文件地址](https://github.com/Kingserch/Job-accumulation/tree/Docker/json)
+[json文件地址](https://github.com/Kingserch/Job-accumulation/tree/Docker/json)   
 `[root@42-m docker]# systemctl restart docker`
 
 
