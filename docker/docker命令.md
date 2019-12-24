@@ -146,13 +146,5 @@ Loaded image: centos:7
 [root@42-m ~]# docker tag test:1 user/test:latest
 [root@42-m ~]# docker push test:1 user/test:latest	#这里需要寻教
 ```
-
-
-
-
-	
-+ ### 坑位
-    + [坑位](https://github.com/Kiaccumulation/blob/Docker/docker%E5%AE%89%E8%A3%85.md)
-	
-	
+Docker镜像命令操作:获取，查看，搜索，删除，创建，存出和载入，上传等。
 	
