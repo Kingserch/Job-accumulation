@@ -114,8 +114,6 @@ sha256:027bb2937462dbdb8a0b2231f294c3dae121b771c8ad588ab19aceb8a883c0bd	#新镜�
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 test                1                   027bb2937462        9 seconds ago       203MB
 centos              7                   5e35e350aded        6 weeks ago         203MB
-[root@42-m ~]# 
-
 ```
 2.基于本地模板导入
 `cat 模板压缩版本|docker import -模板信息`  
