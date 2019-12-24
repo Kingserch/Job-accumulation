@@ -124,7 +124,7 @@ dockerfile待请教
 ```  
 + ### 存出和载入镜像
 1.存出镜像
-如果要导出镜像到本地文件，用docker [image] save 命令,-o,-output string，导出镜像到指定的文件中  
+如果要导出镜像到本地文件，用docker [image] save 命令,-o,-output string，导出镜像到指定的文件中,  
 ```
 [root@42-m ~]# docker image ls
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
