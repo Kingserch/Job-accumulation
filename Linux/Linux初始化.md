@@ -23,7 +23,7 @@ nameserver 192.168.31.2
 [root@like /]# yum install tree nmap dos2unix lrzsz nc lsof wget tcpdump htop iftop iotop sysstat nethogs  vim  tig  jq   -y
 [root@like /]# yum install axel -y	#多线程下载工具，可替代curl、wget。
 ```
-#### 2.安装工作中需要的工具包
+#### 3.安装工作中需要的工具包
 ```
 [root@like /]# yum install tree nmap dos2unix lrzsz nc lsof wget tcpdump htop iftop iotop sysstat nethogs  vim  tig  jq  net-tools -y
 [root@like /]# yum install axel -y	#多线程下载工具，可替代curl、wget。
