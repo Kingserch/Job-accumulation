@@ -97,7 +97,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 
 + ### 创建镜像
 1.基于已有容器创建  
-`语法格式:docker [container]commit[options] container [repository][:TAG]`  
+`语法格式:docker commit[options] container [repository][:TAG]`  
 <ul>
   <li>-a,--author="":作者信息</li>
   <li>-c,--change=[]:提交的时候执行dockerfile指令,包括CMD|ENTRYPOINT|E NV|EXPOSE|LABEL|ONBUILD|USER|VOLUME等</li>
