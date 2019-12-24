@@ -4,7 +4,7 @@
     + [搜寻镜像search](#搜寻镜像)
     + [创建镜像commit,import,build](#创建镜像)
     + [存出和载入镜像save,load](#存出和载入镜像)
-    + [坑位](#坑位)
+    + [上传镜像push](#上传镜像)
     + [坑位](#坑位)
     + [坑位](#坑位)
     + [坑位](#坑位)	
@@ -141,8 +141,11 @@ Loaded image: centos:7
 Loaded image: centos:7
 ```
 + ### 上传镜像
-1
-	
+用docker [image] push 命令上传镜像到仓库，默认上传到docker hub官方仓库(需要登录)
+```
+[root@42-m ~]# docker tag test:1 user/test:latest
+[root@42-m ~]# docker push test:1 user/test:latest	#这里需要寻教
+```
 
 
 
