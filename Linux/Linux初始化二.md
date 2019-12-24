@@ -97,8 +97,8 @@ Query OK, 0 rows affected, 1 warning (0.01 sec)
 mysql> exit
 ```
 #### 到此mysql 安装完成，
-`因为我们配置的yum  repository（仓库），所以以后yum 操作都会自动更新，所以我们可以移除mysql 的yum仓库`
-`[root@42-m bin]# yum -y remove mysql80-community-release-el7-2.noarch`
-`skip-grant-tables  #跳过数据库权限验证	mysql忘记密码可以在/etc/my.conf中添加这个字段，来登录修改密码`
+`因为我们配置的yum  repository（仓库），所以以后yum 操作都会自动更新，所以我们可以移除mysql 的yum仓库`  
+`[root@42-m bin]# yum -y remove mysql80-community-release-el7-2.noarch`  
+`skip-grant-tables  #跳过数据库权限验证	mysql忘记密码可以在/etc/my.conf中添加这个字段，来登录修改密码`  
 
 
