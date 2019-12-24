@@ -53,7 +53,7 @@ IMAGE               CREATED             CREATED BY                              
 + ### 搜寻镜像
 `docker search [option] keyword`   
 <ul>
-  <li>-f，--filter:过滤输出内容</li>
+  <li>-f,--filter filter:过滤输出内容</li>
   <li>--format string:格式化输出内容</li>
   <li>--limit int:限制输出结果的个数，默认为25个</li>
   <li>--no-trunc:不截断输出结果</li>
