@@ -140,6 +140,8 @@ Loaded image: centos:7
 [root@42-m ~]# docker load < centos_7.tar	#导入的另一种写法
 Loaded image: centos:7
 ```
++ ### 上传镜像
+1
 	
 
 
