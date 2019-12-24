@@ -28,3 +28,50 @@ nameserver 192.168.31.2
 [root@like /]# yum install tree nmap dos2unix lrzsz nc lsof wget tcpdump htop iftop iotop sysstat nethogs  vim  tig  jq  net-tools -y
 [root@like /]# yum install axel -y	#多线程下载工具，可替代curl、wget。
 ```
+#### 3.查看所有的包组名称(包括安装的和未安装的)
+```
+[root@like /]# yum grouplist 
+Loaded plugins: fastestmirror
+There is no installed groups file.
+Maybe run: yum groups mark convert (see man yum)
+Loading mirror speeds from cached hostfile
+ * base: mirrors.aliyun.com
+ * extras: mirrors.aliyun.com
+ * updates: mirrors.aliyun.com
+Available Environment Groups:
+   Minimal Install
+   Compute Node
+   Infrastructure Server
+   File and Print Server
+   Cinnamon Desktop
+   MATE Desktop
+   Basic Web Server
+   Virtualization Host
+   Server with GUI
+   GNOME Desktop
+   KDE Plasma Workspaces
+   Development and Creative Workstation
+Available Groups:
+   Cinnamon
+   Compatibility Libraries
+   Console Internet Tools
+   Development Tools
+   Educational Software
+   Electronic Lab
+   Fedora Packager
+   General Purpose Desktop
+   Graphical Administration Tools
+   Haskell
+   LXQt Desktop
+   Legacy UNIX Compatibility
+   MATE
+   Milkymist
+   Scientific Support
+   Security Tools
+   Smart Card Support
+   System Administration Tools
+   System Management
+   TurboGears application framework
+   Xfce
+Done
+```
