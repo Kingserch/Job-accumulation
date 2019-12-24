@@ -117,6 +117,14 @@ centos              7                   5e35e350aded        6 weeks ago         
 [root@42-m ~]# 
 
 ```
+2.基于本地模板导入
+`cat 模板压缩版本|docker import -模板信息`  
+3.基于Dockerfile创建
+基于Dockerfile创建是最常用的方式，Dockerfile是一个文本文件，利用给定的指令描述基于某个父镜像创建新镜像的过程
+```
+dockerfile待请教
+```  
++ ### 存出和载入镜像
 
 	
 
