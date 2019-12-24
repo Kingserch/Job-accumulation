@@ -94,6 +94,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
   <li>-f,-force:强制删除镜像。</li>
 </ul>
 `docker image prune -f #这个命令会自动清理临时遗留镜像文件层，最后会提示释放的空间大小`  
+
 + ### 创建镜像
 
 	
