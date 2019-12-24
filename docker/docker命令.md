@@ -1,7 +1,7 @@
 + ### Docker命令
-    + [获取镜像](#获取镜像)
-    + [查看镜像](#查看镜像)
-    + [坑位](#坑位)
+    + [获取镜像pull](#获取镜像)
+    + [查看镜像images,tag,inspect,history](#查看镜像)
+    + [搜寻镜像](#搜寻镜像)
     + [坑位](#坑位)
 + ### 获取镜像
 `docker [image] pull NAME[:TAG]`   
@@ -21,7 +21,36 @@ exit
 [root@42-m ~]# 
 ```
 + ### 查看镜像
-
+```
+[root@42-m ~]# docker images		#images命令查看镜像
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+centos              7                   5e35e350aded        6 weeks ago         203MB
+[root@42-m ~]# docker tag centos:7 mycentos:7		#使用tag命令给镜像做个类似于软连接
+[root@42-m ~]# docker images		#查看镜像可以看到centos跟mycentos IMAGE ID是一致的
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+centos              7                   5e35e350aded        6 weeks ago         203MB
+mycentos            7                   5e35e350aded        6 weeks ago         203MB
+[root@42-m ~]# docker inspect mycentos:7		#inspect命令查看镜像的详细信息
+[
+    {
+        "Id": "sha256:5e35e350aded98340bc8fcb0ba392d809c807bc3eb5c618d4a0674d98d88bccd",
+        "RepoTags": [
+            "centos:7",
+            "mycentos:7"
+        ],
+        "RepoDigests": [
+            "centos@sha256:4a701376d03f6b39b8c2a8f4a8e499441b0d567f9ab9d58e4991de4472fb813c"
+        ],
+      .....省略若干
+]
+[root@42-m ~]# docker history mycentos:7		#history命令查看镜像历史
+IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
+5e35e350aded        6 weeks ago         /bin/sh -c #(nop)  CMD ["/bin/bash"]            0B                  
+<missing>           6 weeks ago         /bin/sh -c #(nop)  LABEL org.label-schema.sc…   0B                  
+<missing>           6 weeks ago         /bin/sh -c #(nop) ADD file:45a381049c52b5664…   203MB               
+[root@42-m ~]# 
+```
++ ### 搜寻镜像
 	
 	
 	
