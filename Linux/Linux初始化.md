@@ -33,3 +33,17 @@ nameserver 192.168.31.2
 [root@like /]# yum grouplist 
 [root@like /]# yum groupinstall  "Cinnamon" -y 	#安装组包
 ```
+#### 5.Selinux和防火墙操作
+```
+[root@like /]# systemctl stop firewalld		#临时关闭防火墙
+[root@like /]# systemctl disable firewalld	#防火墙开机自关闭
+[root@like /]# systemctl start firewalld	#临时启动防火墙
+[root@like /]# systemctl enable firewalld	#防火墙开机开启
+[root@like /]# systemctl status firewalld	#查看防火墙状态
+[root@like /]# setenforce 0	#临时关闭SELinux
+[root@like /]# setenforce 1	#临时打开SELinux
+[root@like /]# getenforce	#查看SELinux状态
+[root@like /]# sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config	#开机关闭SELinux
+[root@like /]# systemctl status firewalld	#查看防火墙状态
+[root@like /]# systemctl list-dependencies | grep 服务的名字   检测是否加入开启启动
+```
