@@ -1,7 +1,7 @@
 + ### 操作docker容器
     + [创建容器create,start,run,wait,logs](#创建容器)
 	+ [启动容器start](#启动容器)
-	+ [坑位](#坑位)
+	+ [查看容器输出logs](#查看容器输出)
 	+ [坑位](#坑位)
 	+ [坑位](#坑位)
 + ### 创建容器
@@ -31,3 +31,5 @@ create命令与容器资源限制和安全保护相关的选项，以后会把�
 + ### 启动容器
 `docker [container] start 命令启动容器`  
 `docker run centos:7 /bin/echo 'hello world'   centos:7本地没有就从官方下载，直接运行容器`
++ ### 查看容器输出
+
