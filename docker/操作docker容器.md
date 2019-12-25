@@ -123,5 +123,5 @@ save 和 export区别
 ```
 
 <div align=center>
-	<img src="https://github.com/Kingserch/Job-accumulation/blob/Docker/images/create3.jpg" width="200"> 
+	<img src="https://github.com/Kingserch/Job-accumulation/blob/Docker/images/create3.jpg" > 
 </div>
