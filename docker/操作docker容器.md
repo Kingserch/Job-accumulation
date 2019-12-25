@@ -101,8 +101,8 @@ centos              latest              0f3e07c0138f        2 months ago        
 [root@42-m ~]#
 ```
 ***
-两个方法的区别：  
-镜像和容器 导出和导入的区别  
+``两个方法的区别：  ``
+``镜像和容器 导出和导入的区别 `` 
 1）容器（export 导出、import导入) 是将当前容器 变成一个新的镜像，导入时会丢失镜像所有的历史，所以无法进行回滚操作(docker tag <LAYER ID> <IMAGE NAME>)  
 2）镜像（save保存、load加载） 是复制的过程，没有丢失镜像的历史，可以回滚到之前的层(layer)。(查看方式：docker images --tree)  
 save 和 export区别  
