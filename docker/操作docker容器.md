@@ -23,4 +23,6 @@ a8beb3a9e1fe        centos:7            "/bin/bash"              13 hours ago   
 [root@42-m /]#
 ```
 create命令与容器运行模式相关的选项
-![]()
+![](https://github.com/Kingserch/Job-accumulation/blob/Docker/images/create1.jpg)
+![](https://github.com/Kingserch/Job-accumulation/blob/Docker/images/create2.jpg)
+![](https://github.com/Kingserch/Job-accumulation/blob/Docker/images/create3.jpg)
