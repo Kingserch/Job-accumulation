@@ -30,11 +30,17 @@ a8beb3a9e1fe        centos:7            "/bin/bash"              13 hours ago   
 [root@42-m /]#
 ```
 create命令与容器运行模式相关的选项，以下留个记录吧，以后参数用到翻阅起来也方便。
-![](https://github.com/Kingserch/Job-accumulation/blob/Docker/images/create1.jpg)  
+<div align=center>
+	<img src="https://github.com/Kingserch/Job-accumulation/blob/Docker/images/create1.jpg" > 
+</div>  
 create命令与容器环境和配置相关的选项，create命令是一个非常重要的命令。
-![](https://github.com/Kingserch/Job-accumulation/blob/Docker/images/create2.jpg)  
+<div align=center>
+	<img src="https://github.com/Kingserch/Job-accumulation/blob/Docker/images/create2.jpg" > 
+</div> 
 create命令与容器资源限制和安全保护相关的选项，以后会把重要的参数罗列出来的。
-![](https://github.com/Kingserch/Job-accumulation/blob/Docker/images/create3.jpg)  
+<div align=center>
+	<img src="https://github.com/Kingserch/Job-accumulation/blob/Docker/images/create3.jpg" > 
+</div> 
 + ### 启动容器
 `docker [container] start 命令启动容器`  
 `docker run centos:7 /bin/echo 'hello world'   centos:7本地没有就从官方下载，直接运行容器`
@@ -122,6 +128,4 @@ save 和 export区别
 若是在启动容器后，容器内容有变化，需要备份，则使用export、import。（或者将容器commit成新的镜像，在使用镜像导出）
 ```
 
-<div align=center>
-	<img src="https://github.com/Kingserch/Job-accumulation/blob/Docker/images/create3.jpg" > 
-</div>
+
