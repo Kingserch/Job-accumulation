@@ -2,7 +2,7 @@
     + [创建容器create,start,run,wait,logs](#创建容器)
 	+ [启动容器start](#启动容器)
 	+ [查看容器输出logs](#查看容器输出)
-	+ [坑位](#坑位)
+	+ [停止容器pause/unpause,stop,prune](#停止容器)
 	+ [坑位](#坑位)
 + ### 创建容器
 `docker [container] create 命令新建一个容器`    
@@ -45,3 +45,5 @@ a8beb3a9e1fe        centos:7            "/bin/bash"              15 hours ago   
 I am running!
 [root@42-m /]#
 ```
++ ### 停止容器
+
