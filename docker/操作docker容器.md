@@ -30,3 +30,4 @@ create命令与容器资源限制和安全保护相关的选项，以后会把�
 ![](https://github.com/Kingserch/Job-accumulation/blob/Docker/images/create3.jpg)  
 + ### 启动容器
 `docker [container] start 命令启动容器` 
+`docker run centos:7 /bin/echo 'hello world'   centos:7本地没有就从官方下载，直接运行容器`
