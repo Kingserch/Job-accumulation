@@ -4,7 +4,7 @@
 	+ [查看容器输出logs](#查看容器输出)
 	+ [停止容器pause/unpause,stop,prune](#停止容器)
 	+ [进入容器attach,exec](#进入容器)
-	+ [坑位](#坑位)
+	+ [删除容器rm](#删除容器)
 	+ [坑位](#坑位)
 	+ [坑位](#坑位)
 + ### 创建容器
@@ -65,4 +65,16 @@ root          1      0  0 08:01 pts/0    00:00:00 /bin/bash
 root         14      0  0 08:03 pts/1    00:00:00 /bin/bash
 root         27     14  0 08:03 pts/1    00:00:00 ps -ef
 [root@f3595a1a712d /]#
+```
++ ### 删除容器
+`用docker [container] rm 命令来删除处于终止或退出状态的容器。-f,是否强行删除，-l删除容器连接，保留容器，-v删除容器挂载的数据卷`
+```
+[root@42-m ~]# docker rm a8beb3a9e1fe 		#跟容器ID删除，rmi i是指image 
+a8beb3a9e1fe
+[root@42-m ~]# docker ps -a		#查看容器
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                    PORTS               NAMES
+f3595a1a712d        centos:7            "/bin/bash"              3 hours ago         Up 27 minutes                                 heuristic_einstein
+ed4fcd15c8f9        centos:latest       "/bin/bash"              7 hours ago         Created                                       gallant_wilbur
+436d39f3ffa3        centos:7            "echo 'I am running!'"   21 hours ago        Exited (0) 21 hours ago                       nice_dirac
+[root@42-m ~]#
 ```
