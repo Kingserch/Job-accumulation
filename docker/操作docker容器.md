@@ -5,7 +5,7 @@
 	+ [停止容器pause/unpause,stop,prune](#停止容器)
 	+ [进入容器attach,exec](#进入容器)
 	+ [删除容器rm](#删除容器)
-	+ [坑位](#坑位)
+	+ [导入import和导出export容器](#导入和导出容器)
 	+ [坑位](#坑位)
 + ### 创建容器
 `docker [container] create 命令新建一个容器`    
@@ -77,4 +77,14 @@ f3595a1a712d        centos:7            "/bin/bash"              3 hours ago    
 ed4fcd15c8f9        centos:latest       "/bin/bash"              7 hours ago         Created                                       gallant_wilbur
 436d39f3ffa3        centos:7            "echo 'I am running!'"   21 hours ago        Exited (0) 21 hours ago                       nice_dirac
 [root@42-m ~]#
+```
++ ### 导入和导出容器
+`导出容器是指，导出一个已经创建的容器到一个文件，不管此时这个容器是否运行`
+```
+[root@42-m ~]# docker export -o centos_for_exec.tar f3	#export导出容器-o指定名字
+[root@42-m ~]# ls
+anaconda-ks.cfg  centos_7.tar  centos_for_exec.tar
+[root@42-m ~]# docker export ed >centos_for_stop.tar
+[root@42-m ~]# ls
+anaconda-ks.cfg  centos_7.tar  centos_for_exec.tar  centos_for_stop.tar
 ```
