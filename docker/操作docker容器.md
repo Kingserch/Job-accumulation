@@ -56,4 +56,13 @@ https://docs.docker.com/engine/reference/commandline/stop/	#stop命令
 [root@42-m /]# docker run -it centos:7 /bin/bash	#需要先启动一个容器
 [root@f3595a1a712d /]#
 [root@42-m ~]# docker attach f3595a1a712d		#根据容器ID进入容器
+[root@42-m /]# docker exec -it f3595a1a712d /bin/bash	#exec命令字运行容器内直接执行任意命令
+[root@f3595a1a712d /]# pwd
+/
+[root@f3595a1a712d /]# ps -ef
+UID         PID   PPID  C STIME TTY          TIME CMD
+root          1      0  0 08:01 pts/0    00:00:00 /bin/bash
+root         14      0  0 08:03 pts/1    00:00:00 /bin/bash
+root         27     14  0 08:03 pts/1    00:00:00 ps -ef
+[root@f3595a1a712d /]#
 ```
