@@ -22,7 +22,9 @@ a8beb3a9e1fe        centos:7            "/bin/bash"              13 hours ago   
 7b2a90fe3ad8        centos:7            "/bin/bash"              15 hours ago        Exited (0) 15 hours ago                       reverent_albattani
 [root@42-m /]#
 ```
-create命令与容器运行模式相关的选项
+create命令与容器运行模式相关的选项，以下留个记录吧，以后参数用到翻阅起来也方便。
 ![](https://github.com/Kingserch/Job-accumulation/blob/Docker/images/create1.jpg)
+create命令与容器环境和配置相关的选项，create命令是一个非常重要的命令。
 ![](https://github.com/Kingserch/Job-accumulation/blob/Docker/images/create2.jpg)
+create命令与容器资源限制和安全保护相关的选项，以后会把重要的参数罗列出来的。
 ![](https://github.com/Kingserch/Job-accumulation/blob/Docker/images/create3.jpg)
