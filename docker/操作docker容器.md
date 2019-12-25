@@ -6,6 +6,10 @@
 	+ [进入容器attach,exec](#进入容器)
 	+ [删除容器rm](#删除容器)
 	+ [导入import和导出export容器](#导入和导出容器)
+	+ [镜像save,load&容器import,export区别](#镜像save,load&容器import,export区别)
+	+ [坑位](#坑位)
+	+ [坑位](#坑位)
+	+ [坑位](#坑位)
 	+ [坑位](#坑位)
 + ### 创建容器
 `docker [container] create 命令新建一个容器`    
@@ -100,12 +104,20 @@ centos              7                   5e35e350aded        6 weeks ago         
 centos              latest              0f3e07c0138f        2 months ago        220MB
 [root@42-m ~]#
 ```
-***
-``两个方法的区别：  ``
-``镜像和容器 导出和导入的区别 `` 
-1）容器（export 导出、import导入) 是将当前容器 变成一个新的镜像，导入时会丢失镜像所有的历史，所以无法进行回滚操作(docker tag <LAYER ID> <IMAGE NAME>)  
-2）镜像（save保存、load加载） 是复制的过程，没有丢失镜像的历史，可以回滚到之前的层(layer)。(查看方式：docker images --tree)  
-save 和 export区别  
-1）save 保存镜像所有的信息-包含历史  
-2）export 只导出当前的信息  
-镜像导出的 tar 文件比容器导出文件大  
++ ### 镜像save,load&容器import,export区别
+```
+一.两个方法的区别：
+1)容器（export 导出、import导入) 是将当前容器 变成一个新的镜像，导入时会丢失镜像所有的历史，所以无法进行回滚操作(docker tag <LAYER ID> <IMAGE NAME>)；
+2)镜像（save保存、load加载） 是复制的过程，没有丢失镜像的历史，可以回滚到之前的层(layer)。(查看方式：docker images --tree)
+save 和 export区别
+1)save 保存镜像所有的信息-包含历史
+2)export 只导出当前的信息
+镜像导出的 tar 文件比容器导出文件大。
+二.使用场景的区别
+容器内项目有修改
+不需要历史记录的、想要体积小、又快速的，选择容器导出；反之选择镜像导出，镜像导出需先将容器commit成新的镜像，才能使用镜像导出。
+容器内项目无修改
+选择镜像导出。
+若是只想备份images，使用save、load即可
+若是在启动容器后，容器内容有变化，需要备份，则使用export、import。（或者将容器commit成新的镜像，在使用镜像导出）
+```
