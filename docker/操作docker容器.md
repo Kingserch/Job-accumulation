@@ -79,7 +79,7 @@ ed4fcd15c8f9        centos:latest       "/bin/bash"              7 hours ago    
 [root@42-m ~]#
 ```
 + ### 导入和导出容器
-`导出容器是指，导出一个已经创建的容器到一个文件，不管此时这个容器是否运行`
+`1.导出容器是指，导出一个已经创建的容器到一个文件，不管此时这个容器是否运行`
 ```
 [root@42-m ~]# docker export -o centos_for_exec.tar f3	#export导出容器-o指定名字
 [root@42-m ~]# ls
@@ -88,3 +88,17 @@ anaconda-ks.cfg  centos_7.tar  centos_for_exec.tar
 [root@42-m ~]# ls
 anaconda-ks.cfg  centos_7.tar  centos_for_exec.tar  centos_for_stop.tar
 ```
+`2.导出的文件可以用docker [container] import 导入变成镜像`
+```
+[root@42-m ~]# docker  import centos_7.tar centos:v1	
+sha256:850b87045c9866f807a2404563e87b9d494a46cece275781afc84f8ca364bbe3
+[root@42-m ~]# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+centos              v1                  850b87045c98        6 seconds ago       211MB
+test                1                   027bb2937462        20 hours ago        203MB
+centos              7                   5e35e350aded        6 weeks ago         203MB
+centos              latest              0f3e07c0138f        2 months ago        220MB
+[root@42-m ~]#
+```
+***
+**这是加粗的文字**
