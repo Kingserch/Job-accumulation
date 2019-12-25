@@ -22,3 +22,5 @@ a8beb3a9e1fe        centos:7            "/bin/bash"              13 hours ago   
 7b2a90fe3ad8        centos:7            "/bin/bash"              15 hours ago        Exited (0) 15 hours ago                       reverent_albattani
 [root@42-m /]#
 ```
+create命令与容器运行模式相关的选项
+![]()
