@@ -46,4 +46,5 @@ I am running!
 [root@42-m /]#
 ```
 + ### 停止容器
-
+https://docs.docker.com/engine/reference/commandline/pause/ #pause命令
+https://docs.docker.com/engine/reference/commandline/stop/	#stop命令
