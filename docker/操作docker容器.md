@@ -5,8 +5,7 @@
 	+ [坑位](#坑位)
 	+ [坑位](#坑位)
 + ### 创建容器
-`docker [image] pull NAME[:TAG]`   
-`NAME是镜像仓库名称，用来区分镜像，TAG是镜像的标签，用来表示版本信息，docker拉取一个官方镜像，例如:`   
+`docker [container] create 命令新建一个容器`    
 ```
 [root@42-m ~]# docker pull centos:7
 7: Pulling from library/centos
