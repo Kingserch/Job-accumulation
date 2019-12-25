@@ -40,7 +40,7 @@ create命令与容器环境和配置相关的选项，create命令是一个非�
 create命令与容器资源限制和安全保护相关的选项，以后会把重要的参数罗列出来的。
 <div align=center>
 	<img src="https://github.com/Kingserch/Job-accumulation/blob/Docker/images/create3.jpg" > 
-</div> 
+</div>   
 + ### 启动容器
 `docker [container] start 命令启动容器`  
 `docker run centos:7 /bin/echo 'hello world'   centos:7本地没有就从官方下载，直接运行容器`
