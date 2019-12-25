@@ -32,4 +32,16 @@ create命令与容器资源限制和安全保护相关的选项，以后会把�
 `docker [container] start 命令启动容器`  
 `docker run centos:7 /bin/echo 'hello world'   centos:7本地没有就从官方下载，直接运行容器`
 + ### 查看容器输出
-
+https://docs.docker.com/engine/reference/commandline/logs/	#logs命令官方解释
+```
+[root@42-m /]# docker ps -a
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                     PORTS               NAMES
+1d48d20107ce        centos:7            "/bin/bash"              5 minutes ago       Exited (0) 4 minutes ago                       bold_wing
+ed4fcd15c8f9        centos:latest       "/bin/bash"              2 hours ago         Created                                        gallant_wilbur
+a8beb3a9e1fe        centos:7            "/bin/bash"              15 hours ago        Exited (0) 15 hours ago                        quizzical_meitner
+436d39f3ffa3        centos:7            "echo 'I am running!'"   15 hours ago        Exited (0) 15 hours ago                        nice_dirac
+7b2a90fe3ad8        centos:7            "/bin/bash"              16 hours ago        Exited (0) 16 hours ago                        reverent_albattani
+[root@42-m /]# docker logs 436d39f3ffa3		#logs命令查看容器输出
+I am running!
+[root@42-m /]#
+```
