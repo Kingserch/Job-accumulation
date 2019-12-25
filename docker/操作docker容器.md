@@ -52,3 +52,8 @@ I am running!
 https://docs.docker.com/engine/reference/commandline/pause/ #pause命令
 https://docs.docker.com/engine/reference/commandline/stop/	#stop命令
 + ### 进入容器
+```
+[root@42-m /]# docker run -it centos:7 /bin/bash	#需要先启动一个容器
+[root@f3595a1a712d /]#
+[root@42-m ~]# docker attach f3595a1a712d		#根据容器ID进入容器
+```
