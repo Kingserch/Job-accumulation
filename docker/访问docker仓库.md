@@ -69,12 +69,14 @@ centos              latest              0f3e07c0138f        2 months ago        
 registry            2                   e49440199476        9 months ago        25.8MB
 [root@42-m ~]# docker tag registry:2 192.168.31.142:5000/test registry:2 
 2.管理私有仓库
+
 [root@42-m ~]# docker ps -a 	#查看刚才绑定5000端口容器
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                           PORTS                    NAMES
 e49440199476        registry:2          "/entrypoint.sh /etc…"   33 minutes ago      Up 12 minutes                    0.0.0.0:5000->5000/tcp   romantic_rhodes
 384733417a81        centos:latest       "/bin/bash"              8 hours ago         Exited (127) About an hour ago                            exciting_mcnulty
 2221fc238dee        centos:7            "echo 'I am running'"    8 hours ago         Exited (0) 8 hours ago                                    awesome_buck
 3.排错
+
 [root@42-m ~]# docker push 192.168.31.142:5000/test		#push报错说客户端不支持https
 The push refers to repository [192.168.31.142:5000/test]
 Get https://192.168.31.142:5000/v2/: http: server gave HTTP response to HTTPS client
