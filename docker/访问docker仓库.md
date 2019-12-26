@@ -11,4 +11,4 @@
 	+ [其他容器命令cp,diff,port,update(#其他容器命令)
 + ### 简介
 仓库是集中存放镜像的地址，分为公有仓库和私有仓库。注册服务器是存放仓库的具体服务器，一个注册服务器有多个仓库，而每个仓库下面有多个镜像。
-<a href="https://hub.docker.com/" target="_blank">https://hub.docker.com/</a>
+<a href="https://hub.docker.com/" target="_blank">https://hub.docker.com/</a>可以通过这个网站来下载镜像，
