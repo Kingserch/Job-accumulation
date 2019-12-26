@@ -50,18 +50,28 @@ b4541f6d3db6: Pull complete
 Digest: sha256:8004747f1e8cd820a148fb7499d71a76d45ff66bac6a29129bfdbfdc0154d146
 Status: Downloaded newer image for registry:2
 c4bbbd6d32eda420a59ff9ad0a67a8813db1db0cb2e3bedc87aea143de53bf48
-[root@42-m ~]# docker run -d -p 886:886 -v /home/docker_registry/:/var/lib/registry registry:2	#-v参数指定仓库为宿主机本地目录
-5ed3fbb7124db504f709c9b06359f14f8a5714144e1aaaf792d00ca75a4a90d9
+[root@42-m ~]# docker run -d -p 5000:5000 -v /home/docker_registry/:/var/lib/registry registry:2	#-v参数指定仓库为宿主机本地目录
+Unable to find image 'registry:2' locally
+2: Pulling from library/registry
+c87736221ed0: Pull complete 
+1cc8e0bb44df: Pull complete 
+54d33bcb37f5: Pull complete 
+e8afc091c171: Pull complete 
+b4541f6d3db6: Pull complete 
+Digest: sha256:8004747f1e8cd820a148fb7499d71a76d45ff66bac6a29129bfdbfdc0154d146
+Status: Downloaded newer image for registry:2
+e49440199476b307ef1d9d17d85d35923e6cc1ae884f127f1b378e9d52279183
+[root@42-m ~]# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+centos              7                   5e35e350aded        6 weeks ago         203MB
+centos              latest              0f3e07c0138f        2 months ago        220MB
+registry            2                   e49440199476        9 months ago        25.8MB
+[root@42-m ~]# docker tag registry:2 192.168.31.142:5000/test registry:2 
 #2.管理私有仓库
-[root@42-m ~]# docker ps -a 	#查看刚才创建的俩个registry容器
-CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                        PORTS               NAMES
-5ed3fbb7124d        registry:2          "/entrypoint.sh /etc…"   17 minutes ago      Exited (2) 16 minutes ago                         elated_yalow
-c4bbbd6d32ed        registry:2          "/entrypoint.sh /etc…"   20 minutes ago      Exited (2) 6 seconds ago                          inspiring_lehmann
-384733417a81        centos:latest       "/bin/bash"              7 hours ago         Exited (127) 28 minutes ago                       exciting_mcnulty
-2221fc238dee        centos:7            "echo 'I am running'"    7 hours ago         Exited (0) 7 hours ago                            awesome_buck
-[root@42-m ~]# docker start 5e	#启动
-5e
-[root@42-m ~]# docker port 5e	#查看容器绑定的端口是886
-886/tcp -> 0.0.0.0:886
+[root@42-m ~]# docker ps -a 	#查看刚才绑定5000端口容器
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                           PORTS                    NAMES
+e49440199476        registry:2          "/entrypoint.sh /etc…"   33 minutes ago      Up 12 minutes                    0.0.0.0:5000->5000/tcp   romantic_rhodes
+384733417a81        centos:latest       "/bin/bash"              8 hours ago         Exited (127) About an hour ago                            exciting_mcnulty
+2221fc238dee        centos:7            "echo 'I am running'"    8 hours ago         Exited (0) 8 hours ago                                    awesome_buck
 [root@42-m ~]#
 ```
