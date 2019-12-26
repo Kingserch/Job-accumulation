@@ -1,6 +1,6 @@
 + ### 访问docker仓库(Repository)
     + [仓库(Repository)简介](#简介)
-	+ [启动容器start](#启动容器)
+	+ [搭建本地私有仓库registry](#搭建私有仓库)
 	+ [查看容器输出logs](#查看容器输出)
 	+ [停止容器pause/unpause,stop,prune](#停止容器)
 	+ [进入容器attach,exec](#进入容器)
@@ -36,3 +36,20 @@ Removing login credentials for https://index.docker.io/v1/
 [root@42-m .docker]#
 ```
 <a href="https://hub.tenxcloud.com" target="_blank">https://hub.tenxcloud.com</a>时速云镜像市场
++ ### 搭建私有仓库
+```
+[root@42-m ~]# docker run -d -p 888:888 registry:2	#下载启动registry容器，仓库会被创建在容器的/var/lib/registry下
+Unable to find image 'registry:2' locally
+2: Pulling from library/registry
+c87736221ed0: Pull complete 
+1cc8e0bb44df: Pull complete 
+54d33bcb37f5: Pull complete 
+e8afc091c171: Pull complete 
+b4541f6d3db6: Pull complete 
+Digest: sha256:8004747f1e8cd820a148fb7499d71a76d45ff66bac6a29129bfdbfdc0154d146
+Status: Downloaded newer image for registry:2
+c4bbbd6d32eda420a59ff9ad0a67a8813db1db0cb2e3bedc87aea143de53bf48
+[root@42-m ~]# docker run -d -p 886:886 -v /home/docker_registry/:/var/lib/registry registry:2	#-v参数指定仓库为宿主机本地目录
+5ed3fbb7124db504f709c9b06359f14f8a5714144e1aaaf792d00ca75a4a90d9
+[root@42-m ~]#
+```
