@@ -134,7 +134,7 @@ save 和 export区别
             "centos@sha256:4a701376d03f6b39b8c2a8f4a8e499441b0d567f9ab9d58e4991de4472fb813c"
         ],
 		......
-	}
+}
 ]
 
 ```
