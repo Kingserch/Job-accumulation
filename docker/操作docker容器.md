@@ -123,6 +123,7 @@ save 和 export区别
 ```
 + ### 镜像save,load&容器import,export区别
 ```
+# inspect命令
 [root@42-m ~]# docker inspect centos:7	#json格式返回容器id，创建时间路径，状态，镜像，配置
 [
     {
@@ -136,7 +137,7 @@ save 和 export区别
 		......
     }
 ]
-#####top命令
+# top命令
 [root@42-m ~]# docker ps -a 		#查看当前的容器
 CONTAINER ID        IMAGE               COMMAND                 CREATED              STATUS                     PORTS               NAMES
 384733417a81        centos:latest       "/bin/bash"             About a minute ago   Created                                        exciting_mcnulty
@@ -148,8 +149,6 @@ Error response from daemon: Container 384733417a812b08e9a3d6359e120a6a34c538c0d0
 [root@42-m ~]# docker top 384733417a81		#查看这个容器的进程
 UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
 root                3006                2989                0                   09:52               pts/0               00:00:00            /bin/bash
-[root@42-m ~]#
-
 ```
 
 
