@@ -39,6 +39,7 @@ Removing login credentials for https://index.docker.io/v1/
 + ### 搭建私有仓库
 ```
 1.先下载一个容器绑定端口5000
+
 [root@42-m ~]# docker run -d -p 888:888 registry:2	#下载启动registry容器，仓库会被创建在容器的/var/lib/registry下
 Unable to find image 'registry:2' locally
 2: Pulling from library/registry
