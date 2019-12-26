@@ -136,6 +136,19 @@ save 和 export区别
 		......
     }
 ]
+#####top命令
+[root@42-m ~]# docker ps -a 		#查看当前的容器
+CONTAINER ID        IMAGE               COMMAND                 CREATED              STATUS                     PORTS               NAMES
+384733417a81        centos:latest       "/bin/bash"             About a minute ago   Created                                        exciting_mcnulty
+2221fc238dee        centos:7            "echo 'I am running'"   3 minutes ago        Exited (0) 3 minutes ago                       awesome_buck
+[root@42-m ~]# docker top 384733417a81	#容器没运行，
+Error response from daemon: Container 384733417a812b08e9a3d6359e120a6a34c538c0d073e1f46a54674f178564c5 is not running
+[root@42-m ~]# docker start 384733417a81	#启动这个容器
+384733417a81
+[root@42-m ~]# docker top 384733417a81		#查看这个容器的进程
+UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
+root                3006                2989                0                   09:52               pts/0               00:00:00            /bin/bash
+[root@42-m ~]#
 
 ```
 
