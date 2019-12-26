@@ -6,7 +6,7 @@
 	+ [进入容器attach,exec](#进入容器)
 	+ [删除容器rm](#删除容器)
 	+ [导入import和导出export容器](#导入和导出容器)
-	+ [镜像save,load&容器import,export区别](#镜像save,load&容器import,export区别)
+	+ [镜像save,load&容器import,export区别](#镜像容器区别)
 	+ [查看容器inspect,top,stats](#查看容器)
 	+ [其他容器命令cp,diff,port,update](#其他容器命令)
 + ### 创建容器
@@ -102,7 +102,7 @@ centos              7                   5e35e350aded        6 weeks ago         
 centos              latest              0f3e07c0138f        2 months ago        220MB
 [root@42-m ~]#
 ```
-+ ### 镜像save,load&容器import,export区别
++ ### 镜像容器区别
 ```
 一.两个方法的区别：
 1)容器（export 导出、import导入) 是将当前容器 变成一个新的镜像，导入时会丢失镜像所有的历史，所以无法进行回滚操作(docker tag <LAYER ID> <IMAGE NAME>)；
