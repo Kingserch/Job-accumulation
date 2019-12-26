@@ -12,4 +12,12 @@
 + ### 简介
 ```
 仓库是集中存放镜像的地址，分为公有仓库和私有仓库。注册服务器是存放仓库的具体服务器，一个注册服务器有多个仓库，而每个仓库下面有多个镜像。
+docker hub 公共镜像市场
+[title](https://hub.docker.com)
+//js
+var aTagArr = [].slice.apply(document.getElementsByTagName("a"));
+
+aTagArr.forEach(function (e, i) {
+  e.href.indexOf("_blank") > -1 ? e.target = "_blank" : null;
+});
 ```
