@@ -8,9 +8,7 @@
 	+ [导入import和导出export容器](#导入和导出容器)
 	+ [镜像save,load&容器import,export区别](#镜像save,load&容器import,export区别)
 	+ [查看容器inspect,top,stats](#查看容器)
-	+ [坑位](#坑位)
-	+ [坑位](#坑位)
-	+ [坑位](#坑位)
+	+ [其他容器命令cp,diff,port,update(#其他容器命令)
 + ### 创建容器
 `docker [container] create 命令新建一个容器`    
 ```
@@ -150,5 +148,27 @@ Error response from daemon: Container 384733417a812b08e9a3d6359e120a6a34c538c0d0
 UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
 root                3006                2989                0                   09:52               pts/0               00:00:00            /bin/bash
 ```
-
++ ### 其他容器命令
+```
+#cp命令支持在容器和主机之间复制文件-a,-archive:打包模式，复制文件会带有原始的UID/GID,-L,-follow-link，复制软连接的目标内容。
+[root@42-m ~]# cd /home/tools/
+[root@42-m tools]# ls
+cmake-3.8.1
+[root@42-m tools]# docker cp /home/tools/ 384733417a81:/tmp/	#把本地的/home/tools/下复制到容器的/tmp目录下
+[root@42-m ~]# docker attach 384733417a81		#查看容器
+[root@384733417a81 /]# cd /tmp/
+[root@384733417a81 tmp]# ls
+ks-script-0n44nrd1  ks-script-w6m6m_20	tools
+[root@384733417a81 tmp]# cd tools/
+[root@384733417a81 tools]# ls
+cmake-3.8.1		#可以看到复制成功
+#diff查看容器内文件系统的变更
+[root@42-m tools]# dockker diff 384733417a81	#可以看到上传的cmake工具
+A /tmp/tools/cmake-3.8.1/Utilities/cmvssetup/Setup.Configuration.h
+....
+#port可以查看端口映射，update更新配置
+[root@42-m tools]# docker port 384733417a81
+[root@42-m tools]# docker update --cpu-quota 100000 384733417a81
+384733417a81
+```
 
