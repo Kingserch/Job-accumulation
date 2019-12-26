@@ -171,4 +171,6 @@ A /tmp/tools/cmake-3.8.1/Utilities/cmvssetup/Setup.Configuration.h
 [root@42-m tools]# docker update --cpu-quota 100000 384733417a81
 384733417a81
 ```
+`工作中为了提高容器的高可用和安全性，我一般用HAProxy等辅助工具来处理负载均衡，启动切换故障的应用容器`
+
 
