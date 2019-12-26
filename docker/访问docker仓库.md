@@ -12,3 +12,26 @@
 + ### 简介
 仓库是集中存放镜像的地址，分为公有仓库和私有仓库。注册服务器是存放仓库的具体服务器，一个注册服务器有多个仓库，而每个仓库下面有多个镜像。
 <a href="https://hub.docker.com/" target="_blank">https://hub.docker.com/</a>可以通过这个网站来下载镜像，
+```
+[root@42-m ~]# docker login -u838915764 -p*******		#登录docker仓库
+WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+WARNING! Your password will be stored unencrypted in /root/.docker/config.json.#你的密码将以未加密的方式存在config.json中
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+[root@42-m ~]# cd /root/.docker		#查看密码
+[root@42-m .docker]# cat config.json 
+{
+	"auths": {
+		"https://index.docker.io/v1/": {
+			"auth": "ODM4OTE1NzY0OnFheDEyMzEyMw=="
+		}
+	},
+	"HttpHeaders": {
+		"User-Agent": "Docker-Client/19.03.5 (linux)"
+	}
+}[root@42-m .docker]# docker logout		#退出登录
+Removing login credentials for https://index.docker.io/v1/
+[root@42-m .docker]#
+```
