@@ -11,7 +11,7 @@
 	+ [其他容器命令cp,diff,port,update(#其他容器命令)
 + ### 简介
 仓库是集中存放镜像的地址，分为公有仓库和私有仓库。注册服务器是存放仓库的具体服务器，一个注册服务器有多个仓库，而每个仓库下面有多个镜像。
-<a href="https://hub.docker.com/" target="_blank">https://hub.docker.com/</a>可以通过这个网站来下载镜像，
+<a href="https://hub.docker.com/" target="_blank">https://hub.docker.com/</a>可以通过这个网站来下载镜像。
 ```
 [root@42-m ~]# docker login -u838915764 -p*******		#登录docker仓库
 WARNING! Using --password via the CLI is insecure. Use --password-stdin.
@@ -35,3 +35,4 @@ Login Succeeded
 Removing login credentials for https://index.docker.io/v1/
 [root@42-m .docker]#
 ```
+<a href="https://hub.tenxcloud.com" target="_blank">https://hub.tenxcloud.com</a>时速云镜像市场
