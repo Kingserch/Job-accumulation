@@ -8,7 +8,7 @@
 	+ [导入import和导出export容器](#导入和导出容器)
 	+ [镜像save,load&容器import,export区别](#镜像save,load&容器import,export区别)
 	+ [查看容器inspect,top,stats](#查看容器)
-	+ [其他容器命令cp,diff,port,update(#其他容器命令)
+	+ [其他容器命令cp,diff,port,update](#其他容器命令)
 + ### 创建容器
 `docker [container] create 命令新建一个容器`    
 ```
