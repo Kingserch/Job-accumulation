@@ -73,5 +73,26 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 e49440199476        registry:2          "/entrypoint.sh /etc…"   33 minutes ago      Up 12 minutes                    0.0.0.0:5000->5000/tcp   romantic_rhodes
 384733417a81        centos:latest       "/bin/bash"              8 hours ago         Exited (127) About an hour ago                            exciting_mcnulty
 2221fc238dee        centos:7            "echo 'I am running'"    8 hours ago         Exited (0) 8 hours ago                                    awesome_buck
+[root@42-m ~]# docker push 192.168.31.142:5000/test		#push报错说客户端不支持https
+The push refers to repository [192.168.31.142:5000/test]
+Get https://192.168.31.142:5000/v2/: http: server gave HTTP response to HTTPS client
+[root@42-m docker]# vim daemon.json 	#在/etc/docker/daemon.json文件中添加"insecure-registries":["192.168.31.142:5000"]，注意json的格式
+{
+        "registry-mirrors": ["https://njrds9qc.mirror.aliyuncs.com"],
+        "insecure-registries":["192.168.31.142:5000"]
+}
+[root@42-m ~]# docker push 192.168.31.142:5000/test		#说tcp连接不通，解决办法看下面
+The push refers to repository [192.168.31.142:5000/test]
+Get http://192.168.31.142:5000/v2/: dial tcp 192.168.31.142:5000: connect: connection refused
+[root@42-m ~]# docker run -d -p 192.168.31.142:5000:5000 192.168.31.142:5000/test	#把服务端的ip跟端口绑定在容器上
+2248648b98160cada2c8616b892b88dda312bb09f9a5c3bcac0e6e02a4e18a38
+[root@42-m ~]# docker push 192.168.31.142:5000/test		#可以看到push成功了，
+The push refers to repository [192.168.31.142:5000/test]
+73d61bf022fd: Pushed 
+5bbc5831d696: Pushed 
+d5974ddb5a45: Pushed 
+f641ef7a37ad: Pushed 
+d9ff549177a9: Pushed 
+latest: digest: sha256:b1165286043f2745f45ea637873d61939bff6d9a59f76539d6228abf79f87774 size: 1363
 [root@42-m ~]#
 ```
