@@ -7,7 +7,7 @@
 	+ [删除容器rm](#删除容器)
 	+ [导入import和导出export容器](#导入和导出容器)
 	+ [镜像save,load&容器import,export区别](#镜像save,load&容器import,export区别)
-	+ [坑位](#坑位)
+	+ [查看容器inspect,top,stats](#查看容器)
 	+ [坑位](#坑位)
 	+ [坑位](#坑位)
 	+ [坑位](#坑位)
@@ -120,6 +120,23 @@ save 和 export区别
 选择镜像导出。
 若是只想备份images，使用save、load即可
 若是在启动容器后，容器内容有变化，需要备份，则使用export、import。（或者将容器commit成新的镜像，在使用镜像导出）
+```
++ ### 镜像save,load&容器import,export区别
+```
+[root@42-m ~]# docker inspect centos:7	#json格式返回容器id，创建时间路径，状态，镜像，配置
+[
+    {
+        "Id": "sha256:5e35e350aded98340bc8fcb0ba392d809c807bc3eb5c618d4a0674d98d88bccd",
+        "RepoTags": [
+            "centos:7"
+        ],
+        "RepoDigests": [
+            "centos@sha256:4a701376d03f6b39b8c2a8f4a8e499441b0d567f9ab9d58e4991de4472fb813c"
+        ],
+		......
+	}
+]
+
 ```
 
 
