@@ -1,8 +1,8 @@
 + ### 访问docker仓库(Repository)
     + [仓库(Repository)简介](#简介)
 	+ [搭建本地私有仓库registry](#搭建私有仓库)
-	+ [docker数据管理](#docker数据管理)
-	+ [停止容器pause/unpause,stop,prune](#停止容器)
+	+ [docker数据管理，数据卷](#docker数据管理)
+	+ [数据卷操作](#数据卷操作)
 	+ [进入容器attach,exec](#进入容器)
 	+ [删除容器rm](#删除容器)
 	+ [导入import和导出export容器](#导入和导出容器)
@@ -168,10 +168,26 @@ test
 [root@cf3aa9b8752a dbdata]# ls
 test
 ```
-
-
-
-
+注意：如果删除了dbdate和db1挂载的容器，数据卷dbdate不会被自动删除，如果要删除一个数据卷，必须删除最后一个还挂载着它的容器时显示使用docker rm -v 命令
++ ### 数据卷操作
+1.备份
+```
+[root@42-m /]# docker run --volumes-from dbdata -v $(pwd):/backup --name dbdata-back centos tar cvf /backup/backup.tar /dbdata	#centos镜像中必须有dbdata这个容器，备份dbdata数据卷在centos镜像的dbdata-back容器中
+/dbdata/
+tar: Removing leading `/' from member names
+[root@42-m /]# docker ps -a 	#
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS               NAMES
+fe17c0acb1f5        centos              "tar cvf /backup/bac…"   18 seconds ago      Exited (0) 17 seconds ago                       dbdata-back
+27782adac215        centos              "/bin/bash"              38 seconds ago      Up 37 seconds                                   dbdata
+cf3aa9b8752a        centos              "/bin/bash"              28 minutes ago      Exited (0) 10 minutes ago                       db1
+0e94778c2216        training/webapp     "python app.py"          37 minutes ago      Exited (2) 37 minutes ago                       web
+9ad83714533c        registry:2          "/entrypoint.sh /etc…"   2 hours ago         Exited (2) 48 minutes ago                       jovial_chebyshev
+384733417a81        centos:latest       "/bin/bash"              25 hours ago        Exited (127) 19 hours ago                       exciting_mcnulty
+2221fc238dee        centos:7            "echo 'I am running'"    26 hours ago        Exited (0) 26 hours ago                         awesome_buck
+[root@42-m /]# ls
+backup.tar
+```
+数据卷备份命令解析：利用centos镜像创建了一个dbdata-backup容器，使用--volumes-from dbdata参数让dbdata-backup容器挂载dbdata数据卷;使用-v $(pwd):/backup参数来挂载到本地，用tar命令打包，最终是在宿主机的当前目录下backup.tar
 
 
 
