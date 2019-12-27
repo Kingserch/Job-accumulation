@@ -1,4 +1,4 @@
-+ ### 访问docker仓库(Repository)
++ ### 访问docker仓库&便捷操作(Repository)
     + [仓库(Repository)简介](#简介)
 	+ [搭建本地私有仓库registry](#搭建私有仓库)
 	+ [docker数据管理，数据卷](#docker数据管理)
