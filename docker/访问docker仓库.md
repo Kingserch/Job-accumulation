@@ -218,3 +218,4 @@ docker run -d -p 127.0.0.1::5000  trainning/webapp python app.py	#绑定localhos
 /web
 [root@42-m /]#
 ```
+`注意：容器的名称是唯一的，如果已经有了web容器，在此使用web容器，需要把之前的删除了。在执行docker run的时候添加--rm标记，则容器会在终止后立即删除，--rm跟-d参数不能同时使用`
