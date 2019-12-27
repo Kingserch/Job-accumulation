@@ -203,5 +203,6 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 192.168.31.1 - - [27/Dec/2019 08:19:28] "GET /favicon.ico HTTP/1.1" 404 -
 [root@42-m /]#
 ```
+![](https://github.com/Kingserch/Job-accumulation/blob/Docker/images/mapping.png)
 
 
