@@ -120,11 +120,58 @@ test							#可以看到test镜像的
 数据卷是一个可供容器使用的特殊目录，将主机操作系统目录直接映射到容器，类似linux的mount行为。
 1.创建数据卷volume
 ```
-[root@42-m volumes]# docker volume create -d local test
+[root@42-m volumes]# docker volume create -d local test #快速在本地创建一个数据卷
 test
-[root@42-m volumes]# cd /var/lib/docker/volumes/
+[root@42-m volumes]# cd /var/lib/docker/volumes/	#数据卷的路径
 [root@42-m volumes]# ls
 bf537e065d3654aaa0f8920109ff7f9e1b66d41afd71e32786c686dae18d37ba  metadata.db
 e4d530ac649caad516e6de840dc0f209aadbb5bdf36932ffbf59b8c7d2a6b16a  test
 [root@42-m volumes]#
 ```
+2.绑定数据卷
+```
+[root@42-m volumes]# docker run -d -P --name web -v /home/webapp:/opt/webapp training/webapp python app.py	#把本地/home/webapp与容器/opt/webapp绑定
+Unable to find image 'training/webapp:latest' locally
+latest: Pulling from training/webapp
+Image docker.io/training/webapp:latest uses outdated schema1 manifest format. Please upgrade to a schema2 image for better future compatibility. More information at https://docs.docker.com/registry/spec/deprecated-schema-v1/
+e190868d63f8: Pull complete 
+909cd34c6fd7: Pull complete 
+0b9bfabab7c1: Pull complete 
+a3ed95caeb02: Pull complete 
+10bbbc0fc0ff: Pull complete 
+fca59b508e9f: Pull complete 
+e7ae2541b15b: Pull complete 
+9dd97ef58ce9: Pull complete 
+a4c1b0cb7af7: Pull complete 
+Digest: sha256:06e9c1983bd6d5db5fba376ccd63bfa529e8d02f23d5079b8f74a616308fb11d
+Status: Downloaded newer image for training/webapp:latest
+0e94778c22169dc3fd24d3179c6a4efc194770ed0d0172fac76a72244f603d9b
+[root@42-m volumes]#
+```
+3.共享数据卷容器
+```
+[root@42-m volumes]# docker run -it -v /dbdata --name dbdate centos	#在centos镜像中创建一个dbdate的数据卷容器，并且挂载到/dbdata
+[root@45a288af5224 /]# ls
+bin	dev  home  lib64       media  opt   root  sbin	sys  usr
+dbdata	etc  lib   lost+found  mnt    proc  run   srv	tmp  var
+[root@45a288af5224 /]# docker run -it --volumes-from dbdata --name db1 centos	#创建一个db1容器挂载到/dadata
+bash: docker: command not found
+[root@45a288af5224 /]# ls
+bin	dev  home  lib64       media  opt   root  sbin	sys  usr
+dbdata	etc  lib   lost+found  mnt    proc  run   srv	tmp  var
+[root@45a288af5224 /]# cd dbdata/	#在dbdate容器中
+[root@45a288af5224 dbdata]# ls
+[root@45a288af5224 dbdata]# touch test
+[root@45a288af5224 dbdata]# ls
+test
+[root@cf3aa9b8752a /]# cd dbdata/	#在db1容器中
+[root@cf3aa9b8752a dbdata]# ls
+test
+```
+
+
+
+
+
+
+
