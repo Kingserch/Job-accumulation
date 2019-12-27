@@ -187,7 +187,12 @@ cf3aa9b8752a        centos              "/bin/bash"              28 minutes ago 
 [root@42-m /]# ls
 backup.tar
 ```
-数据卷备份命令解析：利用centos镜像创建了一个dbdata-backup容器，使用--volumes-from dbdata参数让dbdata-backup容器挂载dbdata数据卷;使用-v $(pwd):/backup参数来挂载到本地，用tar命令打包，最终是在宿主机的当前目录下backup.tar
+数据卷备份命令解析：利用centos镜像创建了一个dbdata-backup容器，使用--volumes-from dbdata参数让dbdata-backup容器挂载dbdata数据卷;使用-v $(pwd):/backup参数来挂载到本地，用tar命令打包，最终是在宿主机的当前目录下backup.tar  
+2.恢复
+```
+docker run -v /dbdata --name dbdata2 centos 	#创建一个带有数据卷的新容器
+docker run --volumes-from dbdata2 -v $(pwd):/backup untar xvf /backup/backup.tar	#在创建一个新容器，挂载dbdata2容器，并用untar解压就可以了
+```
 
 
 
