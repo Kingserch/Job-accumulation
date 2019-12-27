@@ -88,9 +88,14 @@ Get https://192.168.31.142:5000/v2/: http: server gave HTTP response to HTTPS cl
 [root@42-m ~]# docker push 192.168.31.142:5000/test		#说tcp连接不通，解决办法看下面
 The push refers to repository [192.168.31.142:5000/test]
 Get http://192.168.31.142:5000/v2/: dial tcp 192.168.31.142:5000: connect: connection refused
-[root@42-m ~]# docker run -d -p 192.168.31.142:5000:5000 192.168.31.142:5000/test	#把服务端的ip跟端口绑定在容器上
-2248648b98160cada2c8616b892b88dda312bb09f9a5c3bcac0e6e02a4e18a38
-[root@42-m ~]# docker push 192.168.31.142:5000/test		#可以看到push成功了，
+[root@42-m ~]# docker login -u838915764 -p*****	#需要登录的tcp就通了
+WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+Login Succeeded
+[root@42-m ~]# docker tag registry:2 192.168.31.142:5000/test
+[root@42-m ~]# docker push 192.168.31.142:5000/test
 The push refers to repository [192.168.31.142:5000/test]
 73d61bf022fd: Pushed 
 5bbc5831d696: Pushed 
@@ -98,5 +103,16 @@ d5974ddb5a45: Pushed
 f641ef7a37ad: Pushed 
 d9ff549177a9: Pushed 
 latest: digest: sha256:b1165286043f2745f45ea637873d61939bff6d9a59f76539d6228abf79f87774 size: 1363
-[root@42-m ~]#
+[root@42-m ~]# curl 192.168.31.142:5000/v2/search	#提示404，哎心塞
+404 page not found
+[root@42-m ~]# cd /home/docker_registry/	#我们来本地仓库看看是否有镜像吧
+[root@42-m docker_registry]# ls
+docker
+[root@42-m docker_registry]# cd docker/registry/v2
+[root@42-m v2]# ls
+blobs  repositories
+[root@42-m v2]# cd repositories/
+[root@42-m repositories]# ls
+test							#可以看到test镜像的
+[root@42-m repositories]#
 ```
