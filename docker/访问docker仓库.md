@@ -1,7 +1,7 @@
 + ### 访问docker仓库(Repository)
     + [仓库(Repository)简介](#简介)
 	+ [搭建本地私有仓库registry](#搭建私有仓库)
-	+ [查看容器输出logs](#查看容器输出)
+	+ [docker数据管理](#docker数据管理)
 	+ [停止容器pause/unpause,stop,prune](#停止容器)
 	+ [进入容器attach,exec](#进入容器)
 	+ [删除容器rm](#删除容器)
@@ -116,3 +116,4 @@ blobs  repositories
 test							#可以看到test镜像的
 [root@42-m repositories]#
 ```
++ ### docker数据管理
