@@ -205,5 +205,8 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 ```
 也可以在浏览器上用宿主机的ip加容器映射的端口来访问web。-p(小写的)可以指定要映射的端口。
 ![](https://github.com/Kingserch/Job-accumulation/blob/Docker/images/mapping.png)
-
-
+```
+docker run -d -p 5000:5000 trainning/webapp python app.py	#本地的5000端口映射容器的5000端口
+docker run -d -p 5000:5000 -p 3000:80 trainning/webapp python app.py	#多次使用-p标记可以绑定多个端口
+docker run -d -p 127.0.0.1::5000  trainning/webapp python app.py	#绑定localhost的任意端口到容器的5000端口
+```
