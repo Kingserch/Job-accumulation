@@ -221,7 +221,7 @@ docker run -d -p 127.0.0.1::5000  trainning/webapp python app.py	#绑定localhos
 `注意：容器的名称是唯一的，如果已经有了web容器，在此使用web容器，需要把之前的删除了。在执行docker run的时候添加--rm标记，则容器会在终止后立即删除，--rm跟-d参数不能同时使用`
 3.容器互联--link name:alias ,name是链接容器的名称，alias是别名
 ```
-[root@42-m /]# docker run -d --name db training/postgres
+[root@42-m /]# docker run -d --name db training/postgres	#运行名字为db的容器
 Unable to find image 'training/postgres:latest' locally
 latest: Pulling from training/postgres
 Image docker.io/training/postgres:latest uses outdated schema1 manifest format. Please upgrade to a schema2 image for better future compatibility. More information at https://docs.docker.com/registry/spec/deprecated-schema-v1/
