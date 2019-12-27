@@ -117,3 +117,14 @@ test							#可以看到test镜像的
 [root@42-m repositories]#
 ```
 + ### docker数据管理
+数据卷是一个可供容器使用的特殊目录，将主机操作系统目录直接映射到容器，类似linux的mount行为。
+1.创建数据卷volume
+```
+[root@42-m volumes]# docker volume create -d local test
+test
+[root@42-m volumes]# cd /var/lib/docker/volumes/
+[root@42-m volumes]# ls
+bf537e065d3654aaa0f8920109ff7f9e1b66d41afd71e32786c686dae18d37ba  metadata.db
+e4d530ac649caad516e6de840dc0f209aadbb5bdf36932ffbf59b8c7d2a6b16a  test
+[root@42-m volumes]#
+```
