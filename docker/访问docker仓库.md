@@ -210,3 +210,11 @@ docker run -d -p 5000:5000 trainning/webapp python app.py	#本地的5000端口�
 docker run -d -p 5000:5000 -p 3000:80 trainning/webapp python app.py	#多次使用-p标记可以绑定多个端口
 docker run -d -p 127.0.0.1::5000  trainning/webapp python app.py	#绑定localhost的任意端口到容器的5000端口
 ```
+2.互联网机制实现便捷访问
+```
+[root@42-m /]# docker run -d -P --name web training/webapp python app.py	#自定义容器的名字，方便使用
+587d1cd60e7c4dbd5f8fdb0c218c91d8f3b0f820cecb09ef36d6fd6acc990106
+[root@42-m /]# docker inspect -f "{{.Name}}" 58	#inspect查看容器的名字
+/web
+[root@42-m /]#
+```
