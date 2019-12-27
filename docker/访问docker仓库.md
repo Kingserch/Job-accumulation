@@ -219,3 +219,71 @@ docker run -d -p 127.0.0.1::5000  trainning/webapp python app.py	#绑定localhos
 [root@42-m /]#
 ```
 `注意：容器的名称是唯一的，如果已经有了web容器，在此使用web容器，需要把之前的删除了。在执行docker run的时候添加--rm标记，则容器会在终止后立即删除，--rm跟-d参数不能同时使用`
+3.容器互联--link name:alias ,name是链接容器的名称，alias是别名
+```
+[root@42-m /]# docker run -d --name db training/postgres
+Unable to find image 'training/postgres:latest' locally
+latest: Pulling from training/postgres
+Image docker.io/training/postgres:latest uses outdated schema1 manifest format. Please upgrade to a schema2 image for better future compatibility. More information at https://docs.docker.com/registry/spec/deprecated-schema-v1/
+a3ed95caeb02: Pull complete 
+6e71c809542e: Pull complete 
+2978d9af87ba: Pull complete 
+e1bca35b062f: Pull complete 
+500b6decf741: Pull complete 
+74b14ef2151f: Pull complete 
+7afd5ed3826e: Pull complete 
+3c69bb244f5e: Pull complete 
+d86f9ec5aedf: Pull complete 
+010fabf20157: Pull complete 
+Digest: sha256:a945dc6dcfbc8d009c3d972931608344b76c2870ce796da00a827bd50791907e
+Status: Downloaded newer image for training/postgres:latest
+d9913a3317189484e63697d8a150862c7a53a2c113ee6c4439f370736e774889
+[root@42-m /]# docker ps 
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                     NAMES
+d9913a331718        training/postgres   "su postgres -c '/us…"   8 seconds ago       Up 6 seconds        5432/tcp                  db
+587d1cd60e7c        training/webapp     "python app.py"          10 minutes ago      Up 10 minutes       0.0.0.0:32771->5000/tcp   web
+[root@42-m /]# docker run -d -P --name web --link db:db training/webapp python app.py
+docker: Error response from daemon: Conflict. The container name "/web" is already in use by container "587d1cd60e7c4dbd5f8fdb0c218c91d8f3b0f820cecb09ef36d6fd6acc990106". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+[root@42-m /]# docker rm -f web
+web
+[root@42-m /]# docker run -d -P --name web --link db:db training/webapp python app.py
+c629a1c3d54a7bde6351a5ca5677df780be31270df7ae90f6d00456ed4c1da96
+[root@42-m /]# dokcer ps 
+-bash: dokcer: command not found
+[root@42-m /]# docker ps 
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                     NAMES
+8f39e118f910        training/webapp     "python app.py"          6 seconds ago       Up 5 seconds        0.0.0.0:32774->5000/tcp   web
+f5c455fd9cf6        training/postgres   "su postgres -c '/us…"   31 seconds ago      Up 30 seconds       5432/tcp                  db
+[root@42-m /]# docker run --rm --name web2 --link db:db training/webapp env
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+HOSTNAME=cb5aaa586e2f
+DB_PORT=tcp://172.17.0.2:5432
+DB_PORT_5432_TCP=tcp://172.17.0.2:5432
+DB_PORT_5432_TCP_ADDR=172.17.0.2
+DB_PORT_5432_TCP_PORT=5432
+DB_PORT_5432_TCP_PROTO=tcp
+DB_NAME=/web2/db
+DB_ENV_PG_VERSION=9.3
+HOME=/root
+[root@42-m /]# docker run -t -i --rm --link db:db training/webapp /bin/bash
+root@ce5fd828c072:/opt/webapp# cat /etc/hosts 
+127.0.0.1	localhost	#web绑定在宿主机
+::1	localhost ip6-localhost ip6-loopback
+fe00::0	ip6-localnet
+ff00::0	ip6-mcastprefix
+ff02::1	ip6-allnodes
+ff02::2	ip6-allrouters
+172.17.0.2	db f5c455fd9cf6
+172.17.0.4	ce5fd828c072
+root@ce5fd828c072:/opt/webapp# ping db
+PING db (172.17.0.2) 56(84) bytes of data.
+64 bytes from db (172.17.0.2): icmp_seq=1 ttl=64 time=0.332 ms
+64 bytes from db (172.17.0.2): icmp_seq=2 ttl=64 time=0.109 ms
+64 bytes from db (172.17.0.2): icmp_seq=3 ttl=64 time=0.114 ms
+^C
+--- db ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2000ms
+rtt min/avg/max/mdev = 0.109/0.185/0.332/0.103 ms
+root@ce5fd828c072:/opt/webapp#
+```
