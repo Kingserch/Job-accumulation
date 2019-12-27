@@ -190,5 +190,18 @@ docker run -v /dbdata --name dbdata2 centos 	#创建一个带有数据卷的新�
 docker run --volumes-from dbdata2 -v $(pwd):/backup untar xvf /backup/backup.tar	#在创建一个新容器，挂载dbdata2容器，并用untar解压就可以了
 ```
 + ### 端口映射与容器互联
+1.从外部访问容器应用
+```
+[root@42-m /]# docker run -d -P training/webapp python app.py	#-P(大写的)docker随机映射端口49000~49900到内部容器开放的网络端口
+8f24a605151f0e7d81b4420d2aa38c52344609b98ba8b831d131ff61424b7d77
+[root@42-m /]# docker ps -l	#可以看到映射到5000
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                     NAMES
+8f24a605151f        training/webapp     "python app.py"     14 seconds ago      Up 13 seconds       0.0.0.0:32770->5000/tcp   recursing_spence
+[root@42-m /]# docker logs 8f	#查看容器应用的信息
+ * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+192.168.31.1 - - [27/Dec/2019 08:19:27] "GET / HTTP/1.1" 200 -
+192.168.31.1 - - [27/Dec/2019 08:19:28] "GET /favicon.ico HTTP/1.1" 404 -
+[root@42-m /]#
+```
 
 
