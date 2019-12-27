@@ -189,6 +189,6 @@ backup.tar
 docker run -v /dbdata --name dbdata2 centos 	#创建一个带有数据卷的新容器
 docker run --volumes-from dbdata2 -v $(pwd):/backup untar xvf /backup/backup.tar	#在创建一个新容器，挂载dbdata2容器，并用untar解压就可以了
 ```
-
++ ### 端口映射与容器互联
 
 
