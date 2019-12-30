@@ -1,11 +1,10 @@
 + ### Dockerfile创建镜像
-    + [Docker](#docker使用)
+    + [Docker](#dockerfile创建镜像)
     + [坑位](#坑位)
     + [坑位](#坑位)
     + [坑位](#坑位)
-+ ### docker使用
-    + [docker安装](https://github.com/Kingserch/Job-accumulation/blob/Docker/docker/docker%E5%AE%89%E8%A3%85.md)
-	
++ ### dockerfile创建镜像
+
 	
 	
 	
