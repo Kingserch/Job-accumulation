@@ -1,8 +1,6 @@
 + ### Dockerfile创建镜像
     + [Dockerfile基本结构和命令](#dockerfile基本结构和命令)
     + [Dockerfile创建镜像](#dockerfile创建镜像)
-    + [坑位](#坑位)
-    + [坑位](#坑位)
 + ### dockerfile基本结构和命令
 Dockerfile有四部分:基础镜像信息，维护者信息，镜像操作指令和容器启动时执行命令
 ```
@@ -78,13 +76,3 @@ RUN echo "deb http://archive.ubuntu.com/ubuntu/ xeniel main universe" >> /etc/
 写完dockerfile文件后可以用docker [image] build命令来创建镜像，读取指定路径下的dockerfile，并将该路径的下所有数据作为上下文(context)发送给客户端，docker服务端会校验dockerfile格式通过后，卓条执行其中定义的命令，
 dockerfile[image]build 命令参数  
 ![](https://github.com/Kingserch/Job-accumulation/blob/Docker/images/build.jpg)
-	
-
-
-
-
-
-
-	
-+ ### 坑位
-    + [坑位](https://github.com/Kiaccumulation/blob/Docker/docker%E5%AE%89%E8%A3%85.md)
