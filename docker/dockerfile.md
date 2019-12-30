@@ -1,9 +1,9 @@
 + ### Dockerfile创建镜像
-    + [Dockerfile](#dockerfile创建镜像)
+    + [Dockerfile基本结构和命令](#dockerfile基本结构和命令)
+    + [Dockerfile创建镜像](#dockerfile创建镜像)
     + [坑位](#坑位)
     + [坑位](#坑位)
-    + [坑位](#坑位)
-+ ### dockerfile创建镜像
++ ### dockerfile基本结构和命令
 Dockerfile有四部分:基础镜像信息，维护者信息，镜像操作指令和容器启动时执行命令
 ```
 # escape=\ (backslash)	# 执行解析器命令。
@@ -74,8 +74,10 @@ RUN echo "deb http://archive.ubuntu.com/ubuntu/ xeniel main universe" >> /etc/
 | HEALTHCHECK | 配置所启动容器如何进行健康检查       | HEALTHCHECK[OPTIONS]CMD command 返回值是否为0判断[OPTIONS]的参数-interval=DURATION(default:30s)过多久检查一次，-timeout=DEFAULT(default:30s)每次检查等待结果的超时-retries=N(default:3)如果失败了，重试几次才最终确定失败 |
 | run         | 运行指定命令                                  | RUN<command>每条RUN指令在当前镜像基础上执行指定命令，并提交为新的镜像                                                                                                                          |
 | CMD         | 每个dockerfile只有有一条CMD命令，且只会执行最后一条 | 略                                                                                                                                                                                                                       ||  | 指令      | 说明                                              |                                                                                                                                                                                                                           |
++ ### dockerfile创建镜像
+写完dockerfile文件后可以用docker [image] build命令来创建镜像，读取指定路径下的dockerfile，并将该路径的下所有数据作为上下文(context)发送给客户端，docker服务端会校验dockerfile格式通过后，卓条执行其中定义的命令，
+dockerfile[image]build 命令参数
 
-	
 	
 
 
