@@ -39,16 +39,20 @@ awk处理的工作方式与数据库类似，支持对记录和字段处理，�
 #### 文件内容：
 seq 1 5 > a
 seq 3 7 > b
-找出b文件在a文件相同记录：
+#### 找出b文件在a文件相同记录：
 方法1：
-` awk 'FNR==NR{a[$0];next}{if($0 in a)print $0}' a b`
+```
+awk 'FNR==NR{a[$0];next}{if($0 in a)print $0}' a b
 3
 4
 5
-` awk 'FNR==NR{a[$0];next}{if($0 in a)print FILENAME,$0}' a b`
+```
+```
+awk 'FNR==NR{a[$0];next}{if($0 in a)print FILENAME,$0}' a b
 b 3
 b 4
 b 5
+```
 ` awk 'FNR==NR{a[$0]}NR>FNR{if($0 ina)print $0}' a b
 3
 4
