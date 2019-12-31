@@ -94,79 +94,28 @@ awk 'BEGIN{FS=":";OFS=":"}{a[$1]=a[$1] $2}END{for(v in a)print v,a[v]}' a
 ```
 解读：
 数组a存储是$1=a[$1] $2，第一个a[$1]是以第一个字段为下标，值是a[$1] $2，也就是$1=a[$1] $2，值的a[$1]是用第一个字段为下标获取对应的值，但第一次数组a还没有元素，那么a[$1]是空值，此时数组存储是192.168.1.1=httpd，再遇到192.168.1.1时，a[$1]通过第一字段下标获得上次数组的httpd，把当前处理的行第二个字段放到上一次同下标的值后面，作为下标192.168.1.1的新值。此时数组存储是192.168.1.1=httpd tomcat。每次遇到相同的下标（第一个字段）就会获取上次这个下标对应的值与当前字段并作为此下标的新值。
-5、字符串拆分
-
-字符串拆分：
-方法1：
-` echo "hello" |awk -F '''{for(i=1;i<=NF;i++)print $i}'
+### 4、字符串拆分
+```
+echo "hello" |awk -F '''{for(i=1;i<=NF;i++)print $i}
 h
 e
 l
 l
 o
-
-6、统计出现的次数
-
+```
+### 5、统计出现的次数
 统计字符串中每个字母出现的次数：
-` echo "a.b.c,c.d.e" |awk -F'[.,]' '{for(i=1;i<=NF;i++)a[$i]++}END{for(v in a)print v,a[v]}'
+```
+echo "a.b.c,c.d.e" |awk -F'[.,]' '{for(i=1;i<=NF;i++)a[$i]++}END{for(v in a)print v,a[v]}'
 a 1
 b 1
 c 2
 d 1
 e 1
-
-7、费用统计
-
-得出每个员工出差总费用及次数：
-` cat a
-zhangsan 8000 1
-zhangsan 5000 1
-lisi 1000 1
-lisi 2000 1
-wangwu 1500 1
-zhaoliu 6000 1
-zhaoliu 2000 1
-zhaoliu 3000 1
-` awk '{name[$1]++;cost[$1]+=$2;number[$1]+=$3}END{for(v in name)print v,cost[v],number[v]}' a
-zhangsan 5000 1
-lisi 3000 2
-wangwu 1500 1
-zhaoliu 11000 3
-
-8、获取某列数字最大数
-
-
-` cat a
-a b 1
-c d 2
-e f 3
-g h 3
-i j 2
-获取第三字段最大值：
-` awk 'BEGIN{max=0}{if($3>max)max=$3}END{print max}' a
-3
-打印第三字段最大行：
-` awk 'BEGIN{max=0}{a[$0]=$3;if($3>max)max=$3}END{for(v in a)if(a[v]==max)print v}'a
-g h 3
-e f 3
-
-9、去除文本第一行和最后一行
-
-` seq 5 |awk'NR>2{print s}{s=$0}'
-2
-3
-4
-
-解读：
-读取第一行，NR=1，不执行print s，s=1
-读取第二行，NR=2，不执行print s，s=2 （大于为真）
-读取第三行，NR=3，执行print s，此时s是上一次p赋值内容2，s=3
-最后一行，执行print s，打印倒数第二行，s=最后一行
-
-10、获取Nginx upstream块内后端IP和端口
-
-
-` cat a
+```
+### 6、获取Nginx upstream块内后端IP和端口
+```
+cat << EOF >a
 upstream example-servers1 {
    server 127.0.0.1:80 weight=1 max_fails=2fail_timeout=30s;
 }
@@ -174,6 +123,7 @@ upstream example-servers2 {
    server 127.0.0.1:80 weight=1 max_fails=2fail_timeout=30s;
    server 127.0.0.1:82 backup;
 }
+EOF
 ` awk '/example-servers1/,/}/{if(NR>2){print s}{s=$2}}' a
 127.0.0.1:80
 ` awk '/example-servers1/,/}/{if(i>1)print s;s=$2;i++}' a
