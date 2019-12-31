@@ -67,9 +67,7 @@ lisi woman
 wangwu man
 EOF
 ```
-
-将a文件合并到b文件：
-方法1：
+#### 将a文件合并到b文件：
 ` awk 'FNR==NR{a[$1]=$0;next}{print a[$1],$2}' a b
 zhangsan 20 man
 lisi 23 woman
