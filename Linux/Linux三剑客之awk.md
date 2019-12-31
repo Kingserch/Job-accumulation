@@ -7,7 +7,7 @@ awk处理的工作方式与数据库类似，支持对记录和字段处理，�
 1、分析访问日志（Nginx为例）
 
 日志格式：
-'$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" "$http_x_forwarded_for"'
+`'$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" "$http_x_forwarded_for"'`
 
 
 统计访问IP次数：
