@@ -40,63 +40,34 @@ awk处理的工作方式与数据库类似，支持对记录和字段处理，�
 seq 1 5 > a
 seq 3 7 > b
 #### 找出b文件在a文件相同记录：
-方法1：
 ```
 awk 'FNR==NR{a[$0];next}{if($0 in a)print $0}' a b
 3
 4
 5
 ```
+#### 找出b文件在a文件不同记录：
 ```
-awk 'FNR==NR{a[$0];next}{if($0 in a)print FILENAME,$0}' a b
-b 3
-b 4
-b 5
-```
-` awk 'FNR==NR{a[$0]}NR>FNR{if($0 ina)print $0}' a b
-3
-4
-5
-` awk 'FNR==NR{a[$0]=1;next}(a[$0]==1)' a b  ` a[$0]是通过b文件每行获取值，如果是1说明有
-` awk 'FNR==NR{a[$0]=1;next}{if(a[$0]==1)print}' a b
-3
-4
-5
-方法2：
-` awk 'FILENAME=="a"{a[$0]}FILENAME=="b"{if($0 in a)print $0}' a b
-3
-4
-5
-方法3：
-` awk 'ARGIND==1{a[$0]=1}ARGIND==2 && a[$0]==1' a b
-3
-4
-5
-找出b文件在a文件不同记录：
-方法1：
-` awk 'FNR==NR{a[$0];next}!($0 in a)' a b
+awk 'FNR==NR{a[$0];next}!($0 in a)' a b
 6
 7
-` awk 'FNR==NR{a[$0]=1;next}(a[$0]!=1)' a b
-` awk'FNR==NR{a[$0]=1;next}{if(a[$0]!=1)print}' a b
-6
-7
-方法2：
-` awk'FILENAME=="a"{a[$0]=1}FILENAME=="b" && a[$0]!=1' a b
-方法3：
-` awk 'ARGIND==1{a[$0]=1}ARGIND==2 && a[$0]!=1' a b
-
-3、合并两个文件
-
-文件内容：
-` cat a
+```
+### 3、合并两个文件
+```
+# a文件内容：
+cat << EOF > a
 zhangsan 20
 lisi 23
 wangwu 29
-` cat b
+EOF
+# b文件内容：
+cat << EOF > b
 zhangsan man
 lisi woman
 wangwu man
+EOF
+```
+
 将a文件合并到b文件：
 方法1：
 ` awk 'FNR==NR{a[$1]=$0;next}{print a[$1],$2}' a b
