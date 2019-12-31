@@ -124,13 +124,15 @@ upstream example-servers2 {
    server 127.0.0.1:82 backup;
 }
 EOF
-` awk '/example-servers1/,/}/{if(NR>2){print s}{s=$2}}' a
+# 命令实现
+awk '/example-servers1/,/}/{if(NR>2){print s}{s=$2}}' a
 127.0.0.1:80
-` awk '/example-servers1/,/}/{if(i>1)print s;s=$2;i++}' a
-` awk '/example-servers1/,/}/{if(i>1){print s}{s=$2;i++}}' a
+awk '/example-servers1/,/}/{if(i>1)print s;s=$2;i++}' a
 127.0.0.1:80
-
-解读：
+awk '/example-servers1/,/}/{if(i>1){print s}{s=$2;i++}}' a
+127.0.0.1:80
+```
+说明
 读取第一行，i初始值为0，0>1为假，不执行print s，x=example-servers1，i=1
 读取第二行，i=1，1>1为假，不执行prints，s=127.0.0.1:80,i=2
 读取第三行，i=2，2>1为真，执行prints，此时s是上一次s赋值内容127.0.0.1:80，i=3
