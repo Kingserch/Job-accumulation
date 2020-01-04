@@ -1,6 +1,6 @@
 + ### docker进阶
     + [基本架构](#基本架构)
-    + [web服务apache,nginx,tomcat,lamp](#web服务)
+    + [命名空间](#命名空间)
     + [Jenkins和GitLab](#Jenkins和GitLab)
 	+ [数据库](#数据库)
 + ### 基本架构
@@ -19,3 +19,23 @@ INFO[2020-01-03T09:39:28.247263463+08:00] scheme "unix" not registered, fallback
 ...
 ```
 2.客户端
+`客户端默认通过本地的unix:///var/run/docker套接字向服务端发送命令，如果服务没监听默认的地址，则需要用docker -H tcp://127.0.0.1:1234 info`
+3.镜像仓库
+镜像是使用容器的基础，docker使用镜像仓库在大规模场景下存出和分发docker镜像![官方镜像](https://github.com/docker/distribution)
++ ### 命名空间
+```
+[root@42-m ~]# docker network ls	#查看当前系统中的网桥，docker采用虚拟网络设备(VND)方式，将不同的空间网络设备连接到一起
+NETWORK ID          NAME                DRIVER              SCOPE
+3f9aab951a12        bridge              bridge              local
+b700de0add7c        host                host                local
+47646d8b88cf        none                null                local
+[root@42-m ~]#
+```
+```
+[root@42-m ~]# yum install bridge-utils -y #安装brctl工具包，
+#每个容器默认分配一个网桥上的虚拟网口，并将docker0的ip地址设置为默认的网关，容器发起的网络流量通过宿主机的iptables规则进行转发。
+[root@42-m ~]# brctl show	#可以看到连接到网桥上的虚拟网口的信息
+bridge name	bridge id		STP enabled	interfaces
+docker0		8000.0242bd1affc3	no		
+[root@42-m ~]#
+```
