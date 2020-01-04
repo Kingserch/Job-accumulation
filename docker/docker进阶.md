@@ -21,8 +21,7 @@ INFO[2020-01-03T09:39:28.247263463+08:00] scheme "unix" not registered, fallback
 2.客户端  
 `客户端默认通过本地的unix:///var/run/docker套接字向服务端发送命令，如果服务没监听默认的地址，则需要用docker -H tcp://127.0.0.1:1234 info`  
 3.镜像仓库
-镜像是使用容器的基础，docker使用镜像仓库在大规模场景下存出和分发docker镜像  
-![](https://github.com/docker/distribution)  
+镜像是使用容器的基础，docker使用镜像仓库在大规模场景下存出和分发docker镜像![](https://github.com/docker/distribution)
 + ### 命名空间
 ```
 [root@42-m ~]# docker network ls	#查看当前系统中的网桥，docker采用虚拟网络设备(VND)方式，将不同的空间网络设备连接到一起
