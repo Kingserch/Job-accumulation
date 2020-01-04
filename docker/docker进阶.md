@@ -1,7 +1,7 @@
 + ### docker进阶
     + [基本架构](#基本架构)
     + [命名空间](#命名空间)
-    + [Jenkins和GitLab](#Jenkins和GitLab)
+    + [Linux网络虚拟化](#Linux网络虚拟化)
 	+ [数据库](#数据库)
 + ### 基本架构
 1.服务端主要包括四个组件
@@ -39,3 +39,6 @@ bridge name	bridge id		STP enabled	interfaces
 docker0		8000.0242bd1affc3	no		
 [root@42-m ~]#
 ```
++ ### Linux网络虚拟化
+Docker的本地网路实现是利用Linux上的网络命名空间和虚拟网络设备(特别是veth pair)
+1.基本原理
