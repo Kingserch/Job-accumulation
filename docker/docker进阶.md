@@ -56,3 +56,23 @@ Docker的本地网路实现是利用Linux上的网络命名空间和虚拟网络
 * --net=host:告诉docker不将容器网络放在隔离的命名空间中，即不要容器化容器内的网络
 * --net=user_defind_network:用户自行用network命令创建一个网络，之后将容器连接到指定的已创建的网络上去  
 ##### 3.手动配置网络  
+```
+[root@42-m ~]# docker run -it --rm --net=none centos:7 /bin/bash	#使用--net=nono后，Docker将不对容器网络进行配置
+[root@42-m ~]# docker inspect -f '{{.State.Pid}}' 4b3a73b38c42	#在本地主机查找容器进程的id，并为他创建网络命名空间
+2630
+[root@42-m ~]# pid=2603	#为变量赋值2630
+[root@42-m ~]# mkdir -p /var/run/netns	#创建一个存储容器id的目录
+[root@42-m ~]# ln -s /proc/$pid/ns/net /var/run/netns/$pid	#
+[root@42-m /]# ip add show docker0 |grep inet	#检查桥接网卡的ip和子网掩码信息
+    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+    inet6 fe80::42:c4ff:feaa:4bd2/64 scope link 
+[root@42-m /]# ip link add A type veth peer name B	#创建一对‘veth pair’接口A和B，
+[root@42-m /]# brctl addif docker0 A	#绑定A接口到docker0，
+[root@42-m /]# ip link set A up	#启动创建的且绑定docker0的A接口
+pid=2630
+ip link set B netns $pid \
+ip netns exec $pid ip link set dev B name eth0 \
+ip netns exec $pid ip link set eth0 up \
+ip netns exec $pid ip addr add 172.17.0.3/16 dev eth0 \ 
+ip netns exec $pid ip route add default via 172.17.0.1 \
+```
