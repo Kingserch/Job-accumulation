@@ -11,7 +11,7 @@
     + [dockerfile创建镜像](https://github.com/Kingserch/Job-accumulation/blob/Docker/docker/dockerfile.md)
     + [容器提供服务](https://github.com/Kingserch/Job-accumulation/blob/Docker/docker/%E5%AE%B9%E5%99%A8%E6%8F%90%E4%BE%9B%E6%9C%8D%E5%8A%A1.md)
     + [docker进阶](https://github.com/Kingserch/Job-accumulation/blob/Docker/docker/docker%E8%BF%9B%E9%98%B6.md)
-    + [坑位](https://github.com/Kiaccumulation/blob/Docker/docker%E5%AE%89%E8%A3%85.md)
+    + [配置私有仓库](https://github.com/Kiaccumulation/blob/Docker/docker%E5%AE%89%E8%A3%85.md)
 	
 	
 	
