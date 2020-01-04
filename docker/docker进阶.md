@@ -76,3 +76,5 @@ ip netns exec $pid ip link set eth0 up \
 ip netns exec $pid ip addr add 172.17.0.3/16 dev eth0 \ 
 ip netns exec $pid ip route add default via 172.17.0.1 \
 ```
+##### 说明
+当容器终止后，docker会清空容器，容器内的网络接口会随网络命名空间一起被清除，A接口也被自动从docker0卸载并清除，此外，在删除/var/run/netns/下的内容之前，可以用ip netns exec命令在指定网络命名空间中配置，从而更新新容器内的网络配置
