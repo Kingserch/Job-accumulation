@@ -4,4 +4,4 @@
 	+ [坑位](#坑位)
 	+ [坑位](#坑位)
 	+ [坑位](#坑位)
-![Ansible试用](https://github.com/Kingserch/Job-accumulation/tree/Devops/ansible)
+![Ansible试用](https://github.com/Kingserch/Job-accumulation/blob/Devops/ansible/ansible.md)
