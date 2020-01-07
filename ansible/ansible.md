@@ -138,7 +138,8 @@ changed: [localhost]
 
 PLAY RECAP **********************************************************************************
 localhost                  : ok=5    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-[root@m129 ansible-playbook-sample]# 
+[root@m129 ansible-playbook-sample]# curl localhost
+hello, development ansible
 ```
 
 
