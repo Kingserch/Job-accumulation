@@ -5,7 +5,7 @@
 	+ [坑位](#坑位)
 	+ [坑位](#坑位)
 + ### Ansible使用
-##### 1.安装Ansible
+##### 1.Ansible命令简单试用
 ```
 yum install -y epel-release
 yum install -y ansible
@@ -108,6 +108,37 @@ localhost | SUCCESS => {
 
 28 directories, 27 files
 [root@m129 ansible-playbook-sample]#
-
 ```
+##### 2.nsible-playbook命令简单试用
+`在生产环境中，我们需要从安装，配置，到启动这一系列的操作，构建一个运行环境。我们就需要将处理和操作对象分组的方式来进行处理，就用到ansible-playbook命令，，他会提前将定义信息构建在playbook文件中`
+```
+[root@m129 ansible-playbook-sample]# cat development 	#查看playbook文件内容
+[development-webservers]
+localhost
+
+[webservers:children]
+development-webservers
+[root@m129 ansible-playbook-sample]# ansible-playbook -i development site.yml 
+PLAY [webservers] ***************************************************************************
+
+TASK [Gathering Facts] **********************************************************************
+ok: [localhost] #ok 表示对象状态和期望值相同
+
+TASK [common : install epel] ****************************************************************
+ok: [localhost]	#表示epel-release软件安装好了
+
+TASK [nginx : install nginx] ****************************************************************
+ok: [localhost]	
+
+TASK [nginx : replace index.html] ***********************************************************
+changed: [localhost]
+
+TASK [nginx : nginx start] ******************************************************************
+changed: [localhost]
+
+PLAY RECAP **********************************************************************************
+localhost                  : ok=5    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+[root@m129 ansible-playbook-sample]# 
+```
+
 
