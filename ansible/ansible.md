@@ -45,6 +45,69 @@ localhost | SUCCESS => {
     "name": "nginx", 
     "state": "started", 
     "status": {
+	...
+[root@m129 git_space]# git clone https://github.com/devops-book/ansible-playbook-sample.git
+[root@m129 git_space]# cd ansible-playbook-sample/
+[root@m129 ansible-playbook-sample]# tree
+.
+├── development
+├── group_vars
+│   ├── development-webservers.yml
+│   └── production-webservers.yml
+├── production
+├── roles
+│   ├── common
+│   │   ├── meta
+│   │   │   └── main.yml
+│   │   └── tasks
+│   │       └── main.yml
+│   ├── jenkins
+│   │   ├── defaults
+│   │   │   └── main.yml
+│   │   ├── handlers
+│   │   │   └── main.yml
+│   │   ├── meta
+│   │   │   └── main.yml
+│   │   ├── README.md
+│   │   ├── tasks
+│   │   │   └── main.yml
+│   │   ├── tests
+│   │   │   ├── inventory
+│   │   │   └── test.yml
+│   │   └── vars
+│   │       └── main.yml
+│   ├── nginx
+│   │   ├── meta
+│   │   │   └── main.yml
+│   │   ├── tasks
+│   │   │   └── main.yml
+│   │   └── templates
+│   │       └── index.html.j2
+│   ├── serverspec
+│   │   ├── meta
+│   │   │   └── main.yml
+│   │   └── tasks
+│   │       └── main.yml
+│   └── serverspec_sample
+│       ├── files
+│       │   └── serverspec_sample
+│       │       ├── Rakefile
+│       │       └── spec
+│       │           ├── localhost
+│       │           └── spec_helper.rb
+│       ├── meta
+│       │   └── main.yml
+│       ├── tasks
+│       │   └── main.yml
+│       ├── templates
+│       │   ├── nginx_spec.rb.j2
+│       │   └── web_spec.rb.j2
+│       └── vars
+│           └── main.yml
+└── site.yml
+
+28 directories, 27 files
+[root@m129 ansible-playbook-sample]#
 
 ```
 
