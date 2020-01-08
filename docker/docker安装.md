@@ -24,6 +24,7 @@ yum install docker-ce -y
 ####  六,为docker添加一个json
 [json文件地址](https://github.com/Kingserch/Job-accumulation/blob/Docker/json/daemon.json)   
 ```
+curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://f1361db2.m.daocloud.io	#该脚本可以将 --registry-mirror 加入到你的 Docker 配置文件 /etc/docker/daemon.json 中。
 [root@42-m /]# systemctl start docker
 [root@42-m /]# systemctl enable docker
 Created symlink from /etc/systemd/system/multi-user.target.wants/docker.service to /usr/lib/systemd/system/docker.service.
