@@ -1,5 +1,6 @@
 #!/bin/bash
 # Author：king
+# Usage:sh push_images image1 [image2...]
 registry=127.0.0.1:5000
 
     ### DO NOT MODIFY THE FOLLOWING PART, UNLESS YOU KNOW WHAT IT MEANS ###
