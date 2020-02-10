@@ -17,3 +17,4 @@ Documentation   etcd   etcdctl   README-etcdctl.md   README.md   READMEv2-etcdct
 [root@m129 ~]# sudo cp etcd＊ /usr/local/bin/
 Etcd安装到此完成。
 ```
+##### 2.Docker镜像方式下载
