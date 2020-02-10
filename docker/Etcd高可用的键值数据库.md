@@ -6,6 +6,7 @@
 	+ [配置容器网桥](#配置容器网桥)
 	+ [libnetwork插件化网络功能](#libnetwork插件化网络功能)
 + ### 安装和使用Etcd
+##### 1.二进制安装
 ```
 [root@m129 ~]# curl  -L  https://github.com/coreos/etcd/releases/download/v3.3.1/etcd-v3.3.1-linux-amd64.tar.gz | tar xzvf
 [root@m129 ~]# cd etcd-v3.3.1-linux-amd64
