@@ -14,3 +14,8 @@ sudo mv /tmp/docker-machine /usr/local/bin/docker-machine &&
 chmod +x /usr/local/bin/docker-machine
 #更多请参考官方文档https://docs.docker.com/machine/install-machine/
 ```
+##### 使用Machine
+Mac的Docker桌面 -您可以docker-machine create与virtualbox驱动程序一起使用来创建其他本地计算机。  
+Windows的Docker桌面 -您可以docker-machine create与hyperv驱动程序一起使用来创建其他本地计算机。  
+##### Machine命令
+docker-machine <COMMAND> -h  可以查看Machine命令帮助  
