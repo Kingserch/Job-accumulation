@@ -1,7 +1,7 @@
 + ### docker三剑客
     + [Machine](#安装和使用Machine)
     + [Compose](#安装和使用Compose)
-    + [配置容器DNS和主机名](#配置容器DNS和主机名)
+    + [compose模板文件](#compose模板文件)
     + [容器访问控制](#容器访问控制)
 	+ [配置容器网桥](#配置容器网桥)
 	+ [libnetwork插件化网络功能](#libnetwork插件化网络功能)
@@ -45,3 +45,5 @@ docker-compose up -d  # 后台启动
 docker-compose down    # 销毁
 docker-compose restart # 重启
 ```
++ ### compose模板文件
+模板文件是使用compose的核心
