@@ -25,10 +25,19 @@ docker-machine <COMMAND> -h  可以查看Machine命令帮助
 服务栈(stack):由多个服务器组成，相互配合完成特定业务，如web应用服务，数据库服务共同构成web服务栈，一般由一个docker-compose.yml文件定义
 ##### Linux平台安装
 ```
+#1.二进制安装
 sudo curl -L https://github.com/docker/compose/releases/download/1.17.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 #卸载
 sudo rm /usr/local/bin/docker-compose
+#2.pip安装
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py   # 下载安装脚本
+sudo python get-pip.py    # 运行安装脚本
+#如果是centos直接用yum安装pip
+yum -y install epel-release
+yum -y install python-pip
+pip install --upgrade pip
+pip install docker-compose
 ```
 ##### Compose常用命令
 ```
