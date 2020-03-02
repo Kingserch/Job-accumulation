@@ -23,3 +23,8 @@ baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
 gpgcheck=0
 enabled=1
 ```
+##### 2.安装nginx
+```
+yum -y install nginx
+curl 127.0.0.1
+```
