@@ -45,6 +45,7 @@ yum install mysql-community-server -y		#开始安装
 systemctl start mysqld			#启动服务
 systemctl enable mysqld			#加入开机启动
 grep 'temporary password' /var/log/mysqld.log
+
 mysql> set global validate_password_policy=0;
 Query OK, 0 rows affected (0.00 sec)
 mysql> set global validate_password_length=1;
