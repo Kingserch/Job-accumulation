@@ -28,3 +28,8 @@ enabled=1
 yum -y install nginx
 curl 127.0.0.1
 ```
+##### 3.开机启动设置
+```
+systemctl enable nginx
+systemctl daemon-reload
+```
