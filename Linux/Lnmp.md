@@ -26,6 +26,7 @@ enabled=1
 ##### 2.安装nginx
 ```
 yum -y install nginx
+nginx #启动nginx
 curl 127.0.0.1
 ```
 ##### 3.开机启动设置
