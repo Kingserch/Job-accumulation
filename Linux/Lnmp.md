@@ -4,4 +4,11 @@
     + [批量管理镜像](#批量管理镜像)
     + [使用通知系统](#使用通知系统)
 + ### yum源
-##### 1.安装Dcoker Registry,基于容器安装  
+##### 切换yum源
+```
+cp /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+yum clean all
+yum makecache
+yum update
+```
