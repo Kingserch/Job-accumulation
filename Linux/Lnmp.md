@@ -1,7 +1,7 @@
 + ### Lnmp环境 
     + [更换yum源](#yum源)
     + [安装nginx](#安装nginx)
-    + [批量管理镜像](#批量管理镜像)
+    + [安装mysql](#安装mysql)
     + [使用通知系统](#使用通知系统)
 + ### yum源
 #### 切换yum源
@@ -12,7 +12,7 @@ yum clean all
 yum makecache
 yum update
 ```
-#### 安装nginx
++ ### 安装nginx
 
 ##### 1.YUM源中没有Nginx，我们需要增加一个nginx的源nginx.repo
 ```
@@ -33,3 +33,5 @@ curl 127.0.0.1
 systemctl enable nginx
 systemctl daemon-reload
 ```
++ ### 安装mysql
+##### 1.
