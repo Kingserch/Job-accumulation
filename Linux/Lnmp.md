@@ -2,9 +2,9 @@
     + [更换yum源](#yum源)
     + [安装nginx](#安装nginx)
     + [安装mysql](#安装mysql)
-    + [使用通知系统](#使用通知系统)
+    + [安装php7](#安装php7)
 + ### yum源
-#### 切换yum源
+##### 切换yum源
 ```
 cp /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
 wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
@@ -59,3 +59,10 @@ grant all on *.* to root@'%' identified by 'root';	#授权可视化工具可以�
 yum -y remove mysql80-community-release-el7-2.noarch
 skip-grant-tables  #跳过数据库权限验证	mysql忘记密码可以在/etc/my.conf中添加这个字段，来登录修改密码
 ```
++ ### 安装php7
+##### 1.配置yum源
+```
+rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
+```
+##### 2.配置yum源
