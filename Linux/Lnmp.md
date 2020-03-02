@@ -36,7 +36,7 @@ systemctl daemon-reload
 ```
 + ### 安装mysql
 ```
-rpm -Uvh https://repo.mysql.com//mysql80-community-release-el7-2.noarch.rpm	#要是安装最新版本 直接安装就可以了
+rpm -Uvh https://repo.mysql.com//mysql80-community-release-el7-2.noarch.rpm	#要是安装最新版本直接安装就可以
 yum repolist all | grep mysql		#查看yum 源中的mysql版本
 yum-config-manager --disable mysql80-community		#禁用mysql8.0
 yum-config-manager --enable mysql57-community		#启动mysql5.7
