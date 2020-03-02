@@ -35,4 +35,26 @@ systemctl enable nginx
 systemctl daemon-reload
 ```
 + ### 安装mysql
-##### 1.
+```
+rpm -Uvh https://repo.mysql.com//mysql80-community-release-el7-2.noarch.rpm	#要是安装最新版本 直接安装就可以了
+yum repolist all | grep mysql		#查看yum 源中的mysql版本
+yum-config-manager --disable mysql80-community		#禁用mysql8.0
+yum-config-manager --enable mysql57-community		#启动mysql5.7
+yum repolist enabled | grep mysql		#查看配置是否生效
+yum install mysql-community-server -y		#开始安装
+systemctl start mysqld			#启动服务
+systemctl enable mysqld			#加入开机启动
+grep 'temporary password' /var/log/mysqld.log
+mysql> set global validate_password_policy=0;
+Query OK, 0 rows affected (0.00 sec)
+mysql> set global validate_password_length=1;
+Query OK, 0 rows affected (0.00 sec)
+mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY 'root';
+Query OK, 0 rows affected (0.00 sec)
+mysql> 
+grant all on *.* to root@'%' identified by 'root';	#授权可视化工具可以连接数据库
+到此mysql 安装完成，
+因为我们配置的yum  repository（仓库），所以以后yum 操作都会自动更新，所以我们可以移除mysql 的yum仓库
+yum -y remove mysql80-community-release-el7-2.noarch
+skip-grant-tables  #跳过数据库权限验证	mysql忘记密码可以在/etc/my.conf中添加这个字段，来登录修改密码
+```
