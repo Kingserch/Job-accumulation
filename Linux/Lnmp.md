@@ -29,6 +29,7 @@ yum -y install nginx
 nginx #启动nginx
 curl 127.0.0.1
 ```
+![nginx.conf](https://github.com/Kingserch/dir/blob/master/linux_%E8%BF%90%E7%BB%B4/nginx.conf)
 #### 3.开机启动设置
 ```
 systemctl enable nginx
