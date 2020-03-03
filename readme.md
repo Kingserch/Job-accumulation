@@ -15,17 +15,13 @@
 
 
 ### 2.zabbix架构
-
+```
 Zabbix Server：负责接收Agent发送的报告信息，组织所有配置、数据和操作。
-
 Database Storage：存储配置信息以及收集到的数据。
-
 Web Interface：Zabbix的GUI 接口，通常与Server运行在同一台机器上。
-
 Proxy：可选组件，常用于分布式监控环境中。
-
 Agent：部署在被监控主机上，负责收集数据发送给Server。
-
+```
  
 
 5、zabbix的工作流程
