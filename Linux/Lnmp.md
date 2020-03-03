@@ -62,6 +62,7 @@ skip-grant-tables  #跳过数据库权限验证	mysql忘记密码可以在/etc/m
 + ### 安装php7
 ##### 1.配置yum源
 ```
+yum -y install epel-release
 rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
 ```
