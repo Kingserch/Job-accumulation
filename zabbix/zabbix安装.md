@@ -19,7 +19,8 @@ systemctl list-dependencies|grep ntpd	#检测是否加入开机启动
 rpm -Uvh https://repo.zabbix.com/zabbix/4.0/rhel/7/x86_64/zabbix-release-4.0-1.el7.noarch.rpm
 yum install -y zabbix-server-mysql zabbix-web-mysql zabbix-agent zabbix-get
 ```
-3)数据库操作
+#### 3)数据库操作
+```
 create database zabbix character set utf8 collate utf8_bin;  #创建zabbix数据库
 grant all privileges on zabbix.* to zabbix@localhost identified by 'zabbix'; #授权zabbix用户从localhost访问，对zabbix数据库有完全控制权限
 授权的时候可能会提示,密码过短。
@@ -34,7 +35,7 @@ select @@validate_password_mixed_case_count;
 SHOW VARIABLES LIKE 'validate_password%';
 flush privileges;
 zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -uzabbix -p zabbix #初始化数据库结构并导入数据
-
+```
 插曲：如果是lnmp环境请这样配置
 cp -a /usr/share/zabbix	/usr/share/nginx/html/	#这个是我nginx的默认目录
 需要授权zabbix用户对配置web路径的访问权限
