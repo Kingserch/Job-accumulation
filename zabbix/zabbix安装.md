@@ -8,11 +8,12 @@
 ### Zabbix-Server服务端安装
 
 ####1)配置时间同步
+```
 yum install ntp -y 
 systemctl start ntpd			#启动
 systemctl enable ntpd		#加入开机启动
 systemctl list-dependencies|grep ntpd	#检测是否加入开机启动
-
+```
 2)客户端安装zabbix
 rpm -Uvh https://repo.zabbix.com/zabbix/4.0/rhel/7/x86_64/zabbix-release-4.0-1.el7.noarch.rpm
 yum install -y zabbix-server-mysql zabbix-web-mysql zabbix-agent zabbix-get
