@@ -73,3 +73,51 @@ yum install php70w.x86_64 php70w-cli.x86_64 php70w-common.x86_64 php70w-gd.x86_6
 ```
 yum install php70w-fpm php70w-opcache
 ```
+##### 4.php配置
+
+###### 4.1配置php.ini
+```
+vi /etc/php.ini
+#理论上配置一下时区就够了，
+date.timezone = Asia/Shanghai	#877行
+#但是需要配置php连接数据库
+pdo_mysql.default_socket=/var/lib/mysql/mysql.sock	#957行
+mysqli.default_socket =/var/lib/mysql/mysql.sock		#1097行
+post_max_size=16M					#656行
+max_execution_time=300				#368行，0表示没有限制
+max_input_time=300					#378行
+```
+###### 4.2配置php-fpm
+```
+vi /etc/php-fpm.d/www.conf
+;默认情况下是apache
+user= apache	#8行
+group=apache	#10行
+; 修改为配置php所属用户为nginx
+user = nginx
+group = nginx
+```
+##### 5.启动php
+```
+systemctl start php-fpm	#启动php-fpm
+systemctl enable php-fpm	#开机启动设置
+systemctl daemon-reload
+```
+##### 6.测试
+```
+#在/nginx配置的站点目录编辑vim index.php 
+<?php
+    phpinfo();
+?>
+
+#测试连接数据库
+vim mysql_test.php
+<?php
+$link = mysqli_connect('localhost', 'root', 'root');
+if (!$link) {
+die('Could not connect: ' . mysqli_error());
+}
+echo 'mysql数据库连接成功';
+mysqli_close($link);
+?>
+```
