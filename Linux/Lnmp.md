@@ -93,10 +93,10 @@ max_input_time=300					#378行
 ##### 4.2配置php-fpm
 ```
 vi /etc/php-fpm.d/www.conf
-;默认情况下是apache
+#默认情况下是apache
 user= apache	#8行
 group=apache	#10行
-; 修改为配置php所属用户为nginx
+#修改为配置php所属用户为nginx
 user = nginx
 group = nginx
 ```
