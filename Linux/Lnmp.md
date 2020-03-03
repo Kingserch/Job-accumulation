@@ -29,6 +29,7 @@ yum -y install nginx
 nginx #启动nginx
 curl 127.0.0.1
 ```
+<a href="https://github.com/Kingserch/dir/blob/master/linux_%E8%BF%90%E7%BB%B4/nginx.conf">超链接对象</a>
 ![nginx.conf](https://github.com/Kingserch/dir/blob/master/linux_%E8%BF%90%E7%BB%B4/nginx.conf)
 #### 3.开机启动设置
 ```
