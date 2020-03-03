@@ -1,6 +1,6 @@
 + ### Job accumulation 工作积累
     + [Zabbix工作环境](https://github.com/Kingserch/Job-accumulation/blob/Linux/Linux/Lnmp.md)
-	+ [Zabbix安装]()
+	+ [Zabbix安装](https://github.com/Kingserch/Job-accumulation/blob/zabbix/zabbix/zabbix%E5%AE%89%E8%A3%85.md)
 
 
 
