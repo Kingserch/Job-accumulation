@@ -7,7 +7,7 @@
     + [上传镜像push](#上传镜像)	
 ### Zabbix-Server服务端安装
 
-####1)配置时间同步
+#### 1)配置时间同步
 ```
 yum install ntp -y 
 systemctl start ntpd			#启动
