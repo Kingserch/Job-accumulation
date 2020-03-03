@@ -10,7 +10,8 @@
 	
 	
 ### 一)Zabbix-Server服务端安装
-1)配置时间同步
+
+####1)配置时间同步
 yum install ntp -y 
 systemctl start ntpd			#启动
 systemctl enable ntpd		#加入开机启动
