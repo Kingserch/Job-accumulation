@@ -36,7 +36,8 @@ SHOW VARIABLES LIKE 'validate_password%';
 flush privileges;
 zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -uzabbix -p zabbix #初始化数据库结构并导入数据
 ```
-插曲：如果是lnmp环境请这样配置
+```
+###插曲：如果是lnmp环境请这样配置
 cp -a /usr/share/zabbix	/usr/share/nginx/html/	#这个是我nginx的默认目录
 需要授权zabbix用户对配置web路径的访问权限
 chown -R zabbix:zabbix /etc/zabbix/
@@ -44,14 +45,14 @@ chown -R zabbix:zabbix /usr/share/nginx/
 chown -R zabbix:zabbix /usr/lib/zabbix/
 chmod -R 755 /etc/zabbix/web/
 chmod -R 777 /var/lib/php/session/
-
-4)配置zabbix_server.conf
-[root@s-30 /]# egrep -v "^#|^$" /etc/zabbix/zabbix_server.conf
+```
+#### 4)配置zabbix_server.conf
+[root@m3 ]# egrep -v "^#|^$" /etc/zabbix/zabbix_server.conf
 LogFile=/var/log/zabbix/zabbix_server.log
 LogFileSize=0
 PidFile=/var/run/zabbix/zabbix_server.pid
 SocketDir=/var/run/zabbix
-DBHost=localhost				#需要修改
+DBHost=119.110.1.3				#需要修改,默认localhost
 DBName=zabbix				#默认
 DBUser=zabbix				#默认
 DBPassword=zabbix				#连接数据库的密码
