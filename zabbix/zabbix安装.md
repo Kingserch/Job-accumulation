@@ -14,10 +14,11 @@ systemctl start ntpd			#启动
 systemctl enable ntpd		#加入开机启动
 systemctl list-dependencies|grep ntpd	#检测是否加入开机启动
 ```
-2)客户端安装zabbix
+#### 2)服务端安装zabbix
+```
 rpm -Uvh https://repo.zabbix.com/zabbix/4.0/rhel/7/x86_64/zabbix-release-4.0-1.el7.noarch.rpm
 yum install -y zabbix-server-mysql zabbix-web-mysql zabbix-agent zabbix-get
-
+```
 3)数据库操作
 create database zabbix character set utf8 collate utf8_bin;  #创建zabbix数据库
 grant all privileges on zabbix.* to zabbix@localhost identified by 'zabbix'; #授权zabbix用户从localhost访问，对zabbix数据库有完全控制权限
