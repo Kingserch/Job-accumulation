@@ -99,6 +99,9 @@ group=apache	#10行
 #修改为配置php所属用户为nginx
 user = nginx
 group = nginx
+#需要把下面这个前面;取消
+listen.owner = nobody
+listen.group = nobody
 ```
 #### 5.启动php
 ```
