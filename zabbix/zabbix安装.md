@@ -64,6 +64,7 @@ ExternalScripts=/usr/lib/zabbix/externalscripts
 LogSlowQueries=3000
 ```
 #### #更改时区，让时间同步
+```
 vim /etc/httpd/conf.d/zabbix.conf
 php_value date.timezone Asia/shanghai
 
@@ -71,7 +72,7 @@ php_value date.timezone Asia/shanghai
 systemctl start zabbix-server		#启动
 systemctl enable zabbix-server		#开机自启动
 systemctl list-dependencies|grep zabbix-server	#检测
-
+```
 5)创建告警和扩展脚本目录(../install)，这里会单独列出一个文件来描述
 mkdir -p /etc/zabbix/alertsscripts  /etc/zabbix/externalscripts
 zabbix_mysql 分表 备份脚本：https://github.com/Kingserch/dir/tree/master/Zabbix/scripts
