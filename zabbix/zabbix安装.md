@@ -62,7 +62,7 @@ AlertScriptsPath=/usr/lib/zabbix/alertscripts
 ExternalScripts=/usr/lib/zabbix/externalscripts
 LogSlowQueries=3000
 
-#更改时区，让时间同步
+#### #更改时区，让时间同步
 vim /etc/httpd/conf.d/zabbix.conf
 php_value date.timezone Asia/shanghai
 
