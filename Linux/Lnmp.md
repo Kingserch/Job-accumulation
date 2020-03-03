@@ -4,7 +4,7 @@
     + [安装mysql](#安装mysql)
     + [安装php7](#安装php7)
 + ### yum源
-##### 切换yum源
+#### 切换yum源
 ```
 cp /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
 wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
@@ -14,7 +14,7 @@ yum update
 ```
 + ### 安装nginx
 
-##### 1.YUM源中没有Nginx，我们需要增加一个nginx的源nginx.repo
+#### 1.YUM源中没有Nginx，我们需要增加一个nginx的源nginx.repo
 ```
 vi /etc/yum.repos.d/nginx.repo
 [nginx]
@@ -23,13 +23,13 @@ baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
 gpgcheck=0
 enabled=1
 ```
-##### 2.安装nginx
+#### 2.安装nginx
 ```
 yum -y install nginx
 nginx #启动nginx
 curl 127.0.0.1
 ```
-##### 3.开机启动设置
+#### 3.开机启动设置
 ```
 systemctl enable nginx
 systemctl daemon-reload
@@ -60,23 +60,23 @@ yum -y remove mysql80-community-release-el7-2.noarch
 skip-grant-tables  #跳过数据库权限验证	mysql忘记密码可以在/etc/my.conf中添加这个字段，来登录修改密码
 ```
 + ### 安装php7
-##### 1.配置yum源
+#### 1.配置yum源
 ```
 yum -y install epel-release
 rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
 ```
-##### 2.安装php7
+#### 2.安装php7
 ```
 yum install php70w.x86_64 php70w-cli.x86_64 php70w-common.x86_64 php70w-gd.x86_64 php70w-ldap.x86_64 php70w-mbstring.x86_64 php70w-mcrypt.x86_64 php70w-mysql.x86_64 php70w-pdo.x86_64
 ```
-##### 3.安装php-fpm
+#### 3.安装php-fpm
 ```
 yum install php70w-fpm php70w-opcache
 ```
 #### 4.php配置
 
-###### 4.1配置php.ini
+##### 4.1配置php.ini
 ```
 vi /etc/php.ini
 #理论上配置一下时区就够了，
@@ -88,7 +88,7 @@ post_max_size=16M					#656行
 max_execution_time=300				#368行，0表示没有限制
 max_input_time=300					#378行
 ```
-###### 4.2配置php-fpm
+##### 4.2配置php-fpm
 ```
 vi /etc/php-fpm.d/www.conf
 ;默认情况下是apache
@@ -98,13 +98,13 @@ group=apache	#10行
 user = nginx
 group = nginx
 ```
-##### 5.启动php
+#### 5.启动php
 ```
 systemctl start php-fpm	#启动php-fpm
 systemctl enable php-fpm	#开机启动设置
 systemctl daemon-reload
 ```
-##### 6.测试
+#### 6.测试
 ```
 #在/nginx配置的站点目录编辑vim index.php 
 <?php
