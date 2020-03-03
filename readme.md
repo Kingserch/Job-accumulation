@@ -21,39 +21,24 @@ Web Interface：Zabbix的GUI 接口，通常与Server运行在同一台机器上
 Proxy：可选组件，常用于分布式监控环境中。
 Agent：部署在被监控主机上，负责收集数据发送给Server。
 ```
- 
-
-5、zabbix的工作流程
-
+### 3.zabbix的工作流程
+```
 Agent获取被监控端数据，发送给Server。
-
 Server记录所接收到的数据，存储在Database中并按照策略进行相应操作。
-
 如果是分布式，Server会将数据传送一份到上级Server中。
-
 Web Interface将收集到的数据和操作信息显示给用户。
-
- 
-
-6、zabbix的进程
-
+```
+### 4.zabbix的进程
+```
 默认情况下zabbix包含5个程序：zabbix_agentd、zabbix_get、zabbix_proxy、zabbix_sender、zabbix_server，另外一个zabbix_java_gateway是可选，这个需要另外安装。下面来分别介绍下他们各自的作用。
-
-zabbix_agentd客户端守护进程，此进程收集客户端数据，例如cpu负载、内存、硬盘使用情况等。
-
+zabbix_agentd客户端守护进程，此进程收集客户端数据，例如cpu负载、内存、硬盘使用情况等
 zabbix_getzabbix工具，单独使用的命令，通常在server或者proxy端执行获取远程客户端信息的命令。通常用户排错。例如在server端获取不到客户端的内存数据，我们可以使用zabbix_get获取客户端的内容的方式来做故障排查。
-
 zabbix_senderzabbix工具，用于发送数据给server或者proxy，通常用于耗时比较长的检查。很多检查非常耗时间，导致zabbix超时。于是我们在脚本执行完毕之后，使用sender主动提交数据。
-
 zabbix_serverzabbix服务端守护进程。zabbix_agentd、zabbix_get、zabbix_sender、zabbix_proxy、zabbix_java_gateway的数据最终都是提交到server
-
 备注：当然不是数据都是主动提交给zabbix_server,也有的是server主动去取数据。
-
 zabbix_proxyzabbix代理守护进程。功能类似server，唯一不同的是它只是一个中转站，它需要把收集到的数据提交/被提交到server里。为什么要用代理？代理是做什么的？卖个关子，请继续关注运维生存时间zabbix教程系列。
-
 zabbix_java_gatewayzabbix2.0之后引入的一个功能。顾名思义：Java网关，类似agentd，但是只用于Java方面。需要特别注意的是，它只能主动去获取数据，而不能被动获取数据。它的数据最终会给到server或者proxy。
-
- 
+```
 
 7、zabbix的逻辑关系图
 
