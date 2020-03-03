@@ -47,6 +47,7 @@ chmod -R 755 /etc/zabbix/web/
 chmod -R 777 /var/lib/php/session/
 ```
 #### 4)配置zabbix_server.conf
+
 [root@m3 ]# egrep -v "^#|^$" /etc/zabbix/zabbix_server.conf
 LogFile=/var/log/zabbix/zabbix_server.log
 LogFileSize=0
