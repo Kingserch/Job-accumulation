@@ -47,7 +47,7 @@ chmod -R 755 /etc/zabbix/web/
 chmod -R 777 /var/lib/php/session/
 ```
 #### 4)配置zabbix_server.conf
-
+```
 [root@m3 ]# egrep -v "^#|^$" /etc/zabbix/zabbix_server.conf
 LogFile=/var/log/zabbix/zabbix_server.log
 LogFileSize=0
@@ -62,7 +62,7 @@ Timeout=4
 AlertScriptsPath=/usr/lib/zabbix/alertscripts
 ExternalScripts=/usr/lib/zabbix/externalscripts
 LogSlowQueries=3000
-
+```
 #### #更改时区，让时间同步
 vim /etc/httpd/conf.d/zabbix.conf
 php_value date.timezone Asia/shanghai
