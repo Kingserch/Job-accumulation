@@ -74,9 +74,9 @@ yum install php70w.x86_64 php70w-cli.x86_64 php70w-common.x86_64 php70w-gd.x86_6
 ```
 yum install php70w-fpm php70w-opcache
 ```
-##### 4.php配置
+#### 4.php配置
 
-####### 4.1配置php.ini
+###### 4.1配置php.ini
 ```
 vi /etc/php.ini
 #理论上配置一下时区就够了，
@@ -88,7 +88,7 @@ post_max_size=16M					#656行
 max_execution_time=300				#368行，0表示没有限制
 max_input_time=300					#378行
 ```
-####### 4.2配置php-fpm
+###### 4.2配置php-fpm
 ```
 vi /etc/php-fpm.d/www.conf
 ;默认情况下是apache
