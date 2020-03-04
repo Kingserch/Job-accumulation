@@ -145,8 +145,8 @@ DBUser=zabbix
 DBPassword=zabbix
 SNMPTrapperFile=/var/log/snmptrap/snmptrap.log
 Timeout=4
-AlertScriptsPath=/usr/lib/zabbix/alertscripts
-ExternalScripts=/usr/lib/zabbix/externalscripts
+AlertScriptsPath=/usr/lib/zabbix/alertscripts	#/etc/zabbix/alertsscripts
+ExternalScripts=/usr/lib/zabbix/externalscripts	#/etc/zabbix/externalscripts
 LogSlowQueries=3000
 AllowRoot=1
 [root@m3 /]#
