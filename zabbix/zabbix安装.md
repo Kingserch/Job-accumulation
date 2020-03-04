@@ -17,7 +17,8 @@ systemctl list-dependencies|grep ntpd	#检测是否加入开机启动
 #### 2)服务端安装zabbix
 ```
 rpm -Uvh https://repo.zabbix.com/zabbix/4.0/rhel/7/x86_64/zabbix-release-4.0-1.el7.noarch.rpm
-yum install -y zabbix-server-mysql zabbix-web-mysql zabbix-agent zabbix-get
+yum -y install zabbix-server-mysql zabbix-web-mysql zabbix-agent zabbix-get zabbix-web zabbix-sender
+
 ```
 #### 3)数据库操作
 ```
@@ -62,12 +63,24 @@ Timeout=4
 AlertScriptsPath=/usr/lib/zabbix/alertscripts
 ExternalScripts=/usr/lib/zabbix/externalscripts
 LogSlowQueries=3000
+AllowRoot=1	#默认为0 改1为了其他用户可以连接数据库，不是必要配置
 ```
 ```
 启动zabbix
 systemctl start zabbix-server		#启动
 systemctl enable zabbix-server		#开机自启动
 systemctl list-dependencies|grep zabbix-server	#检测
+systemctl restart mysqld nginx zabbix-server.service  zabbix-agent.service php-fpm
+systemctl enable mysqld nginx zabbix-server.service  zabbix-agent.service php-fpm
+```
+#### 5)授权
+```
+cp -r /usr/share/zabbix/ /usr/share/nginx/html/zabbix/
+chown -R zabbix:zabbix /etc/zabbix
+chown -R zabbix:zabbix /usr/lib/zabbix
+chown -R zabbix:zabbix /usr/share/zabbix
+chown -R zabbix:zabbix /usr/share/nginx/html/zabbix/
+chown nginx:nginx /etc/zabbix/web/ -R	#授权nginx用户访问webzabbix
 ```
 5)创建告警和扩展脚本目录(../install)，这里会单独列出一个文件来描述
 mkdir -p /etc/zabbix/alertsscripts  /etc/zabbix/externalscripts
