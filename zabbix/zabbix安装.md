@@ -1,6 +1,8 @@
 + ### Zabbix安装
     + [Zabbix-Server服务端安装](#Zabbix-Server服务端安装)
     + [Zabbix-Agent客户端安装](#Zabbix-Agent客户端安装)
+	+ [zabbix_get使用](#zabbix_get使用)
+	
 ### Zabbix-Server服务端安装
 
 #### 1)配置时间同步
@@ -179,7 +181,7 @@ systemctl enable zabbix-agent	#加入开机启动
 systemctl start zabbix-agent	#启动服务
 到此agent，的监控方式安装完成
 ```
-#### 5)zabbix_get使用
+#### zabbix_get使用
 ```
 zabbix_get检测验证客户端的配置是否正确,命令格式如下：
 zabbix_get [-hV] -s <host name or IP> [-p <port>] [-I <ip address>] -k <key>
