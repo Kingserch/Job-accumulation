@@ -84,9 +84,10 @@ chmod -R 777 /var/lib/php/session
 chown nginx:nginx /etc/zabbix/web/ -R	#授权nginx用户访问webzabbix
 ```
 #### 6)创建告警和扩展脚本目录(../install)，这里会单独列出一个文件来描述
-`mkdir -p /etc/zabbix/alertsscripts  /etc/zabbix/externalscripts`
+`mkdir -p /etc/zabbix/alertsscripts  /etc/zabbix/externalscripts`  
 zabbix_mysql 分表 备份脚本：https://github.com/Kingserch/dir/tree/master/Zabbix/scripts
 #### 7)如果关闭防火墙不需要配置下面，开启则需要(我维护的生产环境就没开selinux)
+
 ##### 7.1)防火墙设置
 ```
 #CentOS 7操作系统防火墙规则设置
@@ -106,8 +107,9 @@ setenforce 0 	#0代表permissive，1代表enforcing；也可直接用permissive�
 sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config   #需要重启系统，永久关闭
 getenforce 	#获取当前SELinux的运行状态
 ```
-7)zabbix相关配置
-7.1)Zabbix-Web连接数据库和Zabbix-Server端口的相关配置信息如下：
+##### 8)zabbix相关配置
+
+##### 8.1)Zabbix-Web连接数据库和Zabbix-Server端口的相关配置信息如下：
 [root@s-30 zabbix]# cat /etc/zabbix/web/zabbix.conf.php 
 <?php
 // Zabbix GUI configuration file.
