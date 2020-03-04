@@ -73,13 +73,14 @@ systemctl list-dependencies|grep zabbix-server	#检测
 systemctl restart mysqld nginx zabbix-server.service  zabbix-agent.service php-fpm
 systemctl enable mysqld nginx zabbix-server.service  zabbix-agent.service php-fpm
 ```
-#### 5)授权
+#### 5)授权zabbix用户对配置web路径的访问权限
 ```
 cp -r /usr/share/zabbix/ /usr/share/nginx/html/zabbix/
 chown -R zabbix:zabbix /etc/zabbix
 chown -R zabbix:zabbix /usr/lib/zabbix
 chown -R zabbix:zabbix /usr/share/zabbix
 chown -R zabbix:zabbix /usr/share/nginx/html/zabbix/
+chmod -R 777 /var/lib/php/session
 chown nginx:nginx /etc/zabbix/web/ -R	#授权nginx用户访问webzabbix
 ```
 5)创建告警和扩展脚本目录(../install)，这里会单独列出一个文件来描述
