@@ -1,10 +1,6 @@
 + ### Zabbix安装
     + [Zabbix-Server服务端安装](#Zabbix-Server服务端安装)
-    + [查看镜像images,tag,inspect,history](#查看镜像)
-    + [搜寻镜像search](#搜寻镜像)
-    + [创建镜像commit,import,build](#创建镜像)
-    + [存出和载入镜像save,load](#存出和载入镜像)
-    + [上传镜像push](#上传镜像)	
+    + [Zabbix-Agent客户端安装](#Zabbix-Agent客户端安装)
 ### Zabbix-Server服务端安装
 
 #### 1)配置时间同步
@@ -152,17 +148,22 @@ LogSlowQueries=3000
 AllowRoot=1
 [root@m3 /]#
 ```
-二)Zabbix-Agent客户端安装
-1）客服端的采集方式为Agent，snmp等
+### Zabbix-Agent客户端安装
+#### 1)客服端的采集方式为Agent，snmp等
+```
 rpm -ivh http://repo.zabbix.com/zabbix/4.0/rhel/7/x86_64/zabbix-release-4.0-1.el7.noarch.rpm #安装Zabbix官方的yum源
 yum install -y  zabbix-agent  
 # 由于Zabbix-Server服务器本身也需要监控，所以在Zabbix-Server服务器中也同样需要安装Zabbix-Agent
-防火墙配置
+```
+#### 2)防火墙配置
+```
 #CentOS 7
 firewall-cmd --permanent --add-port=10050/tcp
 firewall-cmd --reload
-2)配置zabbix_agentd.conf
-[root@s-30 /]# egrep -v "^#|^$" /etc/zabbix/zabbix_agentd.conf 
+```
+#### 3)配置zabbix_agentd.conf
+```
+[root@m3 /]# egrep -v "^#|^$" /etc/zabbix/zabbix_agentd.conf 
 PidFile=/var/run/zabbix/zabbix_agentd.pid	#pid文件路径
 LogFile=/var/log/zabbix/zabbix_agentd.log	#日志文件路径
 LogFileSize=0				#日志切割大小，0表示不切割		
@@ -171,11 +172,13 @@ ServerActive=127.0.0.1	#主动模式，zabbix-server的ip地址，Hostname值与
 Hostname=Zabbix server	#本机的Hostname，使用主动模式必须配置
 Include=/etc/zabbix/zabbix_agentd.d/*.conf	#包含的子配置文件
 UnsafeUserParameters=1              	#启用特殊字符，用于自定义监控
-
-[root@s-30 /]# systemctl enable zabbix-agent	#加入开机启动
-[root@s-30 /]# systemctl start zabbix-agent	#启动服务
+```
+#### 4)启动
+```
+systemctl enable zabbix-agent	#加入开机启动
+systemctl start zabbix-agent	#启动服务
 到此agent，的监控方式安装完成
-
+```
 zabbix_get检测验证客户端的配置是否正确,命令格式如下：
 zabbix_get [-hV] -s <host name or IP> [-p <port>] [-I <ip address>] -k <key>
 -s	远程zabbix-agent的ip地址或者主机名字
