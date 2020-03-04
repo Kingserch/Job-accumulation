@@ -86,17 +86,18 @@ chown nginx:nginx /etc/zabbix/web/ -R	#授权nginx用户访问webzabbix
 #### 6)创建告警和扩展脚本目录(../install)，这里会单独列出一个文件来描述
 `mkdir -p /etc/zabbix/alertsscripts  /etc/zabbix/externalscripts`
 zabbix_mysql 分表 备份脚本：https://github.com/Kingserch/dir/tree/master/Zabbix/scripts
-
-
-6)如果关闭防火墙不需要配置下面，开启则需要(我维护的生产环境就没开selinux)
-6.1)防火墙设置
+#### 7)如果关闭防火墙不需要配置下面，开启则需要(我维护的生产环境就没开selinux)
+##### 7.1)防火墙设置
+```
 #CentOS 7操作系统防火墙规则设置
 firewall-cmd --permanent --add-port=80/tcp
 firewall-cmd --permanent --add-port=10050/tcp
 firewall-cmd --permanent --add-port=10051/tcp
 firewall-cmd –reload
 上述规则中，10050是Agent的端口，Agent采用被动方式，Server主动连接Agent的10050端口；10051是Server的端口，Agent采用主动或Trapper方式，会连接Server的10051端口。对于具有防火墙的网络环境，采取相同的防火墙规则策略即可。
-6.2)SELinux的设置
+```
+##### 7.2)SELinux的设置
+```
 如果操作系统已开启SELinux，则需要设置语句开启允许SELinux相关策略。
 setsebool -P httpd_can_connect_zabbix on
 setsebool -P httpd_can_network_connect_db on
@@ -104,7 +105,7 @@ setsebool -P httpd_can_network_connect_db on
 setenforce 0 	#0代表permissive，1代表enforcing；也可直接用permissive和enforcing，不用重启服务器即生效
 sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config   #需要重启系统，永久关闭
 getenforce 	#获取当前SELinux的运行状态
-
+```
 7)zabbix相关配置
 7.1)Zabbix-Web连接数据库和Zabbix-Server端口的相关配置信息如下：
 [root@s-30 zabbix]# cat /etc/zabbix/web/zabbix.conf.php 
