@@ -7,7 +7,7 @@
 
 
 
-
+![zabbix官方文档](https://www.zabbix.com/documentation/4.0/zh/manual)
 ### 1.什么是zabbix
 ```
 Zabbix 是由Alexei Vladishev创建，目前由Zabbix SIA在持续开发和支持，Zabbix 是一个企业级的分布式开源监控方案。  
