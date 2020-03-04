@@ -84,7 +84,7 @@ chmod -R 777 /var/lib/php/session
 chown nginx:nginx /etc/zabbix/web/ -R	#授权nginx用户访问webzabbix
 ```
 #### 6)创建告警和扩展脚本目录(../install)，这里会单独列出一个文件来描述
-mkdir -p /etc/zabbix/alertsscripts  /etc/zabbix/externalscripts
+`mkdir -p /etc/zabbix/alertsscripts  /etc/zabbix/externalscripts`
 zabbix_mysql 分表 备份脚本：https://github.com/Kingserch/dir/tree/master/Zabbix/scripts
 
 
