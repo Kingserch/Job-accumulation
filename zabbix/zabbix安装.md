@@ -2,7 +2,7 @@
     + [Zabbix-Server服务端安装](#Zabbix-Server服务端安装)
     + [Zabbix-Agent客户端安装](#Zabbix-Agent客户端安装)
 	+ [zabbix_get使用](#zabbix_get使用)
-	
+	+ [查询mysql的zabbix数据库中历史表据量的大小](#查询mysql的zabbix数据库中历史表据量的大小)	
 ### Zabbix-Server服务端安装
 
 #### 1)配置时间同步
@@ -181,7 +181,7 @@ systemctl enable zabbix-agent	#加入开机启动
 systemctl start zabbix-agent	#启动服务
 到此agent，的监控方式安装完成
 ```
-#### zabbix_get使用
+### zabbix_get使用
 ```
 zabbix_get检测验证客户端的配置是否正确,命令格式如下：
 zabbix_get [-hV] -s <host name or IP> [-p <port>] [-I <ip address>] -k <key>
@@ -194,5 +194,7 @@ zabbix_get [-hV] -s <host name or IP> [-p <port>] [-I <ip address>] -k <key>
 rpm -ivh http://repo.zabbix.com/zabbix/3.2/rhel/7/x86_64/zabbix-release-3.2-1.el7.noarch.rpm7.noarch.rpm
 yum install zabbix-get.x86_64 -y
 ```
-查询mysql的zabbix数据库中历史表据量的大小
+### 查询mysql的zabbix数据库中历史表据量的大小
+```
 select table_name, (data_length+index_length)/1024/1024 as total_mb, table_rows  from  information_schema.tables  where  table_schema='zabbix';
+```
