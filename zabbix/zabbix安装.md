@@ -107,10 +107,11 @@ setenforce 0 	#0代表permissive，1代表enforcing；也可直接用permissive�
 sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config   #需要重启系统，永久关闭
 getenforce 	#获取当前SELinux的运行状态
 ```
-##### 8)zabbix相关配置
+#### 8)zabbix相关配置
 
 ##### 8.1)Zabbix-Web连接数据库和Zabbix-Server端口的相关配置信息如下：
-[root@s-30 zabbix]# cat /etc/zabbix/web/zabbix.conf.php 
+```
+[root@m3 /]# cat /etc/zabbix/web/zabbix.conf.php
 <?php
 // Zabbix GUI configuration file.
 global $DB;
@@ -125,68 +126,32 @@ $DB['PASSWORD'] = 'zabbix';
 // Schema name. Used for IBM DB2 and PostgreSQL.
 $DB['SCHEMA'] = '';
 
-$ZBX_SERVER      = 'localhost';
+$ZBX_SERVER      = '119.110.1.3';
 $ZBX_SERVER_PORT = '10051';
-$ZBX_SERVER_NAME = 'zabbix';
+$ZBX_SERVER_NAME = '';
 
 $IMAGE_FORMAT_DEFAULT = IMAGE_FORMAT_PNG;
-
-$ZBX_SERVER      = '127.0.0.1';
-$ZBX_SERVER_PORT = '10051';
-$ZBX_SERVER_NAME = 'zbx4';
-
-$IMAGE_FORMAT_DEFAULT = IMAGE_FORMAT_PNG;
-7.2) /etc/zabbix/zabbix_server.conf 中的参数
-[root@s-30 zabbix]# egrep -v "^#|^$" /etc/zabbix/zabbix_server.conf
+[root@m3 /]# 
+```
+##### 8.2) /etc/zabbix/zabbix_server.conf 中的参数
+```
+[root@m3 /]#  egrep -v "^#|^$" /etc/zabbix/zabbix_server.conf
 LogFile=/var/log/zabbix/zabbix_server.log
 LogFileSize=0
 PidFile=/var/run/zabbix/zabbix_server.pid
 SocketDir=/var/run/zabbix
-DBHost=localhost				#数据库的ip如果不在本机，要写真实的iP
-DBName=zabbix				#数据库的名称
-DBUser=zabbix				#数据库的用户
-DBPassword=zabbix				#数据库的密码
+DBHost=localhost
+DBName=zabbix
+DBUser=zabbix
+DBPassword=zabbix
 SNMPTrapperFile=/var/log/snmptrap/snmptrap.log
 Timeout=4
 AlertScriptsPath=/usr/lib/zabbix/alertscripts
 ExternalScripts=/usr/lib/zabbix/externalscripts
 LogSlowQueries=3000
-
-8)zabbix_server程序中的参数
-通过zabbix_server --help 可以查看配置的参数，可以通过在线热加改变某个配置参数
-8.1)手动执行清理器Housekeeper，可以删除过期数据，如下：
-[root@s-30 conf]# zabbix_server -R housekeeper_execute
-zabbix_server [33612]: command sent successfully
-[root@s-30 conf]# tail -f /var/log/zabbix/zabbix_server.log
-  1649:20191101:051138.056 forced execution of the housekeeper
-  1649:20191101:051138.056 executing housekeeper
-  1649:20191101:051138.473 housekeeper [deleted 1073 hist/trends, 0 items/triggers, 0 events, 0 problems, 0 sessions, 0 alarms, 0 audit items in 0.376787 sec, idle for 1 hour(s)]
-  1648:20191101:051238.693 forced reloading of the configuration cache
-  1651:20191101:090445.247 slow query: 10340.401633 sec, "select h.hostid,h.host,h.name,t.httptestid,t.name,t.agent,t.authentication,t.http_user,t.http_password,t.http_proxy,t.retries,t.ssl_cert_file,t.ssl_key_file,t.ssl_key_password,t.verify_peer,t.verify_host,t.delay from httptest t,hosts h where t.hostid=h.hostid and t.nextcheck<=1572559944 and mod(t.httptestid,1)=0 and t.status=0 and h.proxy_hostid is null and h.status=0 and (h.maintenance_status=0 or h.maintenance_type=0)"
-  1649:20191101:090602.697 executing housekeeper
-  1649:20191101:090603.126 housekeeper [deleted 3649 hist/trends, 0 items/triggers, 0 events, 0 problems, 0 sessions, 0 alarms, 0 audit items in 0.427603 sec, idle for 1 hour(s)]
-  1649:20191101:093731.806 forced execution of the housekeeper
-  1649:20191101:093731.806 executing housekeeper
-  1649:20191101:093732.103 housekeeper [deleted 2122 hist/trends, 0 items/triggers, 0 events, 0 problems, 0 sessions, 0 alarms, 0 audit items in 0.283118 sec, idle for 1 hour(s)]
-8.2)在线执行重载配置缓存
-[root@s-30 conf]# zabbix_server -R config_cache_reload
-[root@s-30 conf]# zabbix_server -R config_cache_reload
-8.3)在线调整日志运行级别，执行一次，降低一个级别
-[root@s-30 conf]# zabbix_server -R log_level_decrease
-zabbix_server [33878]: command sent successfully
-[root@s-30 conf]# tail -1 /var/log/zabbix/zabbix_server.log
-  1669:20191101:094205.982 log level has been decreased to 2 (error)
-8.3)在线调整日志级别，执行一次，增加一个级别
-[root@s-30 conf]# zabbix_server -R log_level_increase
-zabbix_server [33973]: command sent successfully
-[root@s-30 conf]# tail -1 /var/log/zabbix/zabbix_server.log
-  1675:20191101:094338.416 log level has been increased to 3 (warning)
-8.4)调整某个进程（pid）的日志运行级别
-[root@s-30 conf]# ps -ef |grep zabbix|wc -l
-zabbix_server -R log_level_increase=pid		#可以跟进程的pid
-zabbix_server -R log_level_increase=poller		#可以跟进程的名字
-zabbix_server -R log_level_increase=poller	,3	#可以根据进程名字设置日志级别
-
+AllowRoot=1
+[root@m3 /]#
+```
 二)Zabbix-Agent客户端安装
 1）客服端的采集方式为Agent，snmp等
 rpm -ivh http://repo.zabbix.com/zabbix/4.0/rhel/7/x86_64/zabbix-release-4.0-1.el7.noarch.rpm #安装Zabbix官方的yum源
