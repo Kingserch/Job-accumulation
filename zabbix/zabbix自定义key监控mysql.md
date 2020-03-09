@@ -17,6 +17,7 @@ UserParameter=mysql_status[*],/scripts/mysql_status.sh "$1"		#自定义需添加
 Timeout=10
 Include=/etc/zabbix/zabbix_agentd.d/*.conf
 UnsafeUserParameters=1 	#1开启自定义监控，默认0不开启
+[root@m39 scripts]# systemctl restart zabbix-agent
 ```
 ![mysql_status.sh](https://github.com/Kingserch/Job-accumulation/blob/zabbix/sh/mysql_status.sh)
 #### 2)编写脚本
