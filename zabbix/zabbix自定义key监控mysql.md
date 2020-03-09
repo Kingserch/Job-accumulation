@@ -18,12 +18,16 @@ Timeout=10
 Include=/etc/zabbix/zabbix_agentd.d/*.conf
 UnsafeUserParameters=1 	#1开启自定义监控，默认0不开启
 [root@m39 scripts]# systemctl restart zabbix-agent
+[root@m39 scripts]# chown  -R  zabbix.zabbix /scripts/mysql_status.sh	#授权zabbix用户可以使用脚本
 ```
 ![mysql_status.sh](https://github.com/Kingserch/Job-accumulation/blob/zabbix/sh/mysql_status.sh)
-#### 2)编写脚本
 
-#### 3)配置被监控端my.cnf
+#### 2)被监控端mysql操作
 ```
+#root登录mysql设置一个可以查询的用户，仅限本地登录
+grant process,reload,replication client,super on *.* to 'status'@'localhost' identified by 'zabbix';
+#刷新权限
+flush privileges;
 [root@m39 scripts]# egrep -v "^#|^$" /etc/my.cnf
 [mysqld]
 datadir=/var/lib/mysql
