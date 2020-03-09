@@ -25,6 +25,8 @@ UnsafeUserParameters=1 	#1开启自定义监控，默认0不开启
 #### 2)被监控端mysql操作
 ```
 #root登录mysql设置一个可以查询的用户，仅限本地登录
+set global validate_password_policy=0;
+set global validate_password_length=1;
 grant process,reload,replication client,super on *.* to 'status'@'localhost' identified by 'zabbix';
 #刷新权限
 flush privileges;
