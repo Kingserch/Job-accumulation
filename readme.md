@@ -1,7 +1,7 @@
 + ### Job accumulation 工作积累
     + [Zabbix工作环境](https://github.com/Kingserch/Job-accumulation/blob/Linux/Linux/Lnmp.md)
 	+ [Zabbix安装](https://github.com/Kingserch/Job-accumulation/blob/zabbix/zabbix/zabbix%E5%AE%89%E8%A3%85.md)
-
+	+ [zabbix监控mysql](https://github.com/Kingserch/Job-accumulation/blob/zabbix/zabbix/zabbix%E8%87%AA%E5%AE%9A%E4%B9%89key%E7%9B%91%E6%8E%A7mysql.md)
 
 
 

@@ -18,10 +18,9 @@ Timeout=10
 Include=/etc/zabbix/zabbix_agentd.d/*.conf
 UnsafeUserParameters=1 	#1开启自定义监控，默认0不开启
 ```
+![mysql_status.sh](https://github.com/Kingserch/Job-accumulation/blob/zabbix/sh/mysql_status.sh)
 #### 2)编写脚本
-```
 
-```
 #### 3)配置被监控端my.cnf
 ```
 [root@m39 scripts]# egrep -v "^#|^$" /etc/my.cnf
