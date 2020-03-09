@@ -84,6 +84,7 @@ chown nginx:nginx /etc/zabbix/web/ -R	#授权nginx用户访问webzabbix
 
 IP+zabbix访问，web页面如下：
 ![zabbix页面](https://github.com/Kingserch/Job-accumulation/blob/zabbix/images/zabbix.png)
+下面看到中文乱码了，
 ![zabbix-font](https://github.com/Kingserch/Job-accumulation/blob/zabbix/images/zabbix-font.png)
 解决中文乱码问题
 ```
