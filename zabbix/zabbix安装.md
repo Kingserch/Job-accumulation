@@ -95,7 +95,7 @@ cp /usr/share/fonts/wqy-microhei/wqy-microhei.ttc /usr/share/zabbix/assets/fonts
 ```
 #### 6)创建告警和扩展脚本目录(../install)，这里会单独列出一个文件来描述
 `mkdir -p /etc/zabbix/alertsscripts  /etc/zabbix/externalscripts`  
-zabbix_mysql 分表 备份脚本：https://github.com/Kingserch/dir/tree/master/Zabbix/scripts
+
 #### 7)如果关闭防火墙不需要配置下面，开启则需要(我维护的生产环境就没开selinux)
 
 ##### 7.1)防火墙设置
