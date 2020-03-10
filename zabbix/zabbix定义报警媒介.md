@@ -12,3 +12,5 @@
 ![](https://github.com/Kingserch/Job-accumulation/blob/zabbix/images/zabbix-q.png)
 #### 定义收件人
 ![](https://github.com/Kingserch/Job-accumulation/blob/zabbix/images/zabbix-s.png)
+#### 添加报警触发器
+![](https://github.com/Kingserch/Job-accumulation/blob/zabbix/images/zabbix-b.png)
