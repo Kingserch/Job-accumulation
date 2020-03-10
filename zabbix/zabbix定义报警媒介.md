@@ -6,4 +6,6 @@
 	+ [Zabbix数据库备份](#Zabbix数据库备份)
 	+ [查询mysql的zabbix数据库中历史表据量的大小](#查询mysql的zabbix数据库中历史表据量的大小)	
 ### 邮件报警
+![](https://github.com/Kingserch/Job-accumulation/blob/zabbix/images/zabbix-qq.png)
+![](https://github.com/Kingserch/Job-accumulation/blob/zabbix/images/zabbix-q.png)
 
