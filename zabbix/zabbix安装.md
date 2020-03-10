@@ -257,6 +257,7 @@ mysql>
 date -d @1583855999 "+%Y-%m-%d"		#1583855999 更改时间戳
 date -d "2020-03-10" +%s
 ```
+[mysql表分区脚本](https://github.com/Kingserch/Job-accumulation/blob/zabbix/sh/partitiontables_zabbix.sh)
 ### Zabbix数据库备份
 备份采用单表备份，对监控的历史展示数据不做备份（history* trends* Acknowledges ALerts Auditlog Events service_alarms）
 ```
