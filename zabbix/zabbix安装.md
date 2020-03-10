@@ -3,6 +3,7 @@
     + [Zabbix-Agent客户端安装](#Zabbix-Agent客户端安装)
 	+ [zabbix_get使用](#zabbix_get使用)
 	+ [zabbix数据库表分区](#zabbix数据库表分区)
+	+ [Zabbix数据库备份](#	Zabbix数据库备份)
 	+ [查询mysql的zabbix数据库中历史表据量的大小](#查询mysql的zabbix数据库中历史表据量的大小)	
 ### Zabbix-Server服务端安装
 
@@ -257,7 +258,8 @@ mysql>
 date -d @1583855999 "+%Y-%m-%d"		#1583855999 更改时间戳
 date -d "2020-03-10" +%s
 ```
-
+### Zabbix数据库备份
+备份采用单表备份，对监控的历史展示数据不做备份（history* trends* Acknowledges ALerts Auditlog Events service_alarms）
 
 ### 查询mysql的zabbix数据库中历史表据量的大小
 ```
