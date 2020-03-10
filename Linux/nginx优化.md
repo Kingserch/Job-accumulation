@@ -16,33 +16,15 @@ Document Path:          /zabbix/
 Document Length:        3353 bytes
 
 Concurrency Level:      20
-Time taken for tests:   32.943 seconds
-Complete requests:      2000
-Failed requests:        0
+Time taken for tests:   32.943 seconds	#总花费总时长
+Complete requests:      2000		 #总请求数
+Failed requests:        0		#请求失败数
 Write errors:           0
-Total transferred:      7576000 bytes
-HTML transferred:       6706000 bytes
-Requests per second:    60.71 [#/sec] (mean)
-Time per request:       329.432 [ms] (mean)
-Time per request:       16.472 [ms] (mean, across all concurrent requests)
-Transfer rate:          224.58 [Kbytes/sec] received
-
-Connection Times (ms)
-              min  mean[+/-sd] median   max
-Connect:        0    0   2.8      0      85
-Processing:    29  328 174.0    286    1840
-Waiting:       29  327 174.0    285    1839
-Total:         30  329 174.0    287    1840
-
-Percentage of the requests served within a certain time (ms)
-  50%    287
-  66%    354
-  75%    405
-  80%    442
-  90%    557
-  95%    661
-  98%    804
-  99%    917
- 100%   1840 (longest request)
-[root@m3 scripts]#
+Total transferred:      7576000 bytes		#总传输大小
+HTML transferred:       6706000 bytes		#页面传输大小
+Requests per second:    60.71 [#/sec] (mean)	[#/sec] (mean)    #每秒多少请求/s(总请求数/总共完成的时间)
+Time per request:       329.432 [ms] (mean)	 #客户端访问服务端, 单个请求所需花费的时间
+Time per request:       16.472 [ms] (mean, across all concurrent requests)	#服务端处理请求的时间
+Transfer rate:          224.58 [Kbytes/sec] received	#判断网络传输速率, 观察网络是否存在瓶颈
+...
 ```
