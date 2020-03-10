@@ -4,6 +4,7 @@
     + [CPU亲和与Worker进程](#CPU亲和与Worker进程)
 + ### php优化
 	+ [php.ini优化](#php.ini优化)
+	+ [php-fpm优化](#php-fpm优化)
 + ###  压力测试工具实战
 ```
 yum install httpd-tools -y
@@ -65,7 +66,6 @@ events {
 ...
 ```
 + ### php优化
-
 #### php.ini优化
 ```
 [root@m3 nginx]# egrep  "^[a-z]" /etc/php.ini 
@@ -182,4 +182,4 @@ soap.wsdl_cache_limit = 5
 ldap.max_links = -1
 [root@m3 nginx]# 
 ```
-#### 2. php-fpm主配置文件/etc/php-fpm.conf调整
+#### php-fpm优化
