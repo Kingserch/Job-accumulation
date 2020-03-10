@@ -2,6 +2,7 @@
     + [Zabbix-Server服务端安装](#Zabbix-Server服务端安装)
     + [Zabbix-Agent客户端安装](#Zabbix-Agent客户端安装)
 	+ [zabbix_get使用](#zabbix_get使用)
+	+ [zabbix数据库表分区](#zabbix数据库表分区)
 	+ [查询mysql的zabbix数据库中历史表据量的大小](#查询mysql的zabbix数据库中历史表据量的大小)	
 ### Zabbix-Server服务端安装
 
@@ -204,6 +205,60 @@ zabbix_get [-hV] -s <host name or IP> [-p <port>] [-I <ip address>] -k <key>
 rpm -ivh http://repo.zabbix.com/zabbix/3.2/rhel/7/x86_64/zabbix-release-3.2-1.el7.noarch.rpm7.noarch.rpm
 yum install zabbix-get.x86_64 -y
 ```
+### zabbix数据库表分区
+```
+#web页面关闭Housekeeper
+#Administrattion（管理）——>General(一般)——>Housekeeper(管家)，去掉History和Trends选项的勾选状态，可关闭History，Trends，Housekeeper功能
+因为是生产环境，history trends表中数据较大，所以需要先清空在执行脚本
+清空语句如下：
+mysql> use zabbix; 
+mysql> truncate table history; 
+mysql> optimize table history; 
+mysql> truncate table history_str; 
+mysql> optimize table history_str; 
+mysql> truncate table history_uint; 
+mysql> optimize table history_uint; 
+mysql> truncate table history_log; 
+mysql> optimize table history_log; 
+mysql> truncate table history_text; 
+mysql> optimize table history_text; 
+mysql> truncate table trends; 
+mysql> optimize table trends; 
+mysql> truncate table trends_uint; 
+mysql> optimize table trends_uint; 
+#运行表分区脚本，为防止网络中断后引起脚本运行中断导致数据库故障，我们用screen后台执行的方式
+yum install screen -y 
+screen  -R  zabbix
+#授权脚本执行权限，执行脚本完成后，提示mysql: [Warning] Using a password on the command line interface can be insecure 暂时忽略
+crontab -e 	#加入开机启动
+1 0 * * *	 sh /scripts/partitiontables_zabbix.sh  #分时日月周 跟脚本路径
+#验证表分区是否成功，可以查看history表结构
+mysql>  show create table history\G
+*************************** 1. row ***************************
+       Table: history
+Create Table: CREATE TABLE `history` (
+  `itemid` bigint(20) unsigned NOT NULL,
+  `clock` int(11) NOT NULL DEFAULT '0',
+  `value` double(16,4) NOT NULL DEFAULT '0.0000',
+  `ns` int(11) NOT NULL DEFAULT '0',
+  KEY `history_1` (`itemid`,`clock`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+/*!50100 PARTITION BY RANGE ( clock)
+(PARTITION p20200310 VALUES LESS THAN (1583855999) ENGINE = InnoDB,
+ PARTITION p20200311 VALUES LESS THAN (1583942399) ENGINE = InnoDB,
+ PARTITION p20200312 VALUES LESS THAN (1584028799) ENGINE = InnoDB,
+ PARTITION p20200313 VALUES LESS THAN (1584115199) ENGINE = InnoDB,
+ PARTITION p20200314 VALUES LESS THAN (1584201599) ENGINE = InnoDB,
+ PARTITION p20200315 VALUES LESS THAN (1584287999) ENGINE = InnoDB,
+ PARTITION p20200316 VALUES LESS THAN (1584374399) ENGINE = InnoDB,
+ PARTITION p20200317 VALUES LESS THAN (1584460799) ENGINE = InnoDB) */
+1 row in set (0.00 sec)
+mysql>
+date -d @1583855999 "+%Y-%m-%d"		#1583855999 更改时间戳
+date -d "2020-03-10" +%s
+```
+
+
 ### 查询mysql的zabbix数据库中历史表据量的大小
 ```
 select table_name, (data_length+index_length)/1024/1024 as total_mb, table_rows  from  information_schema.tables  where  table_schema='zabbix';
