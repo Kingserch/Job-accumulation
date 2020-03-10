@@ -18,7 +18,6 @@ systemctl list-dependencies|grep ntpd	#检测是否加入开机启动
 ```
 rpm -Uvh https://repo.zabbix.com/zabbix/4.0/rhel/7/x86_64/zabbix-release-4.0-1.el7.noarch.rpm
 yum -y install zabbix-server-mysql zabbix-web-mysql zabbix-agent zabbix-get zabbix-web zabbix-sender
-
 ```
 #### 3)数据库操作
 ```
