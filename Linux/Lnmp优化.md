@@ -3,7 +3,7 @@
     + [系统性能优化](#系统性能优化)
     + [CPU亲和与Worker进程](#CPU亲和与Worker进程)
 + ### php优化
-	+ [php.ini优化](#php.ini优化)
+	+ [php.ini优化](#php-ini优化)
 	+ [php-fpm优化](#php-fpm优化)
 + ###  压力测试工具实战
 ```
@@ -65,7 +65,7 @@ include /usr/share/nginx/modules/*.conf;
 events {
 ...
 ```
-+ ### php.ini优化
++ ### php-ini优化
 ```
 [root@m3 nginx]# egrep  "^[a-z]" /etc/php.ini 
 log_errors=On	# 开启日志
