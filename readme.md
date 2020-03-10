@@ -2,7 +2,7 @@
     + [Zabbix工作环境](https://github.com/Kingserch/Job-accumulation/blob/Linux/Linux/Lnmp.md)
 	+ [Zabbix安装](https://github.com/Kingserch/Job-accumulation/blob/zabbix/zabbix/zabbix%E5%AE%89%E8%A3%85.md)
 	+ [zabbix定义报警媒介](https://github.com/Kingserch/Job-accumulation/blob/zabbix/zabbix/zabbix%E8%87%AA%E5%AE%9A%E4%B9%89key%E7%9B%91%E6%8E%A7mysql.md)
-	+ [zabbix监控mysql](https://github.com/Kingserch/Job-accumulation/blob/zabbix/zabbix/zabbix%E8%87%AA%E5%AE%9A%E4%B9%89key%E7%9B%91%E6%8E%A7mysql.md)
+	+ [zabbix监控mysql](https://github.com/Kingserch/Job-accumulation/blob/zabbix/zabbix/zabbix%E8%87%AA%E5%AE%9A%E4%B9%89key%E7%9B%91%E6%8E%A7mysql.md)  
 [zabbix官方文档](https://www.zabbix.com/documentation/4.0/zh/manual)
 ```
 监控需求:
