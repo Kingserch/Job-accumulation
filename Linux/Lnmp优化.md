@@ -65,7 +65,7 @@ include /usr/share/nginx/modules/*.conf;
 events {
 ...
 ```
-#### php.ini优化
++ ### php.ini优化
 ```
 [root@m3 nginx]# egrep  "^[a-z]" /etc/php.ini 
 log_errors=On	# 开启日志
@@ -181,4 +181,4 @@ soap.wsdl_cache_limit = 5
 ldap.max_links = -1
 [root@m3 nginx]# 
 ```
-#### php-fpm优化
++ ### php-fpm优化
