@@ -267,6 +267,7 @@ crontab -e
 0 3 * * *  /scripts//scripts/zabbix-mysql/mysql_back.sh mysqldump	#加入定时任务
 sh /scripts//scripts/zabbix-mysql/mysql_back.sh mysqlimport		#恢复数据
 ```
+[mysql备份脚本](https://github.com/Kingserch/Job-accumulation/blob/zabbix/sh/mysql_back.sh)
 ### 查询mysql的zabbix数据库中历史表据量的大小
 ```
 select table_name, (data_length+index_length)/1024/1024 as total_mb, table_rows  from  information_schema.tables  where  table_schema='zabbix';
