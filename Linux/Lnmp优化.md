@@ -3,8 +3,7 @@
     + [系统性能优化](#系统性能优化)
     + [CPU亲和与Worker进程](#CPU亲和与Worker进程)
 + ### php优化
-	+ [php.ini优化](#php-ini优化)
-	+ [php-fpm优化](#php-fpm优化)
+	+ [php优化](#php优化)
 + ###  压力测试工具实战
 ```
 yum install httpd-tools -y
@@ -65,7 +64,7 @@ include /usr/share/nginx/modules/*.conf;
 events {
 ...
 ```
-+ ### php-ini优化
++ ### php优化
 ```
 [root@m3 nginx]# egrep  "^[a-z]" /etc/php.ini 
 log_errors=On	# 开启日志
@@ -181,4 +180,3 @@ soap.wsdl_cache_limit = 5
 ldap.max_links = -1
 [root@m3 nginx]# 
 ```
-+ ### php-fpm优化
