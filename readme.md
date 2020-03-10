@@ -3,6 +3,7 @@
 	+ [Zabbix安装](https://github.com/Kingserch/Job-accumulation/blob/zabbix/zabbix/zabbix%E5%AE%89%E8%A3%85.md)
 	+ [zabbix监控mysql](https://github.com/Kingserch/Job-accumulation/blob/zabbix/zabbix/zabbix%E8%87%AA%E5%AE%9A%E4%B9%89key%E7%9B%91%E6%8E%A7mysql.md)
 [zabbix官方文档](https://www.zabbix.com/documentation/4.0/zh/manual)
+```
 监控需求:
 1.硬件监控 路由器、交换机、防火墙
 2.系统监控 CPU、内存、磁盘、网络、进程、 TCP
@@ -12,6 +13,7 @@
 6.安全监控 Firewalld、 WAF(Nginx+lua)、安全宝、牛盾云、安全狗
 7.网络监控 smokeping 多机房
 8.业务监控 活动引入多少流量、产生多少注册量、带来多大价值
+```
 ### 1.什么是zabbix
 ```
 Zabbix 是由Alexei Vladishev创建，目前由Zabbix SIA在持续开发和支持，Zabbix 是一个企业级的分布式开源监控方案。  
