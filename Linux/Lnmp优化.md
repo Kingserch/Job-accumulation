@@ -65,7 +65,6 @@ include /usr/share/nginx/modules/*.conf;
 events {
 ...
 ```
-+ ### php优化
 #### php.ini优化
 ```
 [root@m3 nginx]# egrep  "^[a-z]" /etc/php.ini 
