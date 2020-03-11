@@ -38,4 +38,7 @@ Connection: keep-alive
 #配置zabbix参数
 [root@m39 ]# vim /etc/zabbix/zabbix_agentd.d/ngx_statux.conf
 UserParameter=nginx_status[*],/bin/bash /etc/zabbix/scripts/ngx_status.sh $1
+#服务端测试
+[root@m3]# zabbix_get -s 119.110.1.39  -k nginx_status[accepts]
+8
 ```
