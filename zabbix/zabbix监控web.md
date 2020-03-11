@@ -16,5 +16,4 @@ systemctl restart zabbix-agent
 26
 ```
 [TCP监控模板](https://github.com/Kingserch/Job-accumulation/blob/zabbix/Template/TCP%E8%BF%9E%E6%8E%A5%E7%8A%B6%E6%80%81_templates.xml)
-<a href="https://github.com/Kingserch/Job-accumulation/blob/zabbix/Template/TCP%E8%BF%9E%E6%8E%A5%E7%8A%B6%E6%80%81_templates.xml" target="_blank">附件1</a>
 ### nginx监控
