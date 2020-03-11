@@ -31,4 +31,5 @@ Server: nginx/1.16.1
 Date: Wed, 11 Mar 2020 06:42:09 GMT
 Content-Type: text/plain
 Connection: keep-alive
+[root@m39]# vim /etc/zabbix/scripts/ngx_status.sh	#编辑监控nginx脚本，
 ```
