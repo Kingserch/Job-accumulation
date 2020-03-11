@@ -33,3 +33,4 @@ Content-Type: text/plain
 Connection: keep-alive
 [root@m39]# vim /etc/zabbix/scripts/ngx_status.sh	#编辑监控nginx脚本，
 ```
+[监控nginx脚本](https://github.com/Kingserch/Job-accumulation/blob/zabbix/sh/ngx_status.sh)
