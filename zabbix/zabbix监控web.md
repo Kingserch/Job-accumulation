@@ -34,3 +34,8 @@ Connection: keep-alive
 [root@m39]# vim /etc/zabbix/scripts/ngx_status.sh	#编辑监控nginx脚本，
 ```
 [监控nginx脚本](https://github.com/Kingserch/Job-accumulation/blob/zabbix/sh/ngx_status.sh)
+```
+#配置zabbix参数
+[root@m39 ]# vim /etc/zabbix/zabbix_agentd.d/ngx_statux.conf
+UserParameter=nginx_status[*],/bin/bash /etc/zabbix/scripts/ngx_status.sh $1
+```
