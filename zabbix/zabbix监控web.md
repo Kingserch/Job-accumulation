@@ -42,3 +42,4 @@ UserParameter=nginx_status[*],/bin/bash /etc/zabbix/scripts/ngx_status.sh $1
 [root@m3]# zabbix_get -s 119.110.1.39  -k nginx_status[accepts]
 8
 ```
+[nginx监控模板](https://github.com/Kingserch/Job-accumulation/blob/zabbix/Template/.xml
