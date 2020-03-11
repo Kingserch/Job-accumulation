@@ -17,3 +17,16 @@ systemctl restart zabbix-agent
 ```
 [TCP监控模板](https://github.com/Kingserch/Job-accumulation/blob/zabbix/Template/TCP%E8%BF%9E%E6%8E%A5%E7%8A%B6%E6%80%81_templates.xml)
 ### nginx监控
+[root@m39]# vim /etc/nginx/conf.d/default.conf
+...
+    location /status{			#在server中配置一个location
+        stub_status on;
+    }
+...
+#测试
+[root@m39]# curl -I  127.0.0.1/status
+HTTP/1.1 200 OK		#返回状态码200
+Server: nginx/1.16.1
+Date: Wed, 11 Mar 2020 06:42:09 GMT
+Content-Type: text/plain
+Connection: keep-alive
