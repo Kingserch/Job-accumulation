@@ -5,6 +5,8 @@
 	+ [zabbix监控web](https://github.com/Kingserch/Job-accumulation/blob/zabbix/zabbix/zabbix%E7%9B%91%E6%8E%A7web.md)  
 	+ [zabbix监控mysql](https://github.com/Kingserch/Job-accumulation/blob/zabbix/zabbix/zabbix%E8%87%AA%E5%AE%9A%E4%B9%89key%E7%9B%91%E6%8E%A7mysql.md)  
 
+
+<a href="https://github.com/Kingserch/Job-accumulation/blob/zabbix/Template/zbx_nginx_templates.xml" download="zbx_nginx_templates.xml">点击下载</a>
 [zabbix官方文档](https://www.zabbix.com/documentation/4.0/zh/manual)
 ```
 监控需求:
