@@ -3,7 +3,7 @@
     + [安装](#安装)
     + [elasticsearch配置](#elasticsearch配置)
 	+ [安装elasticsearch-head插件](#安装elasticsearch-head插件)
-	+ [Zabbix](https://github.com/Kingserch/Job-accumulation/tree/zabbix)	
+	+ [LogStash的使用](#LogStash的使用)	
 	
 ### 环境
 ```
@@ -67,6 +67,8 @@ cd elasticsearch-head
 npm install
 npm run start
 ```
+### LogStash的使用
+[LogStashg官方安装手册](https://www.elastic.co/guide/en/logstash/current/installing-logstash.html)
 
 
 
