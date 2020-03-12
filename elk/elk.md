@@ -2,7 +2,7 @@
     + [环境](#环境)
     + [安装](#安装)
     + [elasticsearch配置](#elasticsearch配置)
-	+ [Jenkins](https://github.com/Kingserch/Job-accumulation/tree/Jenkins)
+	+ [安装elasticsearch-head插件](#安装elasticsearch-head插件)
 	+ [Zabbix](https://github.com/Kingserch/Job-accumulation/tree/zabbix)	
 	
 ### 环境
@@ -40,9 +40,9 @@ vim /etc/elasticsearch/elasticsearch.yml
 cluster.name: cluster
 #找到配置文件中的node.name，打开该配置并设置节点名称
 node.name: node-1
-#修改data存放的路径
+#修改data存放的路径mkdir -p /tmp/es-data;chown -R elasticsearch:elasticsearch /data/es-data
 path.data: /tmp/es-data
-#修改logs日志的路径
+#修改logs日志的路径  chown -R elasticsearch:elasticsearch /var/log/elasticsearch/
 path.logs: /var/log/elasticsearch/
 #配置内存使用用交换分区
 bootstrap.memory_lock: true
@@ -59,7 +59,14 @@ systemc	enable elasticsearch
 ```
 注意每台主机的配置文件集群名字一样，但是节点不一样
 vim /etc/security/limits.conf
-
+### 安装elasticsearch-head插件
+```
+yum install -y npm
+git clone git://github.com/mobz/elasticsearch-head.git
+cd elasticsearch-head
+npm install
+npm run start
+```
 
 
 
