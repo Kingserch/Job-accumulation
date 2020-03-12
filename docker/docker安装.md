@@ -37,8 +37,13 @@ rz waiting to receive.
 daemon.json  key.json
 [root@42-m docker]#
 ```
-
 `[root@42-m docker]# systemctl restart docker`
+```
+#卸载docker
+yum list installed |grep docker
+yum remove docker-ce.x86_64 docker-ce-cli.x86_64 -y
+rm -rf /var/lib/docker
+```
 
 
 
