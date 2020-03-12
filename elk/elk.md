@@ -13,6 +13,8 @@ IP: 119.110.1.39	安装： elasticsearch、logstash、Kibana、Nginx、Http、Re
 	119.110.1.30	安装:  logstash
 ```
 ### 安装
+[elasticsearch安装官方文档](https://www.elastic.co/guide/en/elasticsearch/reference/7.6/rpm.html#install-rpm)
+
 ```
 #安装elasticsearch的yum源的密钥（这个需要在所有服务器上都配置）
 rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
@@ -28,7 +30,9 @@ autorefresh=1
 type=rpm-md
 #把yum传送到30服务器
 [root@m39 yum.repos.d]# scp /etc/yum.repos.d/elasticsearch.repo root@119.110.1.30:/etc/yum.repos.d/elasticsearch.repo
+yum install -y elasticsearch
 ```
+
 
 
 
