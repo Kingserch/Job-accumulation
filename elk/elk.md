@@ -1,7 +1,7 @@
 + ### elk
     + [环境](#环境)
     + [安装](#安装)
-    + [Devops](https://github.com/Kingserch/Job-accumulation/tree/Devops)
+    + [elasticsearch配置](#elasticsearch配置)
 	+ [Jenkins](https://github.com/Kingserch/Job-accumulation/tree/Jenkins)
 	+ [Zabbix](https://github.com/Kingserch/Job-accumulation/tree/zabbix)	
 	
@@ -30,10 +30,35 @@ autorefresh=1
 type=rpm-md
 #把yum传送到30服务器
 [root@m39 yum.repos.d]# scp /etc/yum.repos.d/elasticsearch.repo root@119.110.1.30:/etc/yum.repos.d/elasticsearch.repo
+#安装elasticsearch需要jdk环境，请自行安装
 yum install -y elasticsearch
 ```
-
-
+### elasticsearch配置
+```
+vim /etc/elasticsearch/elasticsearch.yml
+#找到配置文件中的cluster.name，打开该配置并设置集群名称
+cluster.name: cluster
+#找到配置文件中的node.name，打开该配置并设置节点名称
+node.name: node-1
+#修改data存放的路径
+path.data: /tmp/es-data
+#修改logs日志的路径
+path.logs: /var/log/elasticsearch/
+#配置内存使用用交换分区
+bootstrap.memory_lock: true
+#监听的网络地址,[119.110.1.30,119.110.1.39]
+network.host: 0.0.0.0
+#开启监听的端口
+http.port: 9200
+#增加新的参数，这样head插件可以访问es
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+#启动elasticsearch服务
+systemc	start elasticsearch
+systemc	enable elasticsearch
+```
+注意每台主机的配置文件集群名字一样，但是节点不一样
+vim /etc/security/limits.conf
 
 
 
