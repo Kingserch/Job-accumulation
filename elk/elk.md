@@ -78,8 +78,8 @@ rpm -ql logstash
 #创建一个软连接（默认安装在/usr/share下）
 ln -s /usr/share/logstash/bin/logstash /bin/
 ```
-[LogStashg官方使用配置文件](https://www.elastic.co/guide/en/logstash/current/configuration.html)
-[Input使用文档](https://www.elastic.co/guide/en/logstash/current/input-plugins.html)
+[LogStashg官方使用配置文件](https://www.elastic.co/guide/en/logstash/current/configuration.html)  
+[Input使用文档](https://www.elastic.co/guide/en/logstash/current/input-plugins.html)  
 [Output使用文档](https://www.elastic.co/guide/en/logstash/current/output-plugins.html)
 ```
 vim /etc/logstash/conf.d/elk.conf
