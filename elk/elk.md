@@ -70,5 +70,18 @@ npm run start
 ### LogStash的使用
 [LogStashg官方安装手册](https://www.elastic.co/guide/en/logstash/current/installing-logstash.html)  
 [LogStashg官方包下载地址](https://www.elastic.co/cn/downloads/logstash)
-
+```
+rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
+yum install -y logstash
+#查看下logstash的安装目录
+rpm -ql logstash
+#创建一个软连接（默认安装在/usr/share下）
+ln -s /usr/share/logstash/bin/logstash /bin/
+```
+[LogStashg官方使用配置文件](https://www.elastic.co/guide/en/logstash/current/configuration.html)
+[Input使用文档](https://www.elastic.co/guide/en/logstash/current/input-plugins.html)
+[Output使用文档](https://www.elastic.co/guide/en/logstash/current/output-plugins.html)
+```
+vim /etc/logstash/conf.d/elk.conf
+```
 
