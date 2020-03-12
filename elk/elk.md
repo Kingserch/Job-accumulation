@@ -69,6 +69,6 @@ npm run start
 ```
 ### LogStash的使用
 [LogStashg官方安装手册](https://www.elastic.co/guide/en/logstash/current/installing-logstash.html)
-
+[LogStashg官方包下载地址](https://www.elastic.co/cn/downloads/logstash)
 
 
