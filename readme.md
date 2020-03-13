@@ -7,19 +7,6 @@
 	
 
 [Elk日志分析系统](https://github.com/Kingserch/Job-accumulation/blob/master/elk/elk.md)   		
-##### docker快速安装elk
-[elk各个镜像](https://www.docker.elastic.co/#)  
-[mq消息队列镜像](https://store.docker.com/images/rabbitmq) 
-```
-docker pull sebp/elk:760
-echo "vm.max_map_count=262144" > /etc/sysctl.conf
-sysctl -p
-docker run -dit --name elk \
-    -p 5601:5601 \
-    -p 9200:9200 \
-    -p 5044:5044 \
-    -v /home/elk-data:/var/lib/elasticsearch \
-    -v /etc/localtime:/etc/localtime \
-	 sebp/elk:760
-```
+
+
 master
