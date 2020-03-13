@@ -261,11 +261,11 @@ date -d "2020-03-10" +%s
 ### Zabbix数据库备份
 备份采用单表备份，对监控的历史展示数据不做备份（history* trends* Acknowledges ALerts Auditlog Events service_alarms）
 ```
-chmod 700 /scripts//scripts/zabbix-mysql/mysql_back.sh	
-sh /scripts//scripts/zabbix-mysql/mysql_back.sh mysqldump	#备份数据
+chmod 700 /scripts/zabbix-mysql/mysql_back.sh	
+sh /scripts/zabbix-mysql/mysql_back.sh mysqldump	#备份数据
 crontab -e 
-0 3 * * *  /scripts//scripts/zabbix-mysql/mysql_back.sh mysqldump	#加入定时任务
-sh /scripts//scripts/zabbix-mysql/mysql_back.sh mysqlimport		#恢复数据
+0 3 * * *  /scripts/zabbix-mysql/mysql_back.sh mysqldump	#加入定时任务
+sh /scripts/zabbix-mysql/mysql_back.sh mysqlimport		#恢复数据
 ```
 [mysql备份脚本](https://github.com/Kingserch/Job-accumulation/blob/zabbix/sh/mysql_back.sh)
 ### 查询mysql的zabbix数据库中历史表据量的大小
