@@ -1,5 +1,6 @@
 + ### zabbix定义报警媒介
     + [邮件报警](#邮件报警)
+	+ [钉钉报警](#钉钉报警)
     + [微信报警](#微信报警)
 ### 邮件报警
 
@@ -52,4 +53,35 @@
 问题ID:{EVENT.ID}
 当前的问题是: {TRIGGER.NAME}
 }
+```
+### 钉钉报警
+```
+#!/usr/bin/python
+import requests
+import json
+import sys
+import os
+ 
+headers = {'Content-Type': 'application/json;charset=utf-8'}
+api_url = "https://oapi.dingtalk.com/robot/send?access_token=d9e42ab476193699dd987f6"
+ 
+def msg(text):
+    json_text= {
+     "msgtype": "text",
+        "at": {
+            "atMobiles": [
+                "15638926930"
+            ],
+            "isAtAll": False
+        },
+        "text": {
+            "content": text
+        }
+    }
+    print requests.post(api_url,json.dumps(json_text),headers=headers).content
+     
+if __name__ == '__main__':
+    text = sys.argv[1]
+    msg(text)
+
 ```
