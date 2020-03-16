@@ -11,26 +11,45 @@
 #### 添加报警触发器
 ![](https://github.com/Kingserch/Job-accumulation/blob/zabbix/images/zabbix-b.png)
 ```
-动作是条件，操作跟恢复操作更新操作都需要配置
-发送警告标题：故障{TRIGGER.STATUS},服务器:{HOSTNAME1}发生: {TRIGGER.NAME}故障!
-发送警告消息内容：
-告警主机:{HOSTNAME1}
-告警时间:{EVENT.DATE} {EVENT.TIME}
-告警等级:{TRIGGER.SEVERITY}
-告警信息: {TRIGGER.NAME}
-告警项目:{TRIGGER.KEY1}
-问题详情:{ITEM.NAME}:{ITEM.VALUE}
-当前状态:{TRIGGER.STATUS}:{ITEM.VALUE1}
-事件ID:{EVENT.ID}　
+服务器:{HOST.NAME}发生: {TRIGGER.NAME}故障!
 
-恢复标题：恢复{TRIGGER.STATUS}, 服务器:{HOSTNAME1}: {TRIGGER.NAME}已恢复!
-恢复信息：
-告警主机:{HOSTNAME1}
-告警时间:{EVENT.DATE} {EVENT.TIME}
+{
+告警主机:{HOST.NAME}
+告警地址:{HOST.IP}
+监控项目:{ITEM.NAME}
+监控取值:{ITEM.LASTVALUE}
 告警等级:{TRIGGER.SEVERITY}
-告警信息: {TRIGGER.NAME}
-告警项目:{TRIGGER.KEY1}
-问题详情:{ITEM.NAME}:{ITEM.VALUE}
-当前状态:{TRIGGER.STATUS}:{ITEM.VALUE1}
+当前状态:{TRIGGER.STATUS}
+告警信息:{TRIGGER.NAME}
+告警时间:{EVENT.DATE} {EVENT.TIME}
 事件ID:{EVENT.ID}
+}
+
+服务器:{HOST.NAME}: {TRIGGER.NAME}已恢复!
+
+{
+告警主机:{HOST.NAME}
+告警地址:{HOST.IP}
+监控项目:{ITEM.NAME}
+监控取值:{ITEM.LASTVALUE}
+告警等级:{TRIGGER.SEVERITY}
+当前状态:{TRIGGER.STATUS}
+告警信息:{TRIGGER.NAME}
+告警时间:{EVENT.DATE} {EVENT.TIME}
+恢复时间:{EVENT.RECOVERY.DATE} {EVENT.RECOVERY.TIME}
+持续时间:{EVENT.AGE}
+事件ID:{EVENT.ID}
+}
+
+服务器:{HOST.NAME}: 报警确认
+
+{
+确认人:{USER.FULLNAME} 
+时间:{ACK.DATE} {ACK.TIME} 
+确认信息如下:
+"{ACK.MESSAGE}"
+问题服务器IP:{HOSTNAME1}
+问题ID:{EVENT.ID}
+当前的问题是: {TRIGGER.NAME}
+}
 ```
