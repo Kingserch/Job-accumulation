@@ -4,7 +4,6 @@
 #  1)yum install nc
 #  2)python memcached_discovery.py
 #########################
-
 IP=127.0.0.1 
 PORT="$1"
 METRIC="$2"

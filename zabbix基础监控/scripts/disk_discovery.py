@@ -1,5 +1,6 @@
-#/usr/bin/env python
-#This script is used to discovery disk on the server
+#!/usr/bin/python
+# -*- coding: <encoding name> -*-
+
 import subprocess
 import json
 args="cat /proc/diskstats |grep -E '\ssd[a-z]\s|\sxvd[a-z]\s|\svd[a-z]\s|dm-0\s'|awk '{print $3}'|sort|uniq 2>/dev/null"
