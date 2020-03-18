@@ -49,4 +49,25 @@ The key's randomart image is:
 |. =+ .+=         |
 | ++=++o .        |
 +----[SHA256]-----+
+[root@m129 .ssh]# ssh-copy-id -i id_rsa.pub root@192.168.42.128		#yum -y install openssh-clientsansible
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "id_rsa.pub"
+The authenticity of host '192.168.42.128 (192.168.42.128)' can't be established.
+ECDSA key fingerprint is SHA256:lfwzhMOPQjqXKRlJcpevo40hE1vI6At+0uvOT4/7pEI.
+ECDSA key fingerprint is MD5:ff:cb:06:50:00:28:38:16:b0:06:0b:9e:95:99:ff:a5.
+Are you sure you want to continue connecting (yes/no)? yes
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+root@192.168.42.128's password: 
+
+Number of key(s) added: 1
+
+Now try logging into the machine, with:   "ssh 'root@192.168.42.128'"
+and check to make sure that only the key(s) you wanted were added.
+[root@m129 .ssh]# ssh root@192.168.42.128
+Last login: Wed Mar 18 09:22:07 2020 from 192.168.42.
+#测试
+[root@m129 ansible]# ansible agent -m command -a 'chdir=/data/ ls'
+192.168.42.128 | CHANGED | rc=0 >>
+3306
+3307
 ```
