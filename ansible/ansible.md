@@ -1,5 +1,6 @@
 + ### ansible使用
     + [ansible基本使用](#ansible基本使用)
+    + [ssh ](#ssh)
 ![ansible参考 ](https://www.cnblogs.com/keerya/p/7987886.html#_label0_0)
 + ### ansible 基本使用
 
@@ -24,4 +25,28 @@ log_path = /var/log/ansible.log     #指定一个存储ansible日志的文件（
 /usr/bin/ansible-pull　　Ansible远程执行命令的工具，拉取配置而非推送配置（使用较少，海量机器时使用，对运维的架构能力要求较高）
 /usr/bin/ansible-vault　　Ansible 文件加密工具
 /usr/bin/ansible-console　　Ansible基于Linux Consoble界面可与用户交互的命令执行工具
+```
++ ### ssh
+```
+[root@m129 ansible]# ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/root/.ssh/id_rsa): 
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /root/.ssh/id_rsa.
+Your public key has been saved in /root/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:THQgYwrQ2CnDajREccTPLRe/4E5uo6WpDOzZtnpkL4A root@m129
+The key's randomart image is:
++---[RSA 2048]----+
+|=O=+  + o..      |
+|++=o o = .       |
+|oo. + . +        |
+|..   + * .       |
+|o     + S .      |
+|E. o   o .       |
+| o+ . +.         |
+|. =+ .+=         |
+| ++=++o .        |
++----[SHA256]-----+
 ```
