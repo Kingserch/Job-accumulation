@@ -1,6 +1,6 @@
 + ### ansible环境 
     + [ansible任务执行](#ansible任务执行)
-    + [安装](#安装)
+    + [ansible配置](#ansible配置)
     + [安装mysql](#安装mysql)
     + [安装php7](#安装php7)
 
@@ -13,7 +13,7 @@ playbook模式(剧本模式)是Ansible主要管理方式，也是Ansible功能�
 装部署、数据库服务器的批量备份等。可以简单地把playbook理解为通过组合多条ad-hoc操作的配置文件。
 ```
 ![ansible执行流程](https://github.com/Kingserch/Job-accumulation/blob/Linux/images/ansible.png)
-+ ###  ansible安装
++ ###  ansible配置
 ```
 yum install epel-release -y
 yum install ansible –y
