@@ -9,7 +9,7 @@
     + [Lnmp优化](https://github.com/Kingserch/Job-accumulation/blob/Linux/Linux/Lnmp优化.md)	
 	
 + ### Anisble
-    + [Anisble](https://github.com/Kingserch/Job-accumulation/blob/Linux/ansible/anisble.md)
+    + [Anisble](https://github.com/Kingserch/Job-accumulation/blob/Linux/ansible/ansible.md)
 
 
 
