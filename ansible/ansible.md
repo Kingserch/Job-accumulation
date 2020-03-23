@@ -72,3 +72,14 @@ Last login: Wed Mar 18 09:22:07 2020 from 192.168.42.
 3306
 3307
 ```
+#### ansible命令
+
+##### 1.1)ansible inventory
+定义主机和主机组
+117.158.208.67 ansible_ssh_pass='mim'  #使用Inventory内置变量定义ssh登录密码
+[web]
+192.168.42.10[1.3] #定义一个web组，主机1-3
+[web:vars]
+ansible_ssh_pass='mim'	#定义web组的ssh密码
+[server:children] #定义一个组server包含web
+web
