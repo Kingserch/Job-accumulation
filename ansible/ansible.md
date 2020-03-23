@@ -3,7 +3,7 @@
     + [ssh ](#ssh)  
     + [ansible命令 ](#ansible命令)  
 + ### ansible 基本使用
-
+http://docs.ansible.com
 https://www.cnblogs.com/keerya/p/7987886.html#_label0_0 
 #### ansible配置文件
 ```
