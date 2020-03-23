@@ -1,7 +1,7 @@
 + ### ansible使用
     + [ansible基本使用](#ansible基本使用)
     + [ssh ](#ssh)  
-
+    + [ansible命令 ](#ansible命令)  
 + ### ansible 基本使用
 
 https://www.cnblogs.com/keerya/p/7987886.html#_label0_0 
