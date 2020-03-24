@@ -90,3 +90,36 @@ CentOS Linux Hackers go!!!
 [root@ali-service aly]# cat /etc/motd 
 Hackers go!!!
 ```
+#### 7.优化
+```
+#root启动的单一进程的最大可以打开的文件数设置为65535个
+[root@aly ]# egrep -v "^#|^$" /etc/security/limits.conf 
+root soft nofile 65535
+root hard nofile 65535
+* soft nofile 65535
+* hard nofile 65535
+```
+```
+#查看Linux系统级的最大打开文件数限制，使用如下命令
+[root@aly tomcat]# cat /proc/sys/fs/file-max
+275362
+#内核TCP参数方面
+[root@aly tomcat]# vim /etc/sysctl.conf 
+[root@aly tomcat]# egrep -v "^#|^$" /etc/sysctl.conf
+vm.swappiness = 0
+kernel.sysrq = 1
+net.ipv4.neigh.default.gc_stale_time = 120
+net.ipv4.conf.all.rp_filter = 0
+net.ipv4.conf.default.rp_filter = 0
+net.ipv4.conf.default.arp_announce = 2
+net.ipv4.conf.lo.arp_announce = 2
+net.ipv4.conf.all.arp_announce = 2
+net.ipv4.tcp_max_tw_buckets = 5000	
+net.ipv4.tcp_syncookies = 1		
+net.ipv4.tcp_max_syn_backlog = 1024
+net.ipv4.tcp_synack_retries = 2
+net.ipv4.tcp_tw_reuse= 1			#这可无
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1
+```
