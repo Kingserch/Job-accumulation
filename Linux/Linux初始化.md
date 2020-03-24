@@ -48,3 +48,29 @@ nameserver 192.168.31.2
 [root@like /]# systemctl status firewalld	#查看防火墙状态
 [root@like /]# systemctl list-dependencies | grep 服务的名字   检测是否加入开启启动
 ```
+#### 6.账户和登录安全
+```
+#删除特殊的账户和账户组,可删除的用户，如 adm，lp，sync，shutdown，halt，news，uucp，operator，games，gopher 等。
+#可删除的组，如 adm，lp，news，uucp，games，dip，pppusers，popusers，slipusers 等。
+[root@aly /]# cut -d : -f 1 /etc/passwd		#查看系统中存在的用户
+root
+bin
+daemon
+mail
+ftp
+nobody
+systemd-network
+dbus
+polkitd
+tss
+abrt
+sshd
+postfix
+tcpdump
+[root@aly /]# cat /etc/passwd | grep -v /sbin/nologin | cut -d : -f 1 	#查看系统中可以登录的用户
+root
+```
+#### 7.关闭不必要的服务
+```
+anacron、auditd、autofs、avahi-daemon、avahi-dnsconfd、bluetooth、cpuspeed、firstboot、gpm、haldaemon、hidd、ip6tables、ipsec、isdn、lpd、mcstrans、messagebus、netfs、nfs、nfslock、nscd、pcscd portmap、readahead_early、restorecond、rpcgssd、rpcidmapd、rstatd、sendmail、setroubleshoot、yppasswdd ypserv
+```
