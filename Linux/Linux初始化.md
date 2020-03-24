@@ -70,7 +70,22 @@ tcpdump
 [root@aly /]# cat /etc/passwd | grep -v /sbin/nologin | cut -d : -f 1 	#查看系统中可以登录的用户
 root
 ```
-#### 7.关闭不必要的服务
 ```
+# 关闭不必要的服务
 anacron、auditd、autofs、avahi-daemon、avahi-dnsconfd、bluetooth、cpuspeed、firstboot、gpm、haldaemon、hidd、ip6tables、ipsec、isdn、lpd、mcstrans、messagebus、netfs、nfs、nfslock、nscd、pcscd portmap、readahead_early、restorecond、rpcgssd、rpcidmapd、rstatd、sendmail、setroubleshoot、yppasswdd ypserv
+```
+```
+# 删除系统欢迎信息,/etc/issue 和 /etc/issue.net 文件都记录了操作系统的名称和版本号，当用户通过本地终端或本地虚拟控制台等登录系统时，/etc/issue 的文件内容就会显示。
+当用户通过 ssh 或 telnet 等远程登录系统时，/etc/issue.net 文件内容就会在登录后显示。
+在默认情况下 /etc/issue.net 文件的内容是不会在 ssh 登录后显示的，要显示这个信息可以修改 /etc/ssh/sshd_config 文件，在此文件中添加如下内容即可：Banner /etc/issue.net。
+其实这些登录提示很明显泄漏了系统信息，为了安全起见，建议将此文件中的内容删除或修改。
+/etc/redhat-release 文件也记录了操作系统的名称和版本号，为了安全起见，可以将此文件中的内容删除。
+/etc/motd 文件是系统的公告信息。每次用户登录后，/etc/motd 文件的内容就会显示在用户的终端。
+```
+```
+/etc/issue
+/etc/issue.net
+/etc/redhat-release
+[root@ali-service aly]# cat /etc/motd 
+Hackers go!!!
 ```
