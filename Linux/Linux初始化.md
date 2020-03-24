@@ -85,7 +85,8 @@ anacron、auditd、autofs、avahi-daemon、avahi-dnsconfd、bluetooth、cpuspeed
 ```
 /etc/issue
 /etc/issue.net
-/etc/redhat-release
+[root@ali-service aly]# cat /etc/redhat-release 
+CentOS Linux Hackers go!!!
 [root@ali-service aly]# cat /etc/motd 
 Hackers go!!!
 ```
