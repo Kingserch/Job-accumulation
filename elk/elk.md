@@ -1,17 +1,10 @@
 + ### elk
-    + [环境](#环境)
     + [安装](#安装)
     + [elasticsearch配置](#elasticsearch配置)
 	+ [安装elasticsearch-head插件](#安装elasticsearch-head插件)
 	+ [LogStash的使用](#LogStash的使用)	
+	+ [kibana的使用](#kibana的使用)	
 	
-### 环境
-```
-[root@m39 ]# cat /etc/redhat-release 
-CentOS Linux release 7.7.1908 (Core)
-IP: 119.110.1.39	安装： elasticsearch、logstash、Kibana、Nginx、Http、Redis
-	119.110.1.30	安装:  logstash
-```
 ### 安装
 [elasticsearch安装官方文档](https://www.elastic.co/guide/en/elasticsearch/reference/7.6/rpm.html#install-rpm)
 ```
@@ -94,6 +87,41 @@ ln -s /usr/share/logstash/bin/logstash /bin/
 [Input使用文档](https://www.elastic.co/guide/en/logstash/current/input-plugins.html)  
 [Output使用文档](https://www.elastic.co/guide/en/logstash/current/output-plugins.html)
 ```
-vim /etc/logstash/conf.d/elk.conf
+[root@aly ]# vim /etc/logstash/conf.d/elk.conf
+input {
+    file {
+        path => "/var/log/messages"
+        type => "system"
+        start_position => "beginning"
+    }
+
+    file {
+        path => "/var/log/secure"
+        type => "secure"
+        start_position => "beginning"
+    }
+}
+
+output {
+
+    if [type] == "system" {
+
+        elasticsearch {
+            hosts => ["192.168.42.130:9200"]
+            index => "nginx-system-%{+YYYY.MM.dd}"
+        }
+    }
+
+    if [type] == "secure" {
+
+        elasticsearch {
+            hosts => ["192.168.42.130:9200"]
+            index => "nginx-secure-%{+YYYY.MM.dd}"
+        }
+    }
+}
+
 ```
+### kibana的使用
+
 
