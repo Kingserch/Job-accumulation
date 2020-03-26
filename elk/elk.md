@@ -34,6 +34,7 @@ yum install -y elasticsearch
 ```
 ### elasticsearch配置
 ```
+#集群
 vim /etc/elasticsearch/elasticsearch.yml
 #找到配置文件中的cluster.name，打开该配置并设置集群名称
 cluster.name: cluster
@@ -55,6 +56,18 @@ http.cors.allow-origin: "*"
 #启动elasticsearch服务
 systemc	start elasticsearch
 systemc	enable elasticsearch
+#单机
+[root@aly ~]# egrep "^[a-Z]" /etc/elasticsearch/elasticsearch.yml 
+node.name: node-1
+path.data: /data/es-data
+path.logs: /var/log/elasticsearch
+network.host: 0.0.0.0
+http.port: 9200
+cluster.initial_master_nodes: ["node-1"]
+cluster.routing.allocation.disk.threshold_enabled: false
+http.cors.enabled: true                 #配置可以使用elasticsearch-head插件
+http.cors.allow-origin: "*"
+
 ```
 注意每台主机的配置文件集群名字一样，但是节点不一样
 vim /etc/security/limits.conf
