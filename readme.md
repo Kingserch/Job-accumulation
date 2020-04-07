@@ -12,5 +12,5 @@
     + [Anisble](https://github.com/Kingserch/Job-accumulation/blob/Linux/ansible/ansible.md)
 
 + ### Mysql
-    + [Mysql](https://github.com/Kingserch/Job-accumulation/blob/Linux/ansible/ansible.md)
+    + [Mysql](https://github.com/Kingserch/Job-accumulation/blob/Linux/Linux/mysql.md)  
 这个是分支linux
