@@ -4,7 +4,8 @@
 	+ [zabbix_get使用](#zabbix_get使用)
 	+ [zabbix数据库表分区](#zabbix数据库表分区)
 	+ [Zabbix数据库备份](#Zabbix数据库备份)
-	+ [查询mysql的zabbix数据库中历史表据量的大小](#查询mysql的zabbix数据库中历史表据量的大小)	
+	+ [查询mysql的zabbix数据库中历史表据量的大小](#查询mysql的zabbix数据库中历史表据量的大小)
+	+ [使用es存储历史数据](#使用es存储历史数据)	
 ### Zabbix-Server服务端安装
 
 #### 1)配置时间同步
@@ -272,3 +273,58 @@ sh /scripts/zabbix-mysql/mysql_back.sh mysqlimport		#恢复数据
 ```
 select table_name, (data_length+index_length)/1024/1024 as total_mb, table_rows  from  information_schema.tables  where  table_schema='zabbix';
 ```
+### 使用es存储历史数据
+#### 1)安装es
+```
+[root@ali-service elasticsearch]# egrep -v "^$|^#" /etc/security/limits.conf 
+root soft nofile 65535
+root hard nofile 65535
+* soft nofile 65535
+* hard nofile 65535
+* soft nproc 2048
+* hard nproc 2048
+* soft memlock unlimited
+* hard memlock unlimited
+[root@ali-service elasticsearch]# cat /etc/sysctl.conf 
+vm.swappiness = 0
+kernel.sysrq = 1
+vm.max_map_count=655360
+net.ipv4.neigh.default.gc_stale_time = 120
+
+# see details in https://help.aliyun.com/knowledge_detail/39428.html
+net.ipv4.conf.all.rp_filter = 0
+net.ipv4.conf.default.rp_filter = 0
+net.ipv4.conf.default.arp_announce = 2
+net.ipv4.conf.lo.arp_announce = 2
+net.ipv4.conf.all.arp_announce = 2
+
+# see details in https://help.aliyun.com/knowledge_detail/41334.html
+net.ipv4.tcp_max_tw_buckets = 5000
+net.ipv4.tcp_syncookies = 1
+net.ipv4.tcp_max_syn_backlog = 1024
+net.ipv4.tcp_synack_retries = 2
+
+
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1
+[root@ali-service elasticsearch]# sysctl ­p
+#创建elasticsearch data的存放目录，并修改该目录的属主属组
+mkdir -p /data/es-data 
+chown -R elasticsearch:elasticsearch /data/es-data
+#修改elasticsearch的日志属主属组
+chown -R elasticsearch:elasticsearch /var/log/elasticsearch/
+[root@ali-service elasticsearch]# egrep -v "^$|^#" /etc/elasticsearch/elasticsearch.yml
+node.name: node-1
+path.data: /data/es-data
+path.logs: /var/log/elasticsearch
+network.host: 0.0.0.0
+http.port: 9200
+cluster.initial_master_nodes: ["node-1"]
+bootstrap.system_call_filter: false
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+systemctl start elasticsearch
+```
+#### 2)zabbix配置
+1.修改/etc/zabbix/zabbix_server.conf，添加如下内容 HistoryStorageURL=192.168.179.133:9200 HistoryStorageTypes=str,text,log,uint,dbl HistoryStorageDateIndex=1
