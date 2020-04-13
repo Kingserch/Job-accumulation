@@ -327,4 +327,62 @@ http.cors.allow-origin: "*"
 systemctl start elasticsearch
 ```
 #### 2)zabbix配置
-1.修改/etc/zabbix/zabbix_server.conf，添加如下内容 HistoryStorageURL=192.168.179.133:9200 HistoryStorageTypes=str,text,log,uint,dbl HistoryStorageDateIndex=1
+```
+1.修改/etc/zabbix/zabbix_server.conf，添加如下内容 
+HistoryStorageURL=192.168.179.133:9200 
+HistoryStorageTypes=str,text,log,uint,dbl 
+HistoryStorageDateIndex=1
+2.修改/etc/zabbix/web/zabbix.conf.php，添加如下内容 
+global $DB, $HISTORY; 
+$HISTORY['url'] = 'http://192.168.179.133:9200'; 
+// Value types stored in Elasticsearch. 
+$HISTORY['types'] = ['str', 'text', 'log','uint','dbl'];
+3.在es上创建模板管道，每种数据类型的都需要创建，可以根据elasticsearch.map文件来获取api 的信息
+curl ‐X PUT \
+http://192.168.179.133:9200/_template/dbl_template \
+‐H 'content‐type:application/json' \
+‐d '{
+"template": "dbl*",
+"index_patterns": ["dbl*"],
+"settings" : {
+"index" : {
+"number_of_replicas" : 1,
+"number_of_shards" : 5
+}
+},
+"mappings" : {
+"values" : {
+"values" : {
+"itemid" : {
+"type" : "long"	
+"clock" : {
+"format" : "epoch_second",
+"type" : "date"
+},
+"value" : {
+"type" : "double"
+	}
+	}
+	}
+}'
+curl ‐X PUT \
+http://192.168.179.133:9200/_ingest/pipeline/log‐pipeline \
+‐H 'content‐type:application/json' \
+‐d '{
+"description": "daily log index naming",
+"processors": [
+{
+"date_index_name": {
+"field": "clock",
+"date_formats": ["UNIX"],
+"index_name_prefix": "log‐",
+"date_rounding": "d"
+	}
+	}
+	]
+ }'
+
+#修改完成后重启zabbix,并查看zabbix是否有数据
+systemctl restart zabbix‐server
+
+```
