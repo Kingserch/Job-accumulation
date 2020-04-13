@@ -6,6 +6,7 @@
 	+ [Zabbix数据库备份](#Zabbix数据库备份)
 	+ [查询mysql的zabbix数据库中历史表据量的大小](#查询mysql的zabbix数据库中历史表据量的大小)
 	+ [使用es存储历史数据](#使用es存储历史数据)	
+	+ [安装配置grafana](#安装配置grafana)	
 ### Zabbix-Server服务端安装
 
 #### 1)配置时间同步
@@ -384,5 +385,39 @@ http://192.168.179.133:9200/_ingest/pipeline/log‐pipeline \
 
 #修改完成后重启zabbix,并查看zabbix是否有数据
 systemctl restart zabbix‐server
+
+```
+### 安装配置grafana
+```
+1.下载RPM包并安装
+wget https://dl.grafana.com/oss/release/grafana-6.7.2-1.x86_64.rpm
+sudo yum install grafana-6.7.2-1.x86_64.rpm
+yum install initscripts -y
+2.启动grafana
+#通过init.d方式启动 
+service grafana-server start 
+/sbin/chkconfig --add grafana-server 
+#通过systemd启动 
+systemctl daemon-reload 
+systemctl start grafana-server 
+systemctl enable grafana-server.service
+3.修改存储数据库为mysql
+#默认使用sqlite3数据库，可以编辑配置文件/etc/grafana/grafana.ini，修改使用的数据库，可以选 择mysql或者postgres,默认数据库文件位置/var/lib/grafana/grafana.db
+mysql> create database grafana character set utf8 collate utf8_general_ci;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| grafana            |
+| mysql              |
+| performance_schema |
+| sys                |
+| zabbix             |
++--------------------+
+6 rows in set (0.00 sec)
+#编辑grafana配置文件 vim /etc/grafana/grafana.ini
 
 ```
