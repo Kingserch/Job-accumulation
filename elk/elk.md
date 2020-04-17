@@ -1,16 +1,10 @@
 + ### elk
     + [环境](#环境)
-    + [elasticsearch配置](#elasticsearch配置)
+    + [安装](#安装)
 	+ [安装elasticsearch-head插件](#安装elasticsearch-head插件)
 	+ [LogStash的使用](#LogStash的使用)	
 	+ [kibana的使用](#kibana的使用)	
-	
-	
-	
-	
-	
 ### 环境
-
 ```
 公司要求搭建日志系统，分析tomcat日志和业务日志，感觉主流还是选择elk来进行日志分析，
 #服务器
@@ -20,28 +14,16 @@
 	elasticsearch 7.5.0
 	kibana 7.5.0
 	logstash 7.5.0
+4.官网安装包比较慢，从AWS找了个rpm包
+wget https://rgc-solution-server-validation.s3.cn-north-1.amazonaws.com.cn/andrewxu-test/elasticsearch-7.5.0-x86_64.rpm
+wget https://rgc-solution-server-validation.s3.cn-north-1.amazonaws.com.cn/andrewxu-test/kibana-7.5.0-x86_64.rpm
+wget https://rgc-solution-server-validation.s3.cn-north-1.amazonaws.com.cn/andrewxu-test/logstash-7.5.0.rpm
 ```
-
-
 ### 安装
 [elasticsearch安装官方文档](https://www.elastic.co/guide/en/elasticsearch/reference/7.6/rpm.html#install-rpm)
 ```
-#安装elasticsearch的yum源的密钥（这个需要在所有服务器上都配置）
-rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
-#配置elasticsearch的yum源
-vim /etc/yum.repos.d/elasticsearch.repo
-[elasticsearch-7.x]
-name=Elasticsearch repository for 7.x packages
-baseurl=https://artifacts.elastic.co/packages/5.x/yum
-gpgcheck=1
-gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
-enabled=1
-autorefresh=1
-type=rpm-md
-#把yum传送到30服务器
-[root@m39 yum.repos.d]# scp /etc/yum.repos.d/elasticsearch.repo root@119.110.1.30:/etc/yum.repos.d/elasticsearch.repo
-#安装elasticsearch需要jdk环境，请自行安装
-yum install -y elasticsearch
+#安装elasticsearch
+rpm -ivh elasticsearch-7.5.0-x86_64.rpm
 ```
 ### elasticsearch配置
 ```
