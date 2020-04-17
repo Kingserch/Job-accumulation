@@ -160,6 +160,6 @@ output {
 /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/file.conf &
 ```
 把日志添加至kiban展示
-### kibana的使用
+
 
 
