@@ -191,3 +191,5 @@ output{
 添加索引
 ![](https://github.com/Kingserch/Job-accumulation/blob/master/images/in-1.png)
 ![](https://github.com/Kingserch/Job-accumulation/blob/master/images/in-2.png)
+查看收集到的日志
+![](https://github.com/Kingserch/Job-accumulation/blob/master/images/tomcat.png)
