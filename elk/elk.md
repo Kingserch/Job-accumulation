@@ -3,7 +3,7 @@
     + [安装](#安装)
 	+ [安装elasticsearch-head插件](#安装elasticsearch-head插件)
 	+ [安装kibana](#安装kibana)	
-	+ [收集tomcat access 日志](#收集tomcat access 日志)	
+	+ [收集tomcat-access日志](#收集tomcat-access日志)	
 ### 环境
 ```
 公司要求搭建日志系统，分析tomcat日志和业务日志，感觉主流还是选择elk来进行日志分析，
@@ -163,7 +163,7 @@ output {
 ![](https://github.com/Kingserch/Job-accumulation/blob/master/images/web-k1.png)
 ![](https://github.com/Kingserch/Job-accumulation/blob/master/images/web-k2.png)
 ![](https://github.com/Kingserch/Job-accumulation/blob/master/images/web-k3.png)
-### 收集tomcat access 日志
+### 收集tomcat-access日志
 ```
 登录tomcat server下载logstash安装包
 安装 logstash
