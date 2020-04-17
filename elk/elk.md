@@ -123,11 +123,11 @@ ln -s /usr/share/logstash/bin/logstash /bin/
 [Input使用文档](https://www.elastic.co/guide/en/logstash/current/input-plugins.html)  
 [Output使用文档](https://www.elastic.co/guide/en/logstash/current/output-plugins.html)
 ```
-[root@aly ]# vim /etc/logstash/conf.d/elk.conf
+[root@elk-server ~] vim /etc/logstash/conf.d/elk.conf
 input {
     file {
         path => "/var/log/messages"
-        type => "system"
+        type => "system-log"
         start_position => "beginning"
     }
 
@@ -143,21 +143,23 @@ output {
     if [type] == "system" {
 
         elasticsearch {
-            hosts => ["192.168.42.130:9200"]
-            index => "nginx-system-%{+YYYY.MM.dd}"
+            hosts => ["10.0.20.74:9200"]
+            index => "system-log-%{+YYYY.MM.dd}"
         }
     }
 
     if [type] == "secure" {
 
         elasticsearch {
-            hosts => ["192.168.42.130:9200"]
-            index => "nginx-secure-%{+YYYY.MM.dd}"
+            hosts => ["10.0.20.74:9200"]
+            index => "system-log-%{+YYYY.MM.dd}"
         }
     }
 }
-
+#启动放置在后台
+/usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/file.conf &
 ```
+把日志添加至kiban展示
 ### kibana的使用
 
 
