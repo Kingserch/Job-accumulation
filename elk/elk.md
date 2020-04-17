@@ -161,7 +161,7 @@ output {
 ```
 把日志添加至kiban展示
 ![](https://github.com/Kingserch/Job-accumulation/blob/master/images/web-k1.png)
-![](https://github.com/Kingserch/Job-accumulation/tree/master/images/web-k2.png)
-![](https://github.com/Kingserch/Job-accumulation/tree/master/images/web-k3.png)
+![](https://github.com/Kingserch/Job-accumulation/blob/master/images/web-k2.png)
+![](https://github.com/Kingserch/Job-accumulation/blob/master/images/web-k3.png)
 
 
