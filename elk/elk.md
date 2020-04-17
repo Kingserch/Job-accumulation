@@ -3,7 +3,7 @@
     + [安装](#安装)
 	+ [安装elasticsearch-head插件](#安装elasticsearch-head插件)
 	+ [安装kibana](#安装kibana)	
-	+ [kibana的使用](#kibana的使用)	
+	+ [收集tomcat access 日志](#收集tomcat access 日志)	
 ### 环境
 ```
 公司要求搭建日志系统，分析tomcat日志和业务日志，感觉主流还是选择elk来进行日志分析，
@@ -163,5 +163,31 @@ output {
 ![](https://github.com/Kingserch/Job-accumulation/blob/master/images/web-k1.png)
 ![](https://github.com/Kingserch/Job-accumulation/blob/master/images/web-k2.png)
 ![](https://github.com/Kingserch/Job-accumulation/blob/master/images/web-k3.png)
-
-
+### 收集tomcat access 日志
+```
+登录tomcat server下载logstash安装包
+安装 logstash
+wget https://rgc-solution-server-validation.s3.cn-north-1.amazonaws.com.cn/andrewxu-test/logstash-7.5.0.rpm
+rpm -i  logstash-7.5.0.rpm 
+```
+添加日志文件
+```
+[root@elk-server conf.d]# cat /etc/logstash/conf.d/tomcat_access.conf 
+input{
+  file{
+    path => ["/usr/tomcat/apache/logs/localhost_access_log*.log"]
+    start_position => "beginning"
+    codec => "json"
+  }
+}
+  
+output{
+  elasticsearch {
+    hosts => ["elasticsearch:9200"]
+    index => "access.log-%{+YYYY.MM.dd}"
+  }
+}
+```
+添加索引
+![](https://github.com/Kingserch/Job-accumulation/blob/master/images/in-1.png)
+![](https://github.com/Kingserch/Job-accumulation/blob/master/images/in-2.png)
