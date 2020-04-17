@@ -25,16 +25,20 @@ wget https://rgc-solution-server-validation.s3.cn-north-1.amazonaws.com.cn/andre
 #安装elasticsearch
 rpm -ivh elasticsearch-7.5.0-x86_64.rpm
 ```
-### elasticsearch配置
+#修改elasticsearch配置文件
 ```
-#集群
-vim /etc/elasticsearch/elasticsearch.yml
+mkdir -p /data/es-data
+chown -R elasticsearch:elasticsearch /data/es-data
+chown -R elasticsearch:elasticsearch /var/log/elasticsearch/
+```
+```
+[root@elk-server ~]cat /etc/elasticsearch/elasticsearch.yml  |grep -v "^#"
 #找到配置文件中的cluster.name，打开该配置并设置集群名称
-cluster.name: cluster
+cluster.name:  my-es
 #找到配置文件中的node.name，打开该配置并设置节点名称
 node.name: node-1
-#修改data存放的路径mkdir -p /tmp/es-data;chown -R elasticsearch:elasticsearch /data/es-data
-path.data: /tmp/es-data
+#修改data存放的路径,数据和日志目录所属用户、组都要是elasticsearch
+path.data: /data/es-data
 #修改logs日志的路径  chown -R elasticsearch:elasticsearch /var/log/elasticsearch/
 path.logs: /var/log/elasticsearch/
 #配置内存使用用交换分区
@@ -50,7 +54,7 @@ http.cors.allow-origin: "*"
 systemc	start elasticsearch
 systemc	enable elasticsearch
 #单机
-[root@aly ~]# egrep "^[a-Z]" /etc/elasticsearch/elasticsearch.yml 
+[root@elk-server ~] egrep "^[a-Z]" /etc/elasticsearch/elasticsearch.yml 
 node.name: node-1
 path.data: /data/es-data
 path.logs: /var/log/elasticsearch
@@ -60,7 +64,6 @@ cluster.initial_master_nodes: ["node-1"]
 cluster.routing.allocation.disk.threshold_enabled: false
 http.cors.enabled: true                 #配置可以使用elasticsearch-head插件
 http.cors.allow-origin: "*"
-
 ```
 注意每台主机的配置文件集群名字一样，但是节点不一样
 vim /etc/security/limits.conf
