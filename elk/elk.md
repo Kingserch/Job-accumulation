@@ -2,7 +2,7 @@
     + [环境](#环境)
     + [安装](#安装)
 	+ [安装elasticsearch-head插件](#安装elasticsearch-head插件)
-	+ [LogStash的使用](#LogStash的使用)	
+	+ [安装kibana](#安装kibana)	
 	+ [kibana的使用](#kibana的使用)	
 ### 环境
 ```
@@ -22,11 +22,9 @@ wget https://rgc-solution-server-validation.s3.cn-north-1.amazonaws.com.cn/andre
 ### 安装
 [elasticsearch安装官方文档](https://www.elastic.co/guide/en/elasticsearch/reference/7.6/rpm.html#install-rpm)
 ```
-#安装elasticsearch
+#1.安装elasticsearch
 rpm -ivh elasticsearch-7.5.0-x86_64.rpm
-```
-#修改elasticsearch配置文件
-```
+#2.修改elasticsearch配置文件
 mkdir -p /data/es-data
 chown -R elasticsearch:elasticsearch /data/es-data
 chown -R elasticsearch:elasticsearch /var/log/elasticsearch/
@@ -64,9 +62,27 @@ cluster.initial_master_nodes: ["node-1"]
 cluster.routing.allocation.disk.threshold_enabled: false
 http.cors.enabled: true                 #配置可以使用elasticsearch-head插件
 http.cors.allow-origin: "*"
+#3.检测是否启动
+[root@elk-server ~]netstat -pantl |grep  9200
+[root@elk-server ~]curl 10.0.20.74:9200
+{
+  "name" : "node-1",
+  "cluster_name" : "my-es",
+  "cluster_uuid" : "FhHOQO2MQbWRX0MiTRFF6g",
+  "version" : {
+    "number" : "7.5.0",
+    "build_flavor" : "default",
+    "build_type" : "rpm",
+    "build_hash" : "e9ccaed468e2fac2275a3761849cbee64b39519f",
+    "build_date" : "2020-3-03T01:06:52.518245Z",
+    "build_snapshot" : false,
+    "lucene_version" : "8.3.0",
+    "minimum_wire_compatibility_version" : "6.8.0",
+    "minimum_index_compatibility_version" : "6.0.0-beta1"
+  },
+  "tagline" : "You Know, for Search"
+}
 ```
-注意每台主机的配置文件集群名字一样，但是节点不一样
-vim /etc/security/limits.conf
 ### 安装elasticsearch-head插件
 ```
 yum install -y npm
@@ -74,6 +90,24 @@ git clone git://github.com/mobz/elasticsearch-head.git
 cd elasticsearch-head
 npm install
 npm run start
+```
+### 安装kibana
+```
+#1.安装 kibana
+rpm -ivh kibana-7.5.0-x86_64.rpm
+#2.修改配置文件[root@elk-server ~]cat /etc/kibana/kibana.yml |grep  -v "^#"
+server.port: 5601 
+server.host: "0.0.0.0" #改成本机IP
+server.name: "node-1"
+elasticsearch.hosts: "http://10.0.20.74:9200"  #改成elasticsearch的IP
+logging.dest: /var/log/kibana/kibana.log  
+kibana.index: ".kibana"
+3.启动
+systemctl start kibana
+systemctl enable kibana　
+
+
+
 ```
 ### LogStash的使用
 [LogStashg官方安装手册](https://www.elastic.co/guide/en/logstash/current/installing-logstash.html)  
