@@ -106,6 +106,7 @@ kibana.index: ".kibana"
 systemctl start kibana
 systemctl enable kibana　
 ```
+web页面查看，还没有索引
 ![](https://github.com/Kingserch/Job-accumulation/blob/master/images/kibana.png)
 ### LogStash的使用
 [LogStashg官方安装手册](https://www.elastic.co/guide/en/logstash/current/installing-logstash.html)  
