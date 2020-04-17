@@ -17,9 +17,9 @@
 1.ALY ECS 2C8G
 2.JDK版本1.8
 3.elk版本
-	*elasticsearch 7.5.0
-	*kibana 7.5.0
-	*logstash 7.5.0
+	elasticsearch 7.5.0
+	kibana 7.5.0
+	logstash 7.5.0
 ```
 
 
