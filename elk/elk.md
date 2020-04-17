@@ -24,12 +24,12 @@ wget https://rgc-solution-server-validation.s3.cn-north-1.amazonaws.com.cn/andre
 ```
 #1.安装elasticsearch
 rpm -ivh elasticsearch-7.5.0-x86_64.rpm
+
 #2.修改elasticsearch配置文件
 mkdir -p /data/es-data
 chown -R elasticsearch:elasticsearch /data/es-data
 chown -R elasticsearch:elasticsearch /var/log/elasticsearch/
-```
-```
+
 [root@elk-server ~]cat /etc/elasticsearch/elasticsearch.yml  |grep -v "^#"
 #找到配置文件中的cluster.name，打开该配置并设置集群名称
 cluster.name:  my-es
