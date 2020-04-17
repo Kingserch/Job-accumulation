@@ -1,10 +1,28 @@
 + ### elk
-    + [安装](#安装)
+    + [环境](#环境)
     + [elasticsearch配置](#elasticsearch配置)
 	+ [安装elasticsearch-head插件](#安装elasticsearch-head插件)
 	+ [LogStash的使用](#LogStash的使用)	
 	+ [kibana的使用](#kibana的使用)	
 	
+	
+	
+	
+	
+### 环境
+
+```
+公司要求搭建日志系统，分析tomcat日志和业务日志，感觉主流还是选择elk来进行日志分析，
+#服务器
+1.ALY ECS 2C8G
+2.JDK版本1.8
+3.elk版本
+	*elasticsearch 7.5.0
+	*kibana 7.5.0
+	*logstash 7.5.0
+```
+
+
 ### 安装
 [elasticsearch安装官方文档](https://www.elastic.co/guide/en/elasticsearch/reference/7.6/rpm.html#install-rpm)
 ```
