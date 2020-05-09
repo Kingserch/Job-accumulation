@@ -17,9 +17,9 @@
 		- Deployment
 		- DaemonSet
 		- ReplicaSet
-		- StatefulSet
-		- Job
-		- Cronjob
+		- StatefulSet(管理有状态的pod控制器)
+		- Job(管理任务)
+		- Cronjob(管理定时任务)
 - Name/Namespace
 - Label/Label选择器
 - Service/Ingress 
