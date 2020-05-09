@@ -1,12 +1,12 @@
 + ### Kubernetes 工作积累
-    + [Linux](https://github.com/Kingserch/Job-accumulation/tree/Linux)  
-    + [Docker](https://github.com/Kingserch/Job-accumulation/tree/Docker)  
-    + [Devops](https://github.com/Kingserch/Job-accumulation/tree/Devops)  
-	+ [Jenkins](https://github.com/Kingserch/Job-accumulation/tree/Jenkins)  
-	+ [Zabbix](https://github.com/Kingserch/Job-accumulation/tree/zabbix)  
-	+ [Kubernetes](https://github.com/Kingserch/Job-accumulation/tree/Kubernetes)  	
+    + [Linux](https://github.com/Kingserch/Jobee/Linux)  
+    + [Docker](https://github.com/Kingserch/Jree/Docker)  
+    + [Devops](https://github.com/Kingserch/Jobee/Devops)  
+	+ [Jenkins](https://github.com/Kingserch/Job-e/Jenkins)  
+	+ [Zabbix](https://github.com/Kingserch/Job-acabbix)  
+	+ [Kubernetes](https://github.com/Kingserch/Job-arnetes)  	
 
-[Elk日志分析系统](https://github.com/Kingserch/Job-accumulation/blob/master/elk/elk.md)   		
+	
 
 
-master
+Kubernetes
