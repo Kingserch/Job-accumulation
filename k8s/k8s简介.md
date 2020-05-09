@@ -1,4 +1,3 @@
-+ ### Kubernetes
-    + [¾µÏñ](#¾µÏñ)
-    + [Dockerfile´´½¨¾µÏñ](#dockerfile´´½¨¾µÏñ)
-+ ### ¾µÏñ
+ï»¿+ ### Kubernetes
+    + [k8s](#k8s)
++ ### 
