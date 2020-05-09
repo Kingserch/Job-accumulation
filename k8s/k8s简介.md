@@ -11,7 +11,14 @@
 	- 一个Pod里面可以运行多个容器，他们共享UTS+NET+IPC名称空间
 	- 可以把Pod理解成豌豆菜，而同一个Pod内的每个容器是一颗颗豌豆
 	- 一个Pod里运行多个容器，又叫：边车(SideCar)模式
-	
+	- Pod控制器是Pod启动的一种模板，用来保证k8s里启动的Pod应始终按照人们的预期运行(副本数，生命周期，健康状态检查)
+	- k8s内提供了众多的Pod控制器，常用的有
+		- Deployment
+		- DaemonSet
+		- ReplicaSet
+		- StatefulSet
+		- Job
+		- Cronjob
 - Name/Namespace
 - Label/Label选择器
 - Service/Ingress 
