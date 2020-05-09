@@ -35,3 +35,9 @@
 	- 标签选择器目前有俩个：基于等值关系，(等于，不等于)和基于集合关系(属于，不属于，存在)
 	- 许多资源支持内嵌标签选择器字段,比如:matchLabels matchExpressions
 - Service/Ingress 
+	- 在k8s的世界里，虽然每个Pod都会被分配一个单独的IP地址，但这个ip地址会随着Pod的销毁而销毁
+	- 一个Service可以看作一组提供相同服务的Pod对外访问接口
+	- Service作用于那些Pod是通过标签选择器来定义的
+	- Ingress是k8s集群里工作在OSI网络参考模型下，第7层的应用，对外暴露接口
+	- Service只能进行L4流量调度，表现形式是IP+port
+	- Ingress则可以调度不同业务域，不同URL访问路径的业务流量
