@@ -57,3 +57,4 @@
 		- 服务发现用插件 coredns
 		- 服务保留用插件 traefik
 		- GUI管理插件 Dashboard
+		
