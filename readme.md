@@ -4,7 +4,7 @@
     + [Devops](https://github.com/Kingserch/Job-accumulation/tree/Devops)  
 	+ [Jenkins](https://github.com/Kingserch/Job-accumulation/tree/Jenkins)  
 	+ [Zabbix](https://github.com/Kingserch/Job-accumulation/tree/zabbix)  
-	+ [Kubernetes](https://github.com/Kingserch/Job-accumulation/tree/zabbix)  	
+	+ [Kubernetes](https://github.com/Kingserch/Job-accumulation/tree/Kubernetes)  	
 
 [Elk日志分析系统](https://github.com/Kingserch/Job-accumulation/blob/master/elk/elk.md)   		
 
