@@ -169,7 +169,7 @@ curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
   "exec-opts": ["native.cgroupdriver=systemd"],
   "live-restore": true
 }
-https://github.com/goharbor/harbor
+https://github.com/goharbor/harbor  #使用harbor搭建docker私有仓库
 [root@hdss7-22]# mkdir /opt/src -p
 [root@hdss7-22 src]# pwd
 /opt/src
