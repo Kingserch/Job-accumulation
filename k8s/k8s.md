@@ -48,3 +48,37 @@ zone "od.com" IN {
         allow-update { 192.168.56.129; };
 };
 ```
+##### 3)在hdss7-129主机编辑区域数据文件
+```
+[root@hdss7-129 /]# vim /var/named/host.com.zone
+$ORIGIN host.com.
+$TTL 600	; 10 minutes
+@       IN SOA	dns.host.com. dnsadmin.host.com. (
+				2020051101 ; serial
+				10800      ; refresh (3 hours)
+				900        ; retry (15 minutes)
+				604800     ; expire (1 week)
+				86400      ; minimum (1 day)
+				)
+			NS   dns.host.com.
+$TTL 60	; 1 minute
+dns                A    192.168.56.129
+HDSS7-11           A    192.168.56.129
+HDSS7-12           A    192.168.56.128
+HDSS7-21           A    192.168.56.130
+HDSS7-22           A    192.168.56.131
+[root@hdss7-129 /]# vim /var/named/od.com.zone	业务域
+$ORIGIN od.com.
+$TTL 600	; 10 minutes
+@   		IN SOA	dns.od.com. dnsadmin.od.com. (
+				2020051101 ; serial
+				10800      ; refresh (3 hours)
+				900        ; retry (15 minutes)
+				604800     ; expire (1 week)
+				86400      ; minimum (1 day)
+				)
+				NS   dns.od.com.
+$TTL 60	; 1 minute
+dns                A    192.168.56.129
+
+```
