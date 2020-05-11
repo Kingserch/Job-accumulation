@@ -1,6 +1,7 @@
 ﻿+ ### Kubernetes
     + [环境准备](#环境准备)
     + [安装bind服务](#安装bind服务)
+    + [配置证书](#配置证书)
 + ### 环境准备
 `yum install epel-release`   
 `yum install wget net-tools telnet tree nmap sysstat lrzsz dos2unix bind-utils -y`  
@@ -100,4 +101,17 @@ udp        0      0 192.168.56.129:53       0.0.0.0:*                           
 search localdomain
 nameserver 192.168.56.2
 nameserver 192.168.56.129
+```
++ ### 配置证书
+```
+[root@hdss7-22 ~]# wget https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 -O /usr/bin/cfssl
+[root@hdss7-22 ~]# wget https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 -O /usr/bin/cfssl-json
+[root@hdss7-22 ~]# wget https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64 -O /usr/bin/cfssl-certinfo
+[root@hdss7-22 ~]# chmod +x /usr/bin/cfssl*
+[root@hdss7-22 ~]# which cfssl
+/usr/bin/cfssl
+[root@hdss7-22 ~]# which cfssl-json
+/usr/bin/cfssl-json
+[root@hdss7-22 ~]# which cfssl-certinfo
+/usr/bin/cfssl-certinfo
 ```
