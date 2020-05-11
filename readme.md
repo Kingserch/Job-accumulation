@@ -4,7 +4,6 @@
 	
 + ### Kubernetes简介
 
-+ ### Kubernetes
 1)Kubernetes优势:
 - 自动装箱，水平扩展，自我修复  
 - 服务发现和负载均衡，  
