@@ -32,3 +32,7 @@ options {
         dnssec-validation no;
 [root@hdss7-129 /]# named-checkconf	#检查
 ```
+##### 2)在hdss7-129主机配置区域配置文件
+```
+
+```
