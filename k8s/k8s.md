@@ -6,8 +6,8 @@
 `yum install wget net-tools telnet tree nmap sysstat lrzsz dos2unix bind-utils -y`  
 + ### 安装bind服务
 ##### 1)在hdss7-129主机上安装bind服务(DNS服务)
-` yum install bind -y`
 ```
+[root@hdss7-129 ~]# yum install bind -y
 [root@hdss7-129 ~]# rpm -qa bind
 bind-9.11.4-16.P2.el7_8.2.x86_64
 [root@hdss7-129 ~]# netstat   -rn   #查看网关
