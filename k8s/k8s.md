@@ -114,4 +114,9 @@ nameserver 192.168.56.129
 /usr/bin/cfssl-json
 [root@hdss7-22 ~]# which cfssl-certinfo
 /usr/bin/cfssl-certinfo
+[root@hdss7-22 ~]# mkdir -p /opt/certs
+[root@hdss7-22 ~]# cd /opt/certs/
+[root@hdss7-22 certs]# pwd
+/opt/certs
+
 ```
