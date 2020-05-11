@@ -2,6 +2,7 @@
     + [环境准备](#环境准备)
     + [安装bind服务](#安装bind服务)
     + [配置证书](#配置证书)
+    + [安装docker](#安装docker)
 + ### 环境准备
 `yum install epel-release`   
 `yum install wget net-tools telnet tree nmap sysstat lrzsz dos2unix bind-utils -y`  
@@ -153,7 +154,20 @@ total 16
 -rw-r--r-- 1 root root  326 May 11 16:49 ca-csr.json
 -rw------- 1 root root 1679 May 11 16:53 ca-key.pem		#根证书的私钥
 -rw-r--r-- 1 root root 1338 May 11 16:53 ca.pem			#根证书的私钥
-
-
+```
++ ### 安装docker
+```
+curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
+#每台机器都安装docker
+[root@hdss7-22 docker]# cat daemon.json
+{
+  "graph": "/data/docker",
+  "storage-driver": "overlay2",
+  "insecure-registries": ["registry.access.redhat.com","quay.io"],
+  "registry-mirrors": ["https://q2gr04ke.mirror.aliyuncs.com"],
+  "bip": "172.7.131.1/24",	#bip 取linux主机的ip后一位，方便管理
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "live-restore": true
+}
 
 ```
