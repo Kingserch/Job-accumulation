@@ -34,5 +34,17 @@ options {
 ```
 ##### 2)在hdss7-129主机配置区域配置文件
 ```
+[root@hdss7-129 /]# vim /etc/named.rfc1912.zones
+...#在最后添加下面字段
+zone "host.com" IN {
+        type  master;
+        file  "host.com.zone";
+        allow-update { 192.168.56.129; };
+};
 
+zone "od.com" IN {
+        type  master;
+        file  "od.com.zone";
+        allow-update { 192.168.56.129; };
+};
 ```
