@@ -173,5 +173,21 @@ https://github.com/goharbor/harbor
 [root@hdss7-22]# mkdir /opt/src -p
 [root@hdss7-22 src]# pwd
 /opt/src
+[root@hdss7-22 src]# tar xvf harbor-offline-installer-v1.8.3.tgz -C/opt 
+harbor/harbor.v1.8.3.tar.gz
+harbor/prepare
+harbor/LICENSE
+harbor/install.sh
+harbor/harbor.yml
+[root@hdss7-22 opt]# mv harbor/ harbor-v1.8.3
+[root@hdss7-22 opt]# ln -s /opt/harbor-v1.8.3/ /opt/harbor	#软连接到/opt/src下，方便以后升级
+[root@hdss7-22 opt]# ll
+total 0
+drwxr-xr-x  2 root root  71 May 11 16:53 certs
+drwx--x--x. 4 root root  28 May 11 12:06 containerd
+lrwxrwxrwx  1 root root  19 May 11 17:37 harbor -> /opt/harbor-v1.8.3/
+drwxr-xr-x  2 root root 100 May 11 17:36 harbor-v1.8.3
+drwxr-xr-x  2 root root  49 May 11 17:34 src
+[root@hdss7-22 opt]#
 
 ```
