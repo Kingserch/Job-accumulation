@@ -5,8 +5,7 @@
     + [安装docker](#安装docker)
 + ### 环境准备
 `yum install epel-release`   
-`yum install wget net-tools telnet tree nmap sysstat lrzsz dos2unix bind-utils -y` 
- 
+`yum install wget net-tools telnet tree nmap sysstat lrzsz dos2unix bind-utils -y`  
 + ### 安装bind服务
 ##### 1)在hdss7-129主机上安装bind服务(DNS服务)
 ```
