@@ -118,5 +118,42 @@ nameserver 192.168.56.129
 [root@hdss7-22 ~]# cd /opt/certs/
 [root@hdss7-22 certs]# pwd
 /opt/certs
+[root@hdss7-22 certs]# vi ca-csr.json
+{
+    "CN": "kingEdu",
+    "hosts": [
+    ],
+    "key": {
+        "algo": "rsa",	#rsa加密算法
+        "size": 2048	#长度2048
+    },
+    "names": [
+        {
+            "C": "CN",
+            "ST": "beijing",
+            "L": "beijing",
+            "O": "od",
+            "OU": "ops"
+        }
+    ],
+    "ca": {
+        "expiry": "175200h"		#证书过期时间
+    }
+}
+[root@hdss7-22 certs]# cfssl gencert -initca ca-csr.json | cfssl-json -bare ca
+2020/05/11 16:53:28 [INFO] generating a new CA key and certificate from CSR
+2020/05/11 16:53:28 [INFO] generate received request
+2020/05/11 16:53:28 [INFO] received CSR
+2020/05/11 16:53:28 [INFO] generating key: rsa-2048
+2020/05/11 16:53:28 [INFO] encoded CSR
+2020/05/11 16:53:28 [INFO] signed certificate with serial number 217885965496432947483112196286183500766512119525
+[root@hdss7-22 certs]# ll
+total 16
+-rw-r--r-- 1 root root  993 May 11 16:53 ca.csr
+-rw-r--r-- 1 root root  326 May 11 16:49 ca-csr.json
+-rw------- 1 root root 1679 May 11 16:53 ca-key.pem		#根证书的私钥
+-rw-r--r-- 1 root root 1338 May 11 16:53 ca.pem			#根证书的私钥
+
+
 
 ```
