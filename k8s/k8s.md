@@ -188,6 +188,14 @@ drwx--x--x. 4 root root  28 May 11 12:06 containerd
 lrwxrwxrwx  1 root root  19 May 11 17:37 harbor -> /opt/harbor-v1.8.3/
 drwxr-xr-x  2 root root 100 May 11 17:36 harbor-v1.8.3
 drwxr-xr-x  2 root root  49 May 11 17:34 src
-[root@hdss7-22 opt]#
-
+[root@hdss7-22 harbor]# vim harbor.yml
+hostname: harbor.od.com
+   port: 180
+harbor_admin_password: Harbor12345
+data_volume: /data/docker
+#安装docker-compose，harbor基于单机编排
+yum install docker-compose -y
+[root@hdss7-22 harbor]# rpm -qa docker-compose
+docker-compose-1.18.0-4.el7.noarch
+[root@hdss7-22 harbor]# ./install.sh
 ```
