@@ -302,5 +302,31 @@ v1.7.9: digest: sha256:b1f5935eb2e9e2ae89c0b3e2e148c19068d91ca502e857052f14db230
         }
     ]
 }
-
+#生产etcd证书和私钥
+[root@hdss7-131 certs]# cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=peer etcd-peer-csr.json |cfssl-json -bare etcd-peer
+2020/05/12 11:19:23 [INFO] generate received request
+2020/05/12 11:19:23 [INFO] received CSR
+2020/05/12 11:19:23 [INFO] generating key: rsa-2048
+2020/05/12 11:19:23 [INFO] encoded CSR
+2020/05/12 11:19:23 [INFO] signed certificate with serial number 65897943636016508687974124617311544054963979665
+2020/05/12 11:19:23 [WARNING] This certificate lacks a "hosts" field. This makes it unsuitable for
+websites. For more information see the Baseline Requirements for the Issuance and Management
+of Publicly-Trusted Certificates, v.1.1.6, from the CA/Browser Forum (https://cabforum.org);
+specifically, section 10.2.3 ("Information Requirements").
+[root@hdss7-131 certs]# ll
+total 36
+-rw-r--r-- 1 root root  836 May 12 11:04 ca-config.json
+-rw-r--r-- 1 root root  993 May 11 16:53 ca.csr
+-rw-r--r-- 1 root root  326 May 11 16:49 ca-csr.json
+-rw------- 1 root root 1679 May 11 16:53 ca-key.pem
+-rw-r--r-- 1 root root 1338 May 11 16:53 ca.pem
+-rw-r--r-- 1 root root 1062 May 12 11:19 etcd-peer.csr
+-rw-r--r-- 1 root root  383 May 12 11:11 etcd-peer-csr.json
+-rw------- 1 root root 1679 May 12 11:19 etcd-peer-key.pem
+-rw-r--r-- 1 root root 1424 May 12 11:19 etcd-peer.pem
 ```
+
+[root@hdss7-128 src]# useradd  -s /sbin/nologin -M etcd
+[root@hdss7-128 src]# id etcd
+uid=1001(etcd) gid=1001(etcd) groups=1001(etcd)
+[root@hdss7-128 src]# 
