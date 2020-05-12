@@ -242,7 +242,7 @@ v1.7.9: digest: sha256:b1f5935eb2e9e2ae89c0b3e2e148c19068d91ca502e857052f14db230
 ```
 + ### 部署master节点服务
 
-#### 1)部署etcd集群
+#### 1)配置etcd证书
 ```
 [root@hdss7-131 certs]# vim /opt/certs/ca-config.json
 {
@@ -325,8 +325,34 @@ total 36
 -rw------- 1 root root 1679 May 12 11:19 etcd-peer-key.pem
 -rw-r--r-- 1 root root 1424 May 12 11:19 etcd-peer.pem
 ```
-
+#### 2)部署etcd集群
+https://github.com/etcd-io/etcd/tags
+```
 [root@hdss7-128 src]# useradd  -s /sbin/nologin -M etcd
 [root@hdss7-128 src]# id etcd
 uid=1001(etcd) gid=1001(etcd) groups=1001(etcd)
-[root@hdss7-128 src]# 
+[root@hdss7-128 src]# tar xvf etcd-v3.1.20-linux-amd64.tar.gz -C /opt/ 
+[root@hdss7-128 src]# cd /opt/
+[root@hdss7-128 opt]# ls
+containerd  etcd-v3.1.20-linux-amd64  src
+[root@hdss7-128 opt]# mv etcd-v3.1.20-linux-amd64/ etcd-v3.1.20
+[root@hdss7-128 opt]# ln -s /opt/etcd-v3.1.20/ /opt/etcd		#做个软连接方便以后升级
+[root@hdss7-128 opt]# ll
+total 0
+drwx--x--x. 4 root   root   28 May 11 12:06 containerd
+lrwxrwxrwx  1 root   root   18 May 12 11:41 etcd -> /opt/etcd-v3.1.20/
+drwxr-xr-x  3 478493 89939 123 Oct 11  2018 etcd-v3.1.20
+drwxr-xr-x  2 root   root   45 May 12 11:37 src
+[root@hdss7-128 opt]# cd etcd
+[root@hdss7-128 etcd]# mkdir -p /opt/etcd/certs /data/etcd /data/logs/etcd-server
+[root@hdss7-128 etcd]# cd certs
+[root@hdss7-128 certs]# ll		#把etcd的证书和私钥放在这个目录下
+total 12
+-rw-r--r-- 1 root root 1338 May 11 16:53 ca.pem
+-rw------- 1 root root 1679 May 12 11:19 etcd-peer-key.pem	#注意私钥权限600
+-rw-r--r-- 1 root root 1424 May 12 11:19 etcd-peer.pem
+
+
+
+
+```
