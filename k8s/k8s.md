@@ -785,4 +785,28 @@ vrrp_instance VI_1 {
 }
 [root@hdss7-129 bin]# systemctl start keepalived
 [root@hdss7-129 bin]# systemctl enable  keepalived
+[root@hdss7-128 ~]# ip add		#在keepalived主上验证
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: ens33: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 00:0c:29:ab:43:5d brd ff:ff:ff:ff:ff:ff
+    inet 192.168.56.128/24 brd 192.168.56.255 scope global noprefixroute dynamic ens33
+       valid_lft 1743sec preferred_lft 1743sec
+    inet 192.168.56.131/32 scope global ens33		#可以看到keepalived代理成功
+       valid_lft forever preferred_lft forever
+    inet6 fe80::4e43:28ac:3a05:7faa/64 scope link tentative dadfailed 
+       valid_lft forever preferred_lft forever
+    inet6 fe80::bacb:6a60:105d:fffa/64 scope link tentative dadfailed 
+       valid_lft forever preferred_lft forever
+    inet6 fe80::6428:9d44:5bfa:6519/64 scope link tentative dadfailed 
+       valid_lft forever preferred_lft forever
+3: docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default 
+    link/ether 02:42:a4:61:75:4a brd ff:ff:ff:ff:ff:ff
+    inet 172.7.128.1/24 brd 172.7.128.255 scope global docker0
+       valid_lft forever preferred_lft forever
+
 ```
