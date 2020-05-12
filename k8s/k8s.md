@@ -467,8 +467,9 @@ total 884636
 -rwxr-xr-x 1 root root   1648224 Aug  5  2019 mounter
 ```
 #### 2)签发(client)证书(apiserver)
+
+##### 2.1)#在hdss7-131主机上
 ```
-#在hdss7-131主机上
 [root@hdss7-131 certs]# vi  /opt/certss/client-csr.json
 
 {
@@ -490,7 +491,9 @@ total 884636
     ]
 }
 [root@hdss7-131 certs]# cfssl gencerts -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=client client-csr.json |cfssl-json -bare client
-#创建生成证书签名请求的(csr)的json文件
+```
+##### 2.2)创建生成证书签名请求的(csr)的json文件
+```
 [root@hdss7-131 certs]# vi /opt/certss/apiserver-csr.json
 
 {
@@ -521,7 +524,9 @@ total 884636
         }
     ]
 }
-#把创建好的证书发到hdss7-131主机上
+```
+##### 2.3)把创建好的证书发到hdss7-130主机上
+```
 [root@hdss7-130 certs]# pwd
 /opt/kubernetes/server/bin/certs
 [root@hdss7-130 certs]# ll
