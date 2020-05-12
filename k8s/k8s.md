@@ -469,7 +469,7 @@ total 884636
 #### 2)签发(client)证书(apiserver)
 ```
 #在hdss7-131主机上
-[root@hdss7-131 certss]# vi  /opt/certss/client-csr.json
+[root@hdss7-131 certs]# vi  /opt/certss/client-csr.json
 
 {
     "CN": "k8s-node",
@@ -489,9 +489,9 @@ total 884636
         }
     ]
 }
-[root@hdss7-131 certss]# cfssl gencerts -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=client client-csr.json |cfssl-json -bare client
+[root@hdss7-131 certs]# cfssl gencerts -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=client client-csr.json |cfssl-json -bare client
 #创建生成证书签名请求的(csr)的json文件
-[root@hdss7-131 certss]# vi /opt/certss/apiserver-csr.json
+[root@hdss7-131 certs]# vi /opt/certss/apiserver-csr.json
 
 {
     "CN": "k8s-apiserver",
@@ -522,9 +522,9 @@ total 884636
     ]
 }
 #把创建好的证书发到hdss7-131主机上
-[root@hdss7-130 certss]# pwd
-/opt/kubernetes/server/bin/certss
-[root@hdss7-130 certss]# ll
+[root@hdss7-130 certs]# pwd
+/opt/kubernetes/server/bin/certs
+[root@hdss7-130 certs]# ll
 total 24
 -rw------- 1 root root 1679 May 12 17:16 apiserver-key.pem
 -rw-r--r-- 1 root root 1594 May 12 17:16 apiserver.pem
@@ -621,10 +621,10 @@ rules:
   --service-cluster-ip-range 192.168.0.0/16 \
   --service-node-port-range 3000-29999 \
   --target-ram-mb=1024 \
-  --kubelet-client-certsificate ./certs/client.pem \
+  --kubelet-client-certificate ./certs/client.pem \
   --kubelet-client-key ./certs/client-key.pem \
   --log-dir  /data/logs/kubernetes/kube-apiserver \
-  --tls-certs-file ./certs/apiserver.pem \
+  --tls-cert-file ./certs/apiserver.pem \
   --tls-private-key-file ./certs/apiserver-key.pem \
   --v 2
 [root@hdss7-130 bin]# chmod +x kube-apiserver.sh
