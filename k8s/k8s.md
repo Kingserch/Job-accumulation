@@ -660,3 +660,17 @@ stdout_logfile_backups=4                                        ; # of stdout lo
 stdout_capture_maxbytes=1MB                                     ; number of bytes in 'capturemode' (default 0)
 stdout_events_enabled=false                                     ; emit events on stdout writes (default false)
 ```
+##### 验证
+```
+[root@hdss7-128 certs]# supervisorctl status
+etcd-server-7-128                RUNNING   pid 22474, uptime 0:07:25
+kube-apiserver-7-128             RUNNING   pid 22473, uptime 0:07:25
+[root@hdss7-129 bin]# supervisorctl status
+etcd-server-7-129                RUNNING   pid 24018, uptime 0:10:53
+kube-apiserver-7-129             RUNNING   pid 24017, uptime 0:10:53
+[root@hdss7-129 bin]#
+[root@hdss7-130 conf]# supervisorctl status
+etcd-server-7-130                RUNNING   pid 24014, uptime 0:15:44
+kube-apiserver-7-130             RUNNING   pid 24015, uptime 0:15:44
+[root@hdss7-130 conf]#
+```
