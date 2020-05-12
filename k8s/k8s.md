@@ -672,5 +672,8 @@ kube-apiserver-7-129             RUNNING   pid 24017, uptime 0:10:53
 [root@hdss7-130 conf]# supervisorctl status
 etcd-server-7-130                RUNNING   pid 24014, uptime 0:15:44
 kube-apiserver-7-130             RUNNING   pid 24015, uptime 0:15:44
-[root@hdss7-130 conf]#
+[root@hdss7-130 conf]# netstat -lntup |grep api	 
+tcp        0      0 127.0.0.1:8080          0.0.0.0:*               LISTEN      24017/./kube-apiser 	#监听本地回环地址上的8080端口
+tcp6       0      0 :::6443                 :::*                    LISTEN      24017/./kube-apiser 	#监听6443端口
+
 ```
