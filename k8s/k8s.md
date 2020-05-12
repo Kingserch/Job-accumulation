@@ -328,6 +328,8 @@ total 36
 #### 2)部署etcd集群
 https://github.com/etcd-io/etcd/tags
 ```
+[root@hdss7-128 opt]# mkdir src
+[root@hdss7-128 opt]# cd src
 [root@hdss7-128 src]# useradd  -s /sbin/nologin -M etcd
 [root@hdss7-128 src]# id etcd
 uid=1001(etcd) gid=1001(etcd) groups=1001(etcd)
