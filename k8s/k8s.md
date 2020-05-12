@@ -714,3 +714,71 @@ fi
 [root@hdss7-128 etcd]# chmod +x /etc/keepalived/check_port.sh
 ```
 ##### keepalived 主:
+```
+[root@hdss7-128 ~]# vim /etc/keepalived/keepalived.conf 
+
+! Configuration File for keepalived
+
+global_defs {
+   router_id 192.168.56.128
+
+}
+
+vrrp_script chk_nginx {
+    script "/etc/keepalived/check_port.sh 7443"
+    interval 2
+    weight -20
+}
+vrrp_instance VI_1 {
+    state MASTER
+    interface eth0
+    virtual_router_id 251
+    priority 100
+    advert_int 1
+    mcast_src_ip 192.168.56.128
+    nopreempt
+    
+    authentication {
+        auth_type PASS
+        auth_pass 11111111
+    }   
+    track_script {
+         chk_nginx
+    }    
+    virtual_ipaddress {
+        192.168.56.131
+    }   
+} 
+```
+##### keepalived从:
+```
+[root@hdss7-129 bin]# vim  /etc/keepalived/keepalived.conf 
+
+! Configuration File for keepalived
+global_defs {
+        router_id 192.168.56.129
+}
+vrrp_script chk_nginx {
+        script "/etc/keepalived/check_port.sh 7443"
+        interval 2
+        weight -20
+}
+vrrp_instance VI_1 {
+        state BACKUP
+        interface eth0
+        virtual_router_id 251
+        mcast_src_ip 192.168.56.129
+        priority 90
+        advert_int 1
+        authentication {
+                auth_type PASS
+                auth_pass 11111111
+        }
+        track_script {
+                chk_nginx
+        }
+        virtual_ipaddress {
+                192.168.56.131
+        }
+}
+```
