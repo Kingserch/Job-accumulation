@@ -537,6 +537,9 @@ total 24
 -rw-r--r-- 1 root root 1338 May 11 16:53 ca.pem
 -rw------- 1 root root 1679 May 12 17:06 client-key.pem
 -rw-r--r-- 1 root root 1363 May 12 17:06 client.pem
+```
+##### 2.4)创建apiserver需要的配置文件
+```
 [root@hdss7-130 bin]# mkdir conf & cd conf
 [root@hdss7-130 conf]# pwd
 /opt/kubernetes/server/bin/conf
