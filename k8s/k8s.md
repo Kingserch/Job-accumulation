@@ -5,6 +5,7 @@
     + [安装docker并搭建harbor](#安装docker)
     + [部署master节点服务(etcd证书，etcd集群)](#部署master节点服务)
     + [部署kube-apiserver集群](#部署kube-apiserver集群)
+    + [配置nginx反向代理L4,keepalived反向代理](#nginx四层反向代理)
 + ### 环境准备
 `yum install epel-release`   
 `yum install wget net-tools telnet tree nmap sysstat lrzsz dos2unix bind-utils -y`  
@@ -348,8 +349,8 @@ drwxr-xr-x  3 478493 89939 123 Oct 11  2018 etcd-v3.1.20
 drwxr-xr-x  2 root   root   45 May 12 11:37 src
 [root@hdss7-128 opt]# cd etcd
 [root@hdss7-128 etcd]# mkdir -p /opt/etcd/certss /data/etcd /data/logs/etcd-server
-[root@hdss7-128 etcd]# cd certss
-[root@hdss7-128 certss]# ll		#把etcd的证书和私钥放在这个目录下
+[root@hdss7-128 etcd]# cd certs
+[root@hdss7-128 certs]# ll		#把etcd的证书和私钥放在这个目录下
 total 12
 -rw-r--r-- 1 root root 1338 May 11 16:53 ca.pem
 -rw------- 1 root root 1679 May 12 11:19 etcd-peer-key.pem	#注意私钥权限600
@@ -675,5 +676,41 @@ kube-apiserver-7-130             RUNNING   pid 24015, uptime 0:15:44
 [root@hdss7-130 conf]# netstat -lntup |grep api	 
 tcp        0      0 127.0.0.1:8080          0.0.0.0:*               LISTEN      24017/./kube-apiser 	#监听本地回环地址上的8080端口
 tcp6       0      0 :::6443                 :::*                    LISTEN      24017/./kube-apiser 	#监听6443端口
-
 ```
++ ### nginx四层反向代理
+
+##### 在128 129机器上安装nginx
+```
+yum install nginx -y
+[root@hdss7-128 etcd]# vim /etc/nginx/nginx.conf #在nginx主配置文件最后配置以下字段
+[root@hdss7-129 bin]# vim /etc/nginx/nginx.conf	#在nginx主配置文件最后配置以下字段
+stream {
+    upstream kube-apiserver {
+        server 192.168.56.130:6443     max_fails=3 fail_timeout=30s;
+    }
+    server {
+        listen 7443;
+        proxy_connect_timeout 2s;
+        proxy_timeout 900s;
+        proxy_pass kube-apiserver;
+    }
+}
+```
+##### 在128 129机器上安装keepalived
+```
+yum install keepalived -y		#128,129都安装
+[root@hdss7-128 etcd]# vim /etc/keepalived/check_port.sh	#129也添加脚本
+#!/bin/bash
+CHK_PORT=$1
+if [ -n "$CHK_PORT" ];then
+        PORT_PROCESS=`ss -lnt|grep $CHK_PORT|wc -l`
+        if [ $PORT_PROCESS -eq 0 ];then
+                echo "Port $CHK_PORT Is Not Used,End."
+                exit 1
+        fi
+else
+        echo "Check Port Cant Be Empty!"
+fi
+[root@hdss7-128 etcd]# chmod +x /etc/keepalived/check_port.sh
+```
+##### keepalived 主:
