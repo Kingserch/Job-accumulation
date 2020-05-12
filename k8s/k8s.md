@@ -749,6 +749,8 @@ vrrp_instance VI_1 {
         192.168.56.131
     }   
 } 
+[root@hdss7-128 ~]# systemctl start keepalived
+[root@hdss7-128 ~]# systemctl enable  keepalived
 ```
 ##### keepalived从:
 ```
@@ -781,4 +783,6 @@ vrrp_instance VI_1 {
                 192.168.56.131
         }
 }
+[root@hdss7-129 bin]# systemctl start keepalived
+[root@hdss7-129 bin]# systemctl enable  keepalived
 ```
