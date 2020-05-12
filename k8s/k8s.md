@@ -351,6 +351,7 @@ total 12
 -rw-r--r-- 1 root root 1338 May 11 16:53 ca.pem
 -rw------- 1 root root 1679 May 12 11:19 etcd-peer-key.pem	#注意私钥权限600
 -rw-r--r-- 1 root root 1424 May 12 11:19 etcd-peer.pem
+#启动etcd的脚本
 [root@hdss7-128 etcd]# vi etcd-server-startup.sh 
 #!/bin/sh
 ./etcd --name etcd-server-7-128 \
@@ -373,7 +374,14 @@ total 12
        --peer-trusted-ca-file ./certs/ca.pem \
        --log-output stdout
 [root@hdss7-128 etcd]# chmod +x etcd-server-startup.sh 
-
+#更改属主
+[root@hdss7-128 etcd]# chown -R etcd:etcd /opt/etcd-v3.1.20/
+[root@hdss7-128 etcd]# chown -R etcd:etcd /data/etcd/
+[root@hdss7-128 etcd]# chown -R etcd:etcd /data/logs/etcd-server/
+#安装管理后台进程的软件
+yum install supervisor -y
+systemctl start supervisord 
+systemctl enable supervisord
 
 
 ```
