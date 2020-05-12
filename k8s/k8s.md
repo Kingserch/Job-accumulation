@@ -412,5 +412,5 @@ etcd-server-7-128                STARTING
 tcp        0      0 192.168.56.128:2379     0.0.0.0:*               LISTEN      20906/./etcd        
 tcp        0      0 127.0.0.1:2379          0.0.0.0:*               LISTEN      20906/./etcd        
 tcp        0      0 192.168.56.128:2380     0.0.0.0:*               LISTEN      20906/./etcd  
-
+#其他俩台机器配置跟上面一样，就是etcd-server-startup.sh ，/etc/supervisord.d/etcd-server.ini略有改动
 ```
