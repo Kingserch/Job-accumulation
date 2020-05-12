@@ -612,7 +612,7 @@ rules:
     # generate an audit event in RequestReceived.
     omitStages:
       - "RequestReceived"
-[root@hdss7-130 bin]# vim /opt/kubernetes/server/bin/kube-apiserver.sh
+[root@hdss7-130 bin]# vim /opt/kubernetes/server/bin/kube-apiserver.sh	#创建启动apiserver脚本
 #!/bin/bash
 ./kube-apiserver \
   --apiserver-count 2 \
@@ -637,8 +637,7 @@ rules:
   --v 2
 [root@hdss7-130 bin]# chmod +x kube-apiserver.sh
 [root@hdss7-130 bin]# mkdir -p /data/logs/kubernetes/kube-apiserver
-[root@hdss7-130 bin]#  vi /etc/supervisord.d/kube-apiserver.ini
-  
+[root@hdss7-130 bin]#  vi /etc/supervisord.d/kube-apiserver.ini	#配置supervisor后台管理
 [program:kube-apiserver-7-130]
 command=/opt/kubernetes/server/bin/kube-apiserver.sh            ; the program (relative uses PATH, can take args)
 numprocs=1                                                      ; number of processes copies to start (def 1)
