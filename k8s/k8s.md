@@ -351,7 +351,28 @@ total 12
 -rw-r--r-- 1 root root 1338 May 11 16:53 ca.pem
 -rw------- 1 root root 1679 May 12 11:19 etcd-peer-key.pem	#注意私钥权限600
 -rw-r--r-- 1 root root 1424 May 12 11:19 etcd-peer.pem
-
+[root@hdss7-128 etcd]# vi etcd-server-startup.sh 
+#!/bin/sh
+./etcd --name etcd-server-7-128 \
+       --data-dir /data/etcd/etcd-server \
+       --listen-peer-urls https://192.168.56.128:2380 \
+       --listen-client-urls https://192.168.56.128:2379,http://1287.0.0.1:2379 \
+       --quota-backend-bytes 8000000000 \
+       --initial-advertise-peer-urls https://192.168.56.128:2380 \
+       --advertise-client-urls https://192.168.56.128:2379,http://1287.0.0.1:2379 \
+       --initial-cluster  etcd-server-7-128=https://192.168.56.128:2380,etcd-server-7-129=https://192.168.56.129:2380,etcd-server-7-130=https://192.168.56.130:2380 \
+       --ca-file ./certs/ca.pem \
+       --cert-file ./certs/etcd-peer.pem \
+       --key-file ./certs/etcd-peer-key.pem \
+       --client-cert-auth  \
+       --trusted-ca-file ./certs/ca.pem \
+       --peer-ca-file ./certs/ca.pem \
+       --peer-cert-file ./certs/etcd-peer.pem \
+       --peer-key-file ./certs/etcd-peer-key.pem \
+       --peer-client-cert-auth \
+       --peer-trusted-ca-file ./certs/ca.pem \
+       --log-output stdout
+[root@hdss7-128 etcd]# chmod +x etcd-server-startup.sh 
 
 
 
