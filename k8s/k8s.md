@@ -4,6 +4,7 @@
     + [配置证书](#配置证书)
     + [安装docker并搭建harbor](#安装docker)
     + [部署master节点服务(etcd证书，etcd集群)](#部署master节点服务)
+    + [部署kube-apiserver集群](#部署kube-apiserver集群)
 + ### 环境准备
 `yum install epel-release`   
 `yum install wget net-tools telnet tree nmap sysstat lrzsz dos2unix bind-utils -y`  
@@ -422,5 +423,8 @@ cluster is healthy
 3d34a470df8f1443: name=etcd-server-7-130 peerURLs=https://192.168.56.130:2380 clientURLs=http://127.0.0.1:2379,https://192.168.56.130:2379 isLeader=false
 bef04d370192e0b0: name=etcd-server-7-128 peerURLs=https://192.168.56.128:2380 clientURLs=http://127.0.0.1:2379,https://192.168.56.128:2379 isLeader=true
 d7c4f71ecbf42673: name=etcd-server-7-129 peerURLs=https://192.168.56.129:2380 clientURLs=http://127.0.0.1:2379,https://192.168.56.129:2379 isLeader=false
+```
++ ### 部署kube-apiserver集群
+```
 
 ```
