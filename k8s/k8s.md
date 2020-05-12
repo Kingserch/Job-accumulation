@@ -412,5 +412,15 @@ etcd-server-7-128                STARTING
 tcp        0      0 192.168.56.128:2379     0.0.0.0:*               LISTEN      20906/./etcd        
 tcp        0      0 127.0.0.1:2379          0.0.0.0:*               LISTEN      20906/./etcd        
 tcp        0      0 192.168.56.128:2380     0.0.0.0:*               LISTEN      20906/./etcd  
-#其他俩台机器配置跟上面一样，就是etcd-server-startup.sh ，/etc/supervisord.d/etcd-server.ini略有改动
+#其他俩台机器配置跟上面一样，就是etcd-server-startup.sh( --initial-cluster不需要改) ，/etc/supervisord.d/etcd-server.ini 略有改动
+[root@hdss7-130 etcd]# ./etcdctl cluster-health		#查看集群的健康状态
+member 3d34a470df8f1443 is healthy: got healthy result from http://127.0.0.1:2379
+member bef04d370192e0b0 is healthy: got healthy result from http://127.0.0.1:2379
+member d7c4f71ecbf42673 is healthy: got healthy result from http://127.0.0.1:2379
+cluster is healthy
+[root@hdss7-130 etcd]# ./etcdctl member list	#查看集群健康状态，可以看到https://192.168.56.128:2380 是isLeader
+3d34a470df8f1443: name=etcd-server-7-130 peerURLs=https://192.168.56.130:2380 clientURLs=http://127.0.0.1:2379,https://192.168.56.130:2379 isLeader=false
+bef04d370192e0b0: name=etcd-server-7-128 peerURLs=https://192.168.56.128:2380 clientURLs=http://127.0.0.1:2379,https://192.168.56.128:2379 isLeader=true
+d7c4f71ecbf42673: name=etcd-server-7-129 peerURLs=https://192.168.56.129:2380 clientURLs=http://127.0.0.1:2379,https://192.168.56.129:2379 isLeader=false
+
 ```
