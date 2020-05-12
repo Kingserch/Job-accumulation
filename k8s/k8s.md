@@ -3,7 +3,7 @@
     + [安装bind服务](#安装bind服务)
     + [配置证书](#配置证书)
     + [安装docker并搭建harbor](#安装docker)
-    + [部署master节点服务](#部署master节点服务)
+    + [部署master节点服务(etcd证书，etcd集群)](#部署master节点服务)
 + ### 环境准备
 `yum install epel-release`   
 `yum install wget net-tools telnet tree nmap sysstat lrzsz dos2unix bind-utils -y`  
