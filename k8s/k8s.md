@@ -109,19 +109,19 @@ nameserver 192.168.56.129
 ```
 [root@hdss7-131 ~]# wget https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 -O /usr/bin/cfssl
 [root@hdss7-131 ~]# wget https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 -O /usr/bin/cfssl-json
-[root@hdss7-131 ~]# wget https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64 -O /usr/bin/cfssl-certinfo
+[root@hdss7-131 ~]# wget https://pkg.cfssl.org/R1.2/cfssl-certsinfo_linux-amd64 -O /usr/bin/cfssl-certsinfo
 [root@hdss7-131 ~]# chmod +x /usr/bin/cfssl*
 [root@hdss7-131 ~]# which cfssl
 /usr/bin/cfssl
 [root@hdss7-131 ~]# which cfssl-json
 /usr/bin/cfssl-json
-[root@hdss7-131 ~]# which cfssl-certinfo
-/usr/bin/cfssl-certinfo
-[root@hdss7-131 ~]# mkdir -p /opt/certs
-[root@hdss7-131 ~]# cd /opt/certs/
-[root@hdss7-131 certs]# pwd
-/opt/certs
-[root@hdss7-131 certs]# vi ca-csr.json
+[root@hdss7-131 ~]# which cfssl-certsinfo
+/usr/bin/cfssl-certsinfo
+[root@hdss7-131 ~]# mkdir -p /opt/certss
+[root@hdss7-131 ~]# cd /opt/certss/
+[root@hdss7-131 certss]# pwd
+/opt/certss
+[root@hdss7-131 certss]# vi ca-csr.json
 {
     "CN": "kingEdu",
     "hosts": [
@@ -143,14 +143,14 @@ nameserver 192.168.56.129
         "expiry": "175200h"		#证书过期时间
     }
 }
-[root@hdss7-131 certs]# cfssl gencert -initca ca-csr.json | cfssl-json -bare ca
-2020/05/11 16:53:28 [INFO] generating a new CA key and certificate from CSR
+[root@hdss7-131 certss]# cfssl gencerts -initca ca-csr.json | cfssl-json -bare ca
+2020/05/11 16:53:28 [INFO] generating a new CA key and certsificate from CSR
 2020/05/11 16:53:28 [INFO] generate received request
 2020/05/11 16:53:28 [INFO] received CSR
 2020/05/11 16:53:28 [INFO] generating key: rsa-2048
 2020/05/11 16:53:28 [INFO] encoded CSR
-2020/05/11 16:53:28 [INFO] signed certificate with serial number 217885965496432947483112196286183500766512119525
-[root@hdss7-131 certs]# ll
+2020/05/11 16:53:28 [INFO] signed certsificate with serial number 217885965496432947483112196286183500766512119525
+[root@hdss7-131 certss]# ll
 total 16
 -rw-r--r-- 1 root root  993 May 11 16:53 ca.csr
 -rw-r--r-- 1 root root  326 May 11 16:49 ca-csr.json
@@ -185,7 +185,7 @@ harbor/harbor.yml
 [root@hdss7-131 opt]# ln -s /opt/harbor-v1.8.3/ /opt/harbor	#软连接到/opt/src下，方便以后升级
 [root@hdss7-131 opt]# ll
 total 0
-drwxr-xr-x  2 root root  71 May 11 16:53 certs
+drwxr-xr-x  2 root root  71 May 11 16:53 certss
 drwx--x--x. 4 root root  28 May 11 12:06 containerd
 lrwxrwxrwx  1 root root  19 May 11 17:37 harbor -> /opt/harbor-v1.8.3/
 drwxr-xr-x  2 root root 100 May 11 17:36 harbor-v1.8.3
@@ -245,7 +245,7 @@ v1.7.9: digest: sha256:b1f5935eb2e9e2ae89c0b3e2e148c19068d91ca502e857052f14db230
 
 #### 1)配置etcd证书
 ```
-[root@hdss7-131 certs]# vim /opt/certs/ca-config.json
+[root@hdss7-131 certss]# vim /opt/certss/ca-config.json
 {
     "signing": {
         "default": {
@@ -280,7 +280,7 @@ v1.7.9: digest: sha256:b1f5935eb2e9e2ae89c0b3e2e148c19068d91ca502e857052f14db230
         }
     }
 }
-[root@hdss7-131 certs]# vi etcd-peer-csr.json
+[root@hdss7-131 certss]# vi etcd-peer-csr.json
 {
     "CN": "k8s-etcd",
     "hosts": [
@@ -304,17 +304,17 @@ v1.7.9: digest: sha256:b1f5935eb2e9e2ae89c0b3e2e148c19068d91ca502e857052f14db230
     ]
 }
 #生产etcd证书和私钥
-[root@hdss7-131 certs]# cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=peer etcd-peer-csr.json |cfssl-json -bare etcd-peer
+[root@hdss7-131 certss]# cfssl gencerts -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=peer etcd-peer-csr.json |cfssl-json -bare etcd-peer
 2020/05/12 11:19:23 [INFO] generate received request
 2020/05/12 11:19:23 [INFO] received CSR
 2020/05/12 11:19:23 [INFO] generating key: rsa-2048
 2020/05/12 11:19:23 [INFO] encoded CSR
-2020/05/12 11:19:23 [INFO] signed certificate with serial number 65897943636016508687974124617311544054963979665
-2020/05/12 11:19:23 [WARNING] This certificate lacks a "hosts" field. This makes it unsuitable for
+2020/05/12 11:19:23 [INFO] signed certsificate with serial number 65897943636016508687974124617311544054963979665
+2020/05/12 11:19:23 [WARNING] This certsificate lacks a "hosts" field. This makes it unsuitable for
 websites. For more information see the Baseline Requirements for the Issuance and Management
-of Publicly-Trusted Certificates, v.1.1.6, from the CA/Browser Forum (https://cabforum.org);
+of Publicly-Trusted certsificates, v.1.1.6, from the CA/Browser Forum (https://cabforum.org);
 specifically, section 10.2.3 ("Information Requirements").
-[root@hdss7-131 certs]# ll
+[root@hdss7-131 certss]# ll
 total 36
 -rw-r--r-- 1 root root  836 May 12 11:04 ca-config.json
 -rw-r--r-- 1 root root  993 May 11 16:53 ca.csr
@@ -347,9 +347,9 @@ lrwxrwxrwx  1 root   root   18 May 12 11:41 etcd -> /opt/etcd-v3.1.20/
 drwxr-xr-x  3 478493 89939 123 Oct 11  2018 etcd-v3.1.20
 drwxr-xr-x  2 root   root   45 May 12 11:37 src
 [root@hdss7-128 opt]# cd etcd
-[root@hdss7-128 etcd]# mkdir -p /opt/etcd/certs /data/etcd /data/logs/etcd-server
-[root@hdss7-128 etcd]# cd certs
-[root@hdss7-128 certs]# ll		#把etcd的证书和私钥放在这个目录下
+[root@hdss7-128 etcd]# mkdir -p /opt/etcd/certss /data/etcd /data/logs/etcd-server
+[root@hdss7-128 etcd]# cd certss
+[root@hdss7-128 certss]# ll		#把etcd的证书和私钥放在这个目录下
 total 12
 -rw-r--r-- 1 root root 1338 May 11 16:53 ca.pem
 -rw------- 1 root root 1679 May 12 11:19 etcd-peer-key.pem	#注意私钥权限600
@@ -365,16 +365,16 @@ total 12
        --initial-advertise-peer-urls https://192.168.56.128:2380 \
        --advertise-client-urls https://192.168.56.128:2379,http://1287.0.0.1:2379 \
        --initial-cluster  etcd-server-7-128=https://192.168.56.128:2380,etcd-server-7-129=https://192.168.56.129:2380,etcd-server-7-130=https://192.168.56.130:2380 \
-       --ca-file ./certs/ca.pem \
-       --cert-file ./certs/etcd-peer.pem \
-       --key-file ./certs/etcd-peer-key.pem \
-       --client-cert-auth  \
-       --trusted-ca-file ./certs/ca.pem \
-       --peer-ca-file ./certs/ca.pem \
-       --peer-cert-file ./certs/etcd-peer.pem \
-       --peer-key-file ./certs/etcd-peer-key.pem \
-       --peer-client-cert-auth \
-       --peer-trusted-ca-file ./certs/ca.pem \
+       --ca-file ./certss/ca.pem \
+       --certs-file ./certss/etcd-peer.pem \
+       --key-file ./certss/etcd-peer-key.pem \
+       --client-certs-auth  \
+       --trusted-ca-file ./certss/ca.pem \
+       --peer-ca-file ./certss/ca.pem \
+       --peer-certs-file ./certss/etcd-peer.pem \
+       --peer-key-file ./certss/etcd-peer-key.pem \
+       --peer-client-certs-auth \
+       --peer-trusted-ca-file ./certss/ca.pem \
        --log-output stdout
 [root@hdss7-128 etcd]# chmod +x etcd-server-startup.sh 
 #更改属主
@@ -469,7 +469,7 @@ total 884636
 #### 2)签发(client)证书(apiserver)
 ```
 #在hdss7-131主机上
-[root@hdss7-131 certs]# vi  /opt/certs/client-csr.json
+[root@hdss7-131 certss]# vi  /opt/certss/client-csr.json
 
 {
     "CN": "k8s-node",
@@ -489,9 +489,9 @@ total 884636
         }
     ]
 }
-[root@hdss7-131 certs]# cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=client client-csr.json |cfssl-json -bare client
+[root@hdss7-131 certss]# cfssl gencerts -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=client client-csr.json |cfssl-json -bare client
 #创建生成证书签名请求的(csr)的json文件
-[root@hdss7-131 certs]# vi /opt/certs/apiserver-csr.json
+[root@hdss7-131 certss]# vi /opt/certss/apiserver-csr.json
 
 {
     "CN": "k8s-apiserver",
@@ -522,9 +522,9 @@ total 884636
     ]
 }
 #把创建好的证书发到hdss7-131主机上
-[root@hdss7-130 certs]# pwd
-/opt/kubernetes/server/bin/certs
-[root@hdss7-130 certs]# ll
+[root@hdss7-130 certss]# pwd
+/opt/kubernetes/server/bin/certss
+[root@hdss7-130 certss]# ll
 total 24
 -rw------- 1 root root 1679 May 12 17:16 apiserver-key.pem
 -rw-r--r-- 1 root root 1594 May 12 17:16 apiserver.pem
@@ -570,7 +570,7 @@ rules:
     - group: "" # core API group
       resources: ["endpoints", "services"]
 
-  # Don't log authenticated requests to certain non-resource URL paths.
+  # Don't log authenticated requests to certsain non-resource URL paths.
   - level: None
     userGroups: ["system:authenticated"]
     nonResourceURLs:
@@ -611,21 +611,21 @@ rules:
   --audit-log-path /data/logs/kubernetes/kube-apiserver/audit-log \
   --audit-policy-file ./conf/audit.yaml \
   --authorization-mode RBAC \
-  --client-ca-file ./cert/ca.pem \
-  --requestheader-client-ca-file ./cert/ca.pem \
+  --client-ca-file ./certs/ca.pem \
+  --requestheader-client-ca-file ./certs/ca.pem \
   --enable-admission-plugins NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,ResourceQuota \
-  --etcd-cafile ./cert/ca.pem \
-  --etcd-certfile ./cert/client.pem \
-  --etcd-keyfile ./cert/client-key.pem \  --etcd-servers https://192.168.56.128:2379,https://192.168.56.129:2379,https://192.168.56.130:2379 \
-  --service-account-key-file ./cert/ca-key.pem \
+  --etcd-cafile ./certs/ca.pem \
+  --etcd-certfile ./certs/client.pem \
+  --etcd-keyfile ./certs/client-key.pem \  --etcd-servers https://192.168.56.128:2379,https://192.168.56.129:2379,https://192.168.56.130:2379 \
+  --service-account-key-file ./certs/ca-key.pem \
   --service-cluster-ip-range 192.168.0.0/16 \
   --service-node-port-range 3000-29999 \
   --target-ram-mb=1024 \
-  --kubelet-client-certificate ./cert/client.pem \
-  --kubelet-client-key ./cert/client-key.pem \
+  --kubelet-client-certsificate ./certs/client.pem \
+  --kubelet-client-key ./certs/client-key.pem \
   --log-dir  /data/logs/kubernetes/kube-apiserver \
-  --tls-cert-file ./cert/apiserver.pem \
-  --tls-private-key-file ./cert/apiserver-key.pem \
+  --tls-certs-file ./certs/apiserver.pem \
+  --tls-private-key-file ./certs/apiserver-key.pem \
   --v 2
 [root@hdss7-130 bin]# chmod +x kube-apiserver.sh
 [root@hdss7-130 bin]# mkdir -p /data/logs/kubernetes/kube-apiserver
