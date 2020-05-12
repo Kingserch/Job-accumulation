@@ -228,5 +228,14 @@ Configure a credential helper to remove this warning. See
 https://docs.docker.com/engine/reference/commandline/login/#credentials-store
 
 Login Succeeded
-[root@hdss7-131 conf.d]# docker push harbor.od.com/public/nginx:v1.7.9
+[root@hdss7-131 ~]# docker push harbor.od.com/public/nginx:v1.7.9
+The push refers to repository [harbor.od.com/public/nginx]
+5f70bf18a086: Pushed 
+4b26ab29a475: Pushed 
+ccb1d68e3fb7: Pushed 
+e387107e2065: Pushed 
+63bf84221cce: Pushed 
+e02dce553481: Pushed 
+dea2e4984e29: Pushed 
+v1.7.9: digest: sha256:b1f5935eb2e9e2ae89c0b3e2e148c19068d91ca502e857052f14db230443e4c2 size: 3012
 ```
