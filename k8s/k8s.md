@@ -426,10 +426,68 @@ d7c4f71ecbf42673: name=etcd-server-7-129 peerURLs=https://192.168.56.129:2380 cl
 ```
 + ### 部署kube-apiserver集群
 https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.15.md#downloads-for-v11512  找到Server Binaries 下载kubernetes-server-linux-amd64.tar.gz
+
+#### 1)安装准备
 ```
 [root@hdss7-130 src]# tar xf kubernetes-server-linux-amd64-v1.15.2.tar.gz -C /opt/
 [root@hdss7-130 opt]# ls
 containerd  etcd  etcd-v3.1.20  kubernetes  src
+[root@hdss7-130 opt]# mv kubernetes/ kubernetes-v1.15.2
+[root@hdss7-130 opt]# ll
+total 0
+drwx--x--x. 4 root root  28 May 11 12:06 containerd
+lrwxrwxrwx  1 root root  18 May 12 15:22 etcd -> /opt/etcd-v3.1.20/
+drwxr-xr-x  4 etcd etcd 166 May 12 15:47 etcd-v3.1.20
+drwxr-xr-x  4 root root  79 Aug  5  2019 kubernetes-v1.15.2
+drwxr-xr-x  2 root root  97 May 12 16:35 src
+[root@hdss7-130 opt]# ln -s /opt/kubernetes-v1.15.2/ /opt/kubernetes
+[root@hdss7-130 opt]# cd kubernetes
+[root@hdss7-130 kubernetes]# ll
+total 27184
+drwxr-xr-x 2 root root        6 Aug  5  2019 addons
+-rw-r--r-- 1 root root 26625140 Aug  5  2019 kubernetes-src.tar.gz
+-rw-r--r-- 1 root root  1205293 Aug  5  2019 LICENSES
+drwxr-xr-x 3 root root       17 Aug  5  2019 server
+[root@hdss7-130 kubernetes]# rm -rf kubernetes-src.tar.gz 
+[root@hdss7-130 kubernetes]# cd server/bin/
+[root@hdss7-130 bin]# rm -rf *.tar
+[root@hdss7-130 bin]# rm -f *_tag
+[root@hdss7-130 bin]# ll
+total 884636
+-rwxr-xr-x 1 root root  43534816 Aug  5  2019 apiextensions-apiserver
+-rwxr-xr-x 1 root root 100548640 Aug  5  2019 cloud-controller-manager
+-rwxr-xr-x 1 root root 200648416 Aug  5  2019 hyperkube
+-rwxr-xr-x 1 root root  40182208 Aug  5  2019 kubeadm
+-rwxr-xr-x 1 root root 164501920 Aug  5  2019 kube-apiserver
+-rwxr-xr-x 1 root root 116397088 Aug  5  2019 kube-controller-manager
+-rwxr-xr-x 1 root root  42985504 Aug  5  2019 kubectl
+-rwxr-xr-x 1 root root 119616640 Aug  5  2019 kubelet
+-rwxr-xr-x 1 root root  36987488 Aug  5  2019 kube-proxy
+-rwxr-xr-x 1 root root  38786144 Aug  5  2019 kube-scheduler
+-rwxr-xr-x 1 root root   1648224 Aug  5  2019 mounter
+```
+#### 2)签发(client)证书(apiserver)
+```
+#在hdss7-131主机上
+[root@hdss7-131 certs]# vi  /opt/certs/client-csr.json
 
-
+{
+    "CN": "k8s-node",
+    "hosts": [
+    ],
+    "key": {
+        "algo": "rsa",
+        "size": 2048
+    },
+    "names": [
+        {
+            "C": "CN",
+            "ST": "beijing",
+            "L": "beijing",
+            "O": "od",
+            "OU": "ops"
+        }
+    ]
+}
+[root@hdss7-131 certs]# cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=client client-csr.json |cfssl-json -bare client
 ```
