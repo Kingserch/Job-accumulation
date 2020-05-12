@@ -2,7 +2,8 @@
     + [环境准备](#环境准备)
     + [安装bind服务](#安装bind服务)
     + [配置证书](#配置证书)
-    + [安装docker](#安装docker)
+    + [安装docker并搭建harbor](#安装docker)
+    + [部署master节点服务](#部署master节点服务)
 + ### 环境准备
 `yum install epel-release`   
 `yum install wget net-tools telnet tree nmap sysstat lrzsz dos2unix bind-utils -y`  
@@ -163,7 +164,7 @@ curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
 {
   "graph": "/data/docker",
   "storage-driver": "overlay2",
-  "insecure-registries": ["registry.access.redhat.com","quay.io"],
+  "insecure-registries": ["registry.access.redhat.com","quay.io","harbor.od.com"],		#添加harbor.od.com字段，把仓库设置为可信任
   "registry-mirrors": ["https://q2gr04ke.mirror.aliyuncs.com"],
   "bip": "172.7.131.1/24",	#bip 取linux主机的ip后一位，方便管理
   "exec-opts": ["native.cgroupdriver=systemd"],
@@ -238,4 +239,68 @@ e387107e2065: Pushed
 e02dce553481: Pushed 
 dea2e4984e29: Pushed 
 v1.7.9: digest: sha256:b1f5935eb2e9e2ae89c0b3e2e148c19068d91ca502e857052f14db230443e4c2 size: 3012
+```
++ ### 部署master节点服务
+
+#### 1)部署etcd集群
+```
+[root@hdss7-131 certs]# vim /opt/certs/ca-config.json
+{
+    "signing": {
+        "default": {
+            "expiry": "175200h"	#证书过期时间
+        },
+        "profiles": {
+            "server": {
+                "expiry": "175200h",
+                "usages": [
+                    "signing",
+                    "key encipherment",
+                    "server auth"
+                ]
+            },
+            "client": {		#客户端
+                "expiry": "175200h",
+                "usages": [
+                    "signing",
+                    "key encipherment",
+                    "client auth"
+                ]
+            },
+            "peer": {			#互相通信
+                "expiry": "175200h",
+                "usages": [
+                    "signing",
+                    "key encipherment",
+                    "server auth",
+                    "client auth"
+                ]
+            }
+        }
+    }
+}
+[root@hdss7-131 certs]# vi etcd-peer-csr.json
+{
+    "CN": "k8s-etcd",
+    "hosts": [
+        "192.168.56.128",
+        "192.168.56.129",
+        "192.168.56.130",
+        "192.168.56.131"
+    ],
+    "key": {
+        "algo": "rsa",
+        "size": 2048
+    },
+    "names": [
+        {
+            "C": "CN",
+            "ST": "beijing",
+            "L": "beijing",
+            "O": "od",
+            "OU": "ops"
+        }
+    ]
+}
+
 ```

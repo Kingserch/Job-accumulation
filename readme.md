@@ -1,7 +1,9 @@
 + ### Kubernetes使用
     + [Kubernetes安装](https://github.com/Kingserch/Job-accumulation/blob/Kubernetes/k8s/k8s.md)
 
-	
+128-130 etcd集群
+129 DNS
+131根证书和harbor	
 + ### Kubernetes简介
 
 1)Kubernetes优势:
