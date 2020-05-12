@@ -216,4 +216,4 @@ hdss7-129上:
 harbor             A    192.168.56.131
 ```
 浏览器打开http://harbor.od.com
-[](https://github.com/Kingserch/Job-accumulation/blob/Kubernetes/images/harbor.png)
+![](https://github.com/Kingserch/Job-accumulation/blob/Kubernetes/images/harbor.png)
