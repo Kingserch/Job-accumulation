@@ -731,7 +731,7 @@ vrrp_script chk_nginx {
 }
 vrrp_instance VI_1 {
     state MASTER
-    interface eth0
+    interface ens33
     virtual_router_id 251
     priority 100
     advert_int 1
@@ -767,7 +767,7 @@ vrrp_script chk_nginx {
 }
 vrrp_instance VI_1 {
         state BACKUP
-        interface eth0
+        interface ens33
         virtual_router_id 251
         mcast_src_ip 192.168.56.129
         priority 90
