@@ -403,7 +403,12 @@ stdout_capture_maxbytes=1MB                                     ; number of byte
 stdout_events_enabled=false                                     ; emit events on stdout writes (default false)
 [root@hdss7-128 etcd]# supervisorctl update
 etcd-server-7-128: added process group
-
-
+[root@hdss7-128 etcd]# supervisorctl status
+etcd-server-7-128                STARTING  
+[root@hdss7-128 etcd]# chown etcd:etcd /data/etcd/etcd-server/ -R	
+[root@hdss7-128 member]# netstat -luntp|grep etcd
+tcp        0      0 192.168.56.128:2379     0.0.0.0:*               LISTEN      20906/./etcd        
+tcp        0      0 127.0.0.1:2379          0.0.0.0:*               LISTEN      20906/./etcd        
+tcp        0      0 192.168.56.128:2380     0.0.0.0:*               LISTEN      20906/./etcd  
 
 ```
