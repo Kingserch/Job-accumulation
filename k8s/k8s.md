@@ -414,7 +414,10 @@ tcp        0      0 192.168.56.128:2379     0.0.0.0:*               LISTEN      
 tcp        0      0 127.0.0.1:2379          0.0.0.0:*               LISTEN      20906/./etcd        
 tcp        0      0 192.168.56.128:2380     0.0.0.0:*               LISTEN      20906/./etcd  
 #其他俩台机器配置跟上面一样，就是etcd-server-startup.sh( --initial-cluster不需要改) ，/etc/supervisord.d/etcd-server.ini 略有改动
-[root@hdss7-130 etcd]# ./etcdctl cluster-health		#查看集群的健康状态
+```
+##### 查看集群的健康状态
+```
+[root@hdss7-130 etcd]# ./etcdctl cluster-health
 member 3d34a470df8f1443 is healthy: got healthy result from http://127.0.0.1:2379
 member bef04d370192e0b0 is healthy: got healthy result from http://127.0.0.1:2379
 member d7c4f71ecbf42673 is healthy: got healthy result from http://127.0.0.1:2379
