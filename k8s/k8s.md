@@ -736,7 +736,7 @@ vrrp_instance VI_1 {
     priority 100
     advert_int 1
     mcast_src_ip 192.168.56.128
-    nopreempt
+    nopreempt	#非强占式，这样配置vip不会自动回到keepalived上，
     
     authentication {
         auth_type PASS
