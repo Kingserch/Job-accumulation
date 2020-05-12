@@ -211,5 +211,9 @@ server {
     }
 }
 [root@hdss7-131 harbor]# systemctl restart nginx
-在配置的DNS中
+hdss7-129上:
+[root@hdss7-129 ~]# vi /var/named/od.com.zone
+harbor             A    192.168.56.131
 ```
+浏览器打开http://harbor.od.com
+[]()
