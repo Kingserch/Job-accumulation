@@ -217,3 +217,16 @@ harbor             A    192.168.56.131
 ```
 浏览器打开http://harbor.od.com
 ![](https://github.com/Kingserch/Job-accumulation/blob/Kubernetes/images/harbor.png)
+```
+[root@hdss7-131 conf.d]# docker pull nginx:1.7.9
+[root@hdss7-131 conf.d]# docker tag 84581e99d807 harbor.od.com/public/nginx:v1.7.9
+[root@hdss7-131 conf.d]# docker login harbor.od.com
+Username: admin
+Password: 
+WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+[root@hdss7-131 conf.d]# docker push harbor.od.com/public/nginx:v1.7.9
+```
