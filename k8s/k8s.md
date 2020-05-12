@@ -425,6 +425,11 @@ bef04d370192e0b0: name=etcd-server-7-128 peerURLs=https://192.168.56.128:2380 cl
 d7c4f71ecbf42673: name=etcd-server-7-129 peerURLs=https://192.168.56.129:2380 clientURLs=http://127.0.0.1:2379,https://192.168.56.129:2379 isLeader=false
 ```
 + ### 部署kube-apiserver集群
+https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.15.md#downloads-for-v11512  找到Server Binaries 下载kubernetes-server-linux-amd64.tar.gz
 ```
+[root@hdss7-130 src]# tar xf kubernetes-server-linux-amd64-v1.15.2.tar.gz -C /opt/
+[root@hdss7-130 opt]# ls
+containerd  etcd  etcd-v3.1.20  kubernetes  src
+
 
 ```
