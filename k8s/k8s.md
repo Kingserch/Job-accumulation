@@ -988,6 +988,6 @@ subjects:
 docker pull kubernetes/pause
 docker tag f9d5de079539 harbor.od.com/public/pause:latest
 docker push harbor.od.com/public/pause:latest
-
-
 ```
+##### 可以看大harbor上的，pause镜像
+[](https://github.com/Kingserch/Job-accumulation/blob/Kubernetes/images/harbor1.png)
