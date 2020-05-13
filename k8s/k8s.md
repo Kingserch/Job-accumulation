@@ -6,7 +6,7 @@
     + [部署master节点服务(etcd证书，etcd集群)](#部署master节点服务)
     + [部署kube-apiserver集群](#部署kube-apiserver集群)
     + [配置nginx反向代理L4,keepalived反向代理](#nginx四层反向代理)
-	+ [kube-controller&kube-scheduler](在129和130机器上)
+	+ [部署主控制节点控制器和调度控制器服务](在129和130机器上)
 + ### 环境准备
 `yum install epel-release`   
 `yum install wget net-tools telnet tree nmap sysstat lrzsz dos2unix bind-utils -y`  
@@ -888,3 +888,12 @@ kube-apiserver-7-129             RUNNING   pid 1909, uptime 1:18:27
 kube-controller-manager-7-129    RUNNING   pid 16376, uptime 0:01:00
 kube-scheduler-7-129             RUNNING   pid 16131, uptime 0:02:13
 ```
+##### 验证apiserver集群健康状态
+`ln -s /opt/kubernetes/server/bin/kubectl /usr/bin/kubectl`
+[root@hdss7-130 /]# kubectl get cs
+NAME                 STATUS    MESSAGE              ERROR
+controller-manager   Healthy   ok                   
+scheduler            Healthy   ok                   
+etcd-1               Healthy   {"health": "true"}   
+etcd-0               Healthy   {"health": "true"}   
+etcd-2               Healthy   {"health": "true"}  
