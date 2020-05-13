@@ -811,6 +811,8 @@ vrrp_instance VI_1 {
 ...
 ```
 ##### 在129和130机器上
+```
+#配置kube-controller-manager
 vim /opt/kubernetes/server/bin/kube-controller-manager.sh
 #!/bin/sh
 ./kube-controller-manager \
@@ -846,7 +848,9 @@ stdout_capture_maxbytes=1MB                                                     
 stdout_events_enabled=false                                                       ; emit events on stdout writes (default false)
 
 supervisorctl update
-
+```
+##### 配置kube-scheduler
+```
 vim /opt/kubernetes/server/bin/kube-scheduler.sh
 #!/bin/sh
 ./kube-scheduler \
@@ -883,3 +887,4 @@ etcd-server-7-129                RUNNING   pid 1024, uptime 1:18:51
 kube-apiserver-7-129             RUNNING   pid 1909, uptime 1:18:27
 kube-controller-manager-7-129    RUNNING   pid 16376, uptime 0:01:00
 kube-scheduler-7-129             RUNNING   pid 16131, uptime 0:02:13
+```
