@@ -890,6 +890,7 @@ kube-controller-manager-7-129    RUNNING   pid 16376, uptime 0:01:00
 kube-scheduler-7-129             RUNNING   pid 16131, uptime 0:02:13
 ```
 ##### 验证apiserver集群健康状态
+```
 `ln -s /opt/kubernetes/server/bin/kubectl /usr/bin/kubectl`
 [root@hdss7-130 /]# kubectl get cs
 NAME                 STATUS    MESSAGE              ERROR
