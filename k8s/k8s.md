@@ -6,6 +6,7 @@
     + [部署master节点服务(etcd证书，etcd集群)](#部署master节点服务)
     + [部署kube-apiserver集群](#部署kube-apiserver集群)
     + [配置nginx反向代理L4,keepalived反向代理](#nginx四层反向代理)
+	+ [kube-controller&kube-scheduler](在129和130机器上)
 + ### 环境准备
 `yum install epel-release`   
 `yum install wget net-tools telnet tree nmap sysstat lrzsz dos2unix bind-utils -y`  
@@ -809,3 +810,76 @@ vrrp_instance VI_1 {
        valid_lft forever preferred_lft forever
 ...
 ```
+##### 在129和130机器上
+vim /opt/kubernetes/server/bin/kube-controller-manager.sh
+#!/bin/sh
+./kube-controller-manager \
+  --cluster-cidr 172.7.0.0/16 \
+  --leader-elect true \
+  --log-dir /data/logs/kubernetes/kube-controller-manager \
+  --master http://127.0.0.1:8080 \
+  --service-account-private-key-file ./cert/ca-key.pem \
+  --service-cluster-ip-range 192.168.0.0/16 \
+  --root-ca-file ./cert/ca.pem \
+  --v 2
+
+chmod +x /opt/kubernetes/server/bin/kube-controller-manager.sh
+mkdir -p /data/logs/kubernetes/kube-controller-manager
+vim /etc/supervisord.d/kube-conntroller-manager.ini
+[program:kube-controller-manager-7-130]
+command=/opt/kubernetes/server/bin/kube-controller-manager.sh                     ; the program (relative uses PATH, can take args)
+numprocs=1                                                                        ; number of processes copies to start (def 1)
+directory=/opt/kubernetes/server/bin                                              ; directory to cwd to before exec (def no cwd)
+autostart=true                                                                    ; start at supervisord start (default: true)
+autorestart=true                                                                  ; retstart at unexpected quit (default: true)
+startsecs=30                                                                      ; number of secs prog must stay running (def. 1)
+startretries=3                                                                    ; max # of serial start failures (default 3)
+exitcodes=0,2                                                                     ; 'expected' exit codes for process (default 0,2)
+stopsignal=QUIT                                                                   ; signal used to kill process (default TERM)
+stopwaitsecs=10                                                                   ; max num secs to wait b4 SIGKILL (default 10)
+user=root                                                                         ; setuid to this UNIX account to run the program
+redirect_stderr=true                                                              ; redirect proc stderr to stdout (default false)
+stdout_logfile=/data/logs/kubernetes/kube-controller-manager/controller.stdout.log  ; stderr log path, NONE for none; default AUTO
+stdout_logfile_maxbytes=64MB                                                      ; max # logfile bytes b4 rotation (default 50MB)
+stdout_logfile_backups=4                                                          ; # of stdout logfile backups (default 10)
+stdout_capture_maxbytes=1MB                                                       ; number of bytes in 'capturemode' (default 0)
+stdout_events_enabled=false                                                       ; emit events on stdout writes (default false)
+
+supervisorctl update
+
+vim /opt/kubernetes/server/bin/kube-scheduler.sh
+#!/bin/sh
+./kube-scheduler \
+  --leader-elect  \
+  --log-dir /data/logs/kubernetes/kube-scheduler \
+  --master http://127.0.0.1:8080 \
+  --v 2
+
+chmod +x /opt/kubernetes/server/bin/kube-scheduler.sh
+mkdir -p /data/logs/kubernetes/kube-scheduler
+
+vim /etc/supervisord.d/kube-scheduler.ini
+[program:kube-scheduler-7-130]
+command=/opt/kubernetes/server/bin/kube-scheduler.sh                     ; the program (relative uses PATH, can take args)
+numprocs=1                                                               ; number of processes copies to start (def 1)
+directory=/opt/kubernetes/server/bin                                     ; directory to cwd to before exec (def no cwd)
+autostart=true                                                           ; start at supervisord start (default: true)
+autorestart=true                                                         ; retstart at unexpected quit (default: true)
+startsecs=30                                                             ; number of secs prog must stay running (def. 1)
+startretries=3                                                           ; max # of serial start failures (default 3)
+exitcodes=0,2                                                            ; 'expected' exit codes for process (default 0,2)
+stopsignal=QUIT                                                          ; signal used to kill process (default TERM)
+stopwaitsecs=10                                                          ; max num secs to wait b4 SIGKILL (default 10)
+user=root                                                                ; setuid to this UNIX account to run the program
+redirect_stderr=true                                                     ; redirect proc stderr to stdout (default false)
+stdout_logfile=/data/logs/kubernetes/kube-scheduler/scheduler.stdout.log ; stderr log path, NONE for none; default AUTO
+stdout_logfile_maxbytes=64MB                                             ; max # logfile bytes b4 rotation (default 50MB)
+stdout_logfile_backups=4                                                 ; # of stdout logfile backups (default 10)
+stdout_capture_maxbytes=1MB                                              ; number of bytes in 'capturemode' (default 0)
+stdout_events_enabled=false                                              ; emit events on stdout writes (default false)
+
+[root@hdss7-129 kubernetes]# supervisorctl status
+etcd-server-7-129                RUNNING   pid 1024, uptime 1:18:51
+kube-apiserver-7-129             RUNNING   pid 1909, uptime 1:18:27
+kube-controller-manager-7-129    RUNNING   pid 16376, uptime 0:01:00
+kube-scheduler-7-129             RUNNING   pid 16131, uptime 0:02:13
