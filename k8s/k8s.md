@@ -902,10 +902,18 @@ etcd-2               Healthy   {"health": "true"}
 ```
 + ### 部署运算节点服务kubelet
 
-##### 部署node节点服务(129-130),签发证书
+##### 1)部署node节点服务(129-130),签发证书
 ```
 #在131机器上
 vim /opt/certs/kubelet-csr.json
 cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=server kubelet-csr.json | cfssl-json -bare kubelet
 #把认证好的证书kubelet.pem，kubelet-key.pem放在/opt/kubernetes/server/bin/certs目录下，私钥权限600
 ```
+##### 2)创建配置
+##### 2.1)set-cluster
+```
+zai conf
+```
+##### 2.2)set-credentials
+##### 2.3)set-cluster
+##### 2.4)set-cluster
