@@ -993,8 +993,9 @@ docker push harbor.od.com/public/pause:latest
 [](https://github.com/Kingserch/Job-accumulation/blob/Kubernetes/images/harbor1.png)
 
 ##### 4)创建kubelet的启动脚本
+
+##### 4.1)创建129-130主机上启动脚本
 ```
-129-130主机上启动脚本
 [root@hdss7-130 conf]# vim /opt/kubernetes/server/bin/kubelet.sh
 #!/bin/sh
 ./kubelet \
@@ -1005,18 +1006,45 @@ docker push harbor.od.com/public/pause:latest
   --runtime-cgroups=/systemd/system.slice \
   --kubelet-cgroups=/systemd/system.slice \
   --fail-swap-on="false" \		#运算节点没关闭交换分区时候，不使用交换分区
-  --client-ca-file ./cert/ca.pem \
-  --tls-cert-file ./cert/kubelet.pem \
-  --tls-private-key-file ./cert/kubelet-key.pem \
+  --client-ca-file ./certs/ca.pem \
+  --tls-cert-file ./certs/kubelet.pem \
+  --tls-private-key-file ./certs/kubelet-key.pem \
   --hostname-override hdss7-130.host.com \		#hostname-override要根据主机的名字来改
   --image-gc-high-threshold 20 \
   --image-gc-low-threshold 10 \
   --kubeconfig ./conf/kubelet.kubeconfig \
   --log-dir /data/logs/kubernetes/kube-kubelet \
-  --pod-infra-container-image harbor.od.com/public/pause:latest \
+  --pod-infra-container-image harbor.od.com/public/pause:latest \	#网络空间，UTS空间，IPC空间由pod做初始化的
   --root-dir /data/kubelet
   
 mkdir -p /data/logs/kubernetes/kube-kubelet/data/kubelet	#创建存放日志的文件的目录
 chmod +x  /opt/kubernetes/server/bin/kubelet.sh
-
+```
+##### 4.2)创建supervisor配置
+```
+[root@hdss7-130 conf]# vim /etc/supervisord.d/kube-kubelet.ini
+[program:kube-kubelet-7-130]
+command=/opt/kubernetes/server/bin/kubelet.sh     ; the program (relative uses PATH, can take args)
+numprocs=1                                        ; number of processes copies to start (def 1)
+directory=/opt/kubernetes/server/bin              ; directory to cwd to before exec (def no cwd)
+autostart=true                                    ; start at supervisord start (default: true)
+autorestart=true              		          ; retstart at unexpected quit (default: true)
+startsecs=30                                      ; number of secs prog must stay running (def. 1)
+startretries=3                                    ; max # of serial start failures (default 3)
+exitcodes=0,2                                     ; 'expected' exit codes for process (default 0,2)
+stopsignal=QUIT                                   ; signal used to kill process (default TERM)
+stopwaitsecs=10                                   ; max num secs to wait b4 SIGKILL (default 10)
+user=root                                         ; setuid to this UNIX account to run the program
+redirect_stderr=true                              ; redirect proc stderr to stdout (default false)
+stdout_logfile=/data/logs/kubernetes/kube-kubelet/kubelet.stdout.log   ; stderr log path, NONE for none; default AUTO
+stdout_logfile_maxbytes=64MB                      ; max # logfile bytes b4 rotation (default 50MB)
+stdout_logfile_backups=4                          ; # of stdout logfile backups (default 10)
+stdout_capture_maxbytes=1MB                       ; number of bytes in 'capturemode' (default 0)
+stdout_events_enabled=false                       ; emit events on stdout writes (default false)
+[root@hdss7-130 bin]# supervisorctl status
+etcd-server-7-130                STARTING  
+kube-apiserver-7-130             STARTING  
+kube-controller-manager-7-130    STARTING  
+kube-kubelet-7-130               STARTING  
+kube-scheduler-7-130             STARTING 
 ```
