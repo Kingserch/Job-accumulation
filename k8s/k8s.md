@@ -991,3 +991,32 @@ docker push harbor.od.com/public/pause:latest
 ```
 ##### 可以看大harbor上的，pause镜像
 [](https://github.com/Kingserch/Job-accumulation/blob/Kubernetes/images/harbor1.png)
+
+##### 4)创建kubelet的启动脚本
+```
+129-130主机上启动脚本
+[root@hdss7-130 conf]# vim /opt/kubernetes/server/bin/kubelet.sh
+#!/bin/sh
+./kubelet \
+  --anonymous-auth=false \
+  --cgroup-driver systemd \
+  --cluster-dns 192.168.0.2 \
+  --cluster-domain cluster.local \
+  --runtime-cgroups=/systemd/system.slice \
+  --kubelet-cgroups=/systemd/system.slice \
+  --fail-swap-on="false" \
+  --client-ca-file ./cert/ca.pem \
+  --tls-cert-file ./cert/kubelet.pem \
+  --tls-private-key-file ./cert/kubelet-key.pem \
+  --hostname-override hdss7-130.host.com \		#hostname-override要根据主机的名字来改
+  --image-gc-high-threshold 20 \
+  --image-gc-low-threshold 10 \
+  --kubeconfig ./conf/kubelet.kubeconfig \
+  --log-dir /data/logs/kubernetes/kube-kubelet \
+  --pod-infra-container-image harbor.od.com/public/pause:latest \
+  --root-dir /data/kubelet
+  
+mkdir -p /data/logs/kubernetes/kube-kubelet/data/kubelet	#创建存放日志的文件的目录
+chmod +x  /opt/kubernetes/server/bin/kubelet.sh
+
+```
