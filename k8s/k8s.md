@@ -7,6 +7,7 @@
     + [部署kube-apiserver集群](#部署kube-apiserver集群)
     + [配置nginx反向代理L4,keepalived反向代理](#nginx四层反向代理)
 	+ [部署主控制节点控制器和调度控制器服务](在129和130机器上)
+	+ [部署运算节点服务kubelet](部署运算节点服务kubelet)
 + ### 环境准备
 `yum install epel-release`   
 `yum install wget net-tools telnet tree nmap sysstat lrzsz dos2unix bind-utils -y`  
@@ -897,3 +898,8 @@ scheduler            Healthy   ok
 etcd-1               Healthy   {"health": "true"}   
 etcd-0               Healthy   {"health": "true"}   
 etcd-2               Healthy   {"health": "true"}  
+```
++ ### 部署运算节点服务kubelet
+```
+
+```
