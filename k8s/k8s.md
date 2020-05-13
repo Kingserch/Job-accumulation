@@ -932,7 +932,7 @@ User "k8s-node" set.
 [root@hdss7-130 conf]# ls
 audit.yaml  kubelet.kubeconfig
 ```
-##### 2.3)set-cluster
+##### 2.3)set-context
 ```
 [root@hdss7-130 conf]# kubectl config set-context myk8s-context \
    --cluster=myk8s \
@@ -940,4 +940,21 @@ audit.yaml  kubelet.kubeconfig
    --kubeconfig=kubelet.kubeconfig
 Context "myk8s-context" created.
 ```
-##### 2.4)set-cluster
+##### 2.4)use-context 
+```
+[root@hdss7-130 conf]# kubectl config use-context myk8s-context --kubeconfig=kubelet.kubeconfig	#切换上下文到k8s-node
+Switched to context "myk8s-context".
+```
+[root@hdss7-130 conf]# vim /opt/kubernetes/server/bin/conf/k8s-node.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: k8s-node
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:node
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: User
+  name: k8s-node
