@@ -998,13 +998,13 @@ docker push harbor.od.com/public/pause:latest
 [root@hdss7-130 conf]# vim /opt/kubernetes/server/bin/kubelet.sh
 #!/bin/sh
 ./kubelet \
-  --anonymous-auth=false \
-  --cgroup-driver systemd \
+  --anonymous-auth=false \		#不允许匿名登录，必须经过apiserver才能指挥kublet干活
+  --cgroup-driver systemd \		#跟docker  cgroup-driver保持一致
   --cluster-dns 192.168.0.2 \
   --cluster-domain cluster.local \
   --runtime-cgroups=/systemd/system.slice \
   --kubelet-cgroups=/systemd/system.slice \
-  --fail-swap-on="false" \
+  --fail-swap-on="false" \		#运算节点没关闭交换分区时候，不使用交换分区
   --client-ca-file ./cert/ca.pem \
   --tls-cert-file ./cert/kubelet.pem \
   --tls-private-key-file ./cert/kubelet-key.pem \
