@@ -945,6 +945,8 @@ Context "myk8s-context" created.
 [root@hdss7-130 conf]# kubectl config use-context myk8s-context --kubeconfig=kubelet.kubeconfig	#切换上下文到k8s-node
 Switched to context "myk8s-context".
 ```
+##### 2.5)创建
+```
 [root@hdss7-130 conf]# vim /opt/kubernetes/server/bin/conf/k8s-node.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -958,3 +960,32 @@ subjects:
 - apiGroup: rbac.authorization.k8s.io
   kind: User
   name: k8s-node
+[root@hdss7-129 conf]# kubectl create -f k8s-node.yaml 
+clusterrolebinding.rbac.authorization.k8s.io/k8s-node created
+[root@hdss7-129 conf]# kubectl get clusterrolebinding k8s-node -o yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  creationTimestamp: "2020-05-13T06:26:32Z"
+  name: k8s-node
+  resourceVersion: "16968"
+  selfLink: /apis/rbac.authorization.k8s.io/v1/clusterrolebindings/k8s-node
+  uid: d66c735e-6b50-4a15-a785-ee1e1fb47b1a
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:node
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: User
+  name: k8s-node
+
+```
+##### 3)准备pause基础镜像
+
+###### 在安装harbor的主机上下载镜像
+```
+
+
+
+```
