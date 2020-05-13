@@ -909,11 +909,35 @@ vim /opt/certs/kubelet-csr.json
 cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=server kubelet-csr.json | cfssl-json -bare kubelet
 #把认证好的证书kubelet.pem，kubelet-key.pem放在/opt/kubernetes/server/bin/certs目录下，私钥权限600
 ```
-##### 2)创建配置
+##### 2)创建配置(/opt/kubernetes/server/bin/conf)
 ##### 2.1)set-cluster
 ```
-zai conf
+[root@hdss7-129 conf]# kubectl config set-cluster myk8s \
+>   --certificate-authority=/opt/kubernetes/server/bin/certs/ca.pem \
+>   --embed-certs=true \
+>   --server=https://192.168.56.133:7443 \
+>   --kubeconfig=kubelet.kubeconfig
+Cluster "myk8s" set.
+[root@hdss7-129 conf]# ls
+audit.yaml  kubelet.kubeconfig
 ```
 ##### 2.2)set-credentials
+```
+[root@hdss7-130 conf]# kubectl config set-credentials k8s-node \
+   --client-certificate=/opt/kubernetes/server/bin/certs/client.pem \
+   --client-key=/opt/kubernetes/server/bin/certs/client-key.pem \
+   --embed-certs=true \
+   --kubeconfig=kubelet.kubeconfig
+User "k8s-node" set.
+[root@hdss7-130 conf]# ls
+audit.yaml  kubelet.kubeconfig
+```
 ##### 2.3)set-cluster
+```
+[root@hdss7-130 conf]# kubectl config set-context myk8s-context \
+   --cluster=myk8s \
+   --user=k8s-node \
+   --kubeconfig=kubelet.kubeconfig
+Context "myk8s-context" created.
+```
 ##### 2.4)set-cluster
