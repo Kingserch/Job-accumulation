@@ -9,7 +9,7 @@
 	+ [部署主控制节点控制器和调度控制器服务](#在129和130机器上)
 	+ [部署运算节点服务kubelet](#部署运算节点服务kubelet)
 + ### 环境准备
-`yum install epel-release`   
+`yum install epel-release -y`   
 `yum install wget net-tools telnet tree nmap sysstat lrzsz dos2unix bind-utils -y`  
 + ### 安装bind服务
 ##### 1)在hdss7-129主机上安装bind服务(DNS服务)
