@@ -913,10 +913,10 @@ cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=serv
 ##### 2.1)set-cluster
 ```
 [root@hdss7-129 conf]# kubectl config set-cluster myk8s \
->   --certificate-authority=/opt/kubernetes/server/bin/certs/ca.pem \
->   --embed-certs=true \
->   --server=https://192.168.56.133:7443 \
->   --kubeconfig=kubelet.kubeconfig
+   --certificate-authority=/opt/kubernetes/server/bin/certs/ca.pem \
+   --embed-certs=true \
+   --server=https://192.168.56.133:7443 \
+   --kubeconfig=kubelet.kubeconfig
 Cluster "myk8s" set.
 [root@hdss7-129 conf]# ls
 audit.yaml  kubelet.kubeconfig
