@@ -14,6 +14,7 @@
 + ### 安装bind服务
 ##### 1)在hdss7-129主机上安装bind服务(DNS服务)
 ```
+#安装bind服务，因为要用ingress，在k8s里面要做7层流量调度，要绑定域名。
 [root@hdss7-129 ~]# yum install bind -y
 [root@hdss7-129 ~]# rpm -qa bind
 bind-9.11.4-16.P2.el7_8.2.x86_64
