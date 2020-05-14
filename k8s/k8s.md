@@ -1,6 +1,7 @@
 ﻿+ ### Kubernetes
     + [环境准备](#环境准备)
     + [DNS服务初始化](#DNS服务初始化)
+	
 		    + [在hdss7-11主机上安装bind服务](#在hdss7-11主机上安装bind服务)
     + [配置证书](#配置证书)
     + [安装docker并搭建harbor](#安装docker)
