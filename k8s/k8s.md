@@ -15,30 +15,28 @@
 ##### 1)在hdss7-11主机上安装bind服务
 ```
 #安装bind服务，因为要用ingress，在k8s里面要做7层流量调度，要绑定域名。(k8s容器绑定host，)
-[root@hdss7-129 ~]# yum install bind -y
-[root@hdss7-129 ~]# rpm -qa bind
-bind-9.11.4-16.P2.el7_8.2.x86_64
-[root@hdss7-129 ~]# netstat   -rn   #查看网关
+yum install bind -y
+[root@hdss7-11 ~]# netstat   -rn	#查看网关
 Kernel IP routing table
 Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
 0.0.0.0         192.168.56.2    0.0.0.0         UG        0 0          0 ens33
 172.7.68.0      0.0.0.0         255.255.255.0   U         0 0          0 docker0
 192.168.56.0    0.0.0.0         255.255.255.0   U         0 0          0 ens33
-[root@hdss7-129 ~]# vi /etc/named.conf
+[root@hdss7-11 ~]# vi /etc/named.conf
 options {
-        listen-on port 53 { 192.168.56.129; };	#默认是127.0.0.1本机需要改成本机的内网ip
+        listen-on port 53 { 192.168.56.11; };	#默认是127.0.0.1本机需要改成本机的内网ip
         directory       "/var/named";
         dump-file       "/var/named/data/cache_dump.db";
         statistics-file "/var/named/data/named_stats.txt";
         memstatistics-file "/var/named/data/named_mem_stats.txt";
         recursing-file  "/var/named/data/named.recursing";
         secroots-file   "/var/named/data/named.secroots";
-        allow-query     { any; };
-        forwarders      { 0.0.0.0; };	#本机的网关
+        allow-query     { any; };		#那些客户端可以通过自建DNS来去查询DNS解析
+        forwarders      { 192.168.56.2; }; #本机的网关
         recursion yes;	#一定要是yes 表示用递归的算法查询DNS，另一种是迭代
         dnssec-enable no;
         dnssec-validation no;
-[root@hdss7-129 /]# named-checkconf	#检查
+[root@hdss7-11 ~]# named-checkconf	#检查
 ```
 ##### 2)在hdss7-129主机配置区域配置文件
 ```
