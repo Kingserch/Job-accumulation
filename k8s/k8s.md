@@ -1,8 +1,6 @@
 ﻿+ ### Kubernetes
     + [环境准备](#环境准备)
     + [DNS服务初始化](#DNS服务初始化)
-	
-		    + [在hdss7-11主机上安装bind服务](#在hdss7-11主机上安装bind服务)
     + [配置证书](#配置证书)
     + [安装docker并搭建harbor](#安装docker)
     + [部署master节点服务(etcd证书，etcd集群)](#部署master节点服务)
@@ -14,7 +12,7 @@
 `yum install epel-release -y`   
 `yum install wget net-tools telnet tree nmap sysstat lrzsz dos2unix bind-utils -y`  
 + ### DNS服务初始化
-+ ##### 在hdss7-11主机上安装bind服务
+##### 1)在hdss7-11主机上安装bind服务
 ```
 #安装bind服务，因为要用ingress，在k8s里面要做7层流量调度，要绑定域名。(k8s容器绑定host，)
 [root@hdss7-129 ~]# yum install bind -y
