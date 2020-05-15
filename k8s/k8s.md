@@ -612,10 +612,10 @@ rules:
   --tls-cert-file ./certs/apiserver.pem \
   --tls-private-key-file ./certs/apiserver-key.pem \
   --v 2
-[root@hdss7-130 bin]# chmod +x kube-apiserver.sh
-[root@hdss7-130 bin]# mkdir -p /data/logs/kubernetes/kube-apiserver
-[root@hdss7-130 bin]# vi /etc/supervisord.d/kube-apiserver.ini	#配置supervisor后台管理
-[program:kube-apiserver-7-130]		#kube-apiserver-7-130 130 129 128 配置对应的主机ip后一位
+chmod +x  /opt/kubernetes/server/bin/kube-apiserver.sh
+mkdir -p /data/logs/kubernetes/kube-apiserver
+[root@hdss7-21 conf]# cat  /etc/supervisord.d/kube-apiserver.ini
+[program:kube-apiserver-7-21]
 command=/opt/kubernetes/server/bin/kube-apiserver.sh            ; the program (relative uses PATH, can take args)
 numprocs=1                                                      ; number of processes copies to start (def 1)
 directory=/opt/kubernetes/server/bin                            ; directory to cwd to before exec (def no cwd)
