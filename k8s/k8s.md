@@ -453,7 +453,16 @@ total 884636
         }
     ]
 }
-cfssl gencerts -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=client client-csr.json |cfssl-json -bare client
+[root@hdss7-200 certs]# cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=client client-csr.json |cfssl-json -bare client
+2020/05/15 12:28:25 [INFO] generate received request
+2020/05/15 12:28:25 [INFO] received CSR
+2020/05/15 12:28:25 [INFO] generating key: rsa-2048
+2020/05/15 12:28:25 [INFO] encoded CSR
+2020/05/15 12:28:26 [INFO] signed certificate with serial number 422228071699304647920612345166092379258735789973
+2020/05/15 12:28:26 [WARNING] This certificate lacks a "hosts" field. This makes it unsuitable for
+websites. For more information see the Baseline Requirements for the Issuance and Management
+of Publicly-Trusted Certificates, v.1.1.6, from the CA/Browser Forum (https://cabforum.org);
+specifically, section 10.2.3 ("Information Requirements").
 ```
 ##### 2.2)创建生成证书签名请求的(csr)的json文件
 ```
