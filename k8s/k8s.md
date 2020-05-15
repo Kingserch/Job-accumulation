@@ -662,9 +662,9 @@ stream {
     }
 }
 ```
-##### 在128 129机器上安装keepalived
+##### 在11 12机器上安装keepalived
 ```
-yum install keepalived -y		#128,129都安装
+yum install keepalived -y		#11,12都安装
 [root@hdss7-11 ~]# vim /etc/keepalived/check_port.sh
 #!/bin/bash
 CHK_PORT=$1
@@ -774,7 +774,7 @@ systemctl enable  keepalived
     inet 172.7.68.37/24 brd 172.7.68.255 scope global docker0
        valid_lft forever preferred_lft forever
 ```
-##### 在129和130机器上
+##### 在21和22机器上
 ```
 #配置kube-controller-manager
 vim /opt/kubernetes/server/bin/kube-controller-manager.sh
