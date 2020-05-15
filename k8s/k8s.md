@@ -505,7 +505,7 @@ websites. For more information see the Baseline Requirements for the Issuance an
 of Publicly-Trusted Certificates, v.1.1.6, from the CA/Browser Forum (https://cabforum.org);
 specifically, section 10.2.3 ("Information Requirements").
 ```
-##### 2.3)把创建好的证书发到hdss7-130主机上
+##### 2.3)把创建好的证书分发
 ```
 [root@hdss7-130 certs]# pwd
 /opt/kubernetes/server/bin/certs
