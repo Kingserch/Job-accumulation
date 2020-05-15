@@ -314,6 +314,7 @@ total 36
 #### 2)部署etcd集群
 https://github.com/etcd-io/etcd/tags
 ```
+#在12 21 22上
 useradd  -s /sbin/nologin -M etcd
 mkdir /opt/src -p
 cd /opt/src
