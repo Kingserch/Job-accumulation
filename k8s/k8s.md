@@ -322,46 +322,47 @@ cd /opt/
 mv etcd-v3.1.20-linux-amd64/ etcd-v3.1.20
 ln -s /opt/etcd-v3.1.20/ /opt/etcd		#做个软连接方便以后升级
 cd etcd
-[root@hdss7-128 etcd]# mkdir -p /opt/etcd/certss /data/etcd /data/logs/etcd-server
-[root@hdss7-128 etcd]# cd certs
-[root@hdss7-128 certs]# ll		#把etcd的证书和私钥放在这个目录下
+mkdir -p /opt/etcd/certss /data/etcd /data/logs/etcd-server
+cd certs
+[root@hdss7-12 certs]# ll	#把etcd的证书和私钥放在这个目录下
 total 12
--rw-r--r-- 1 root root 1338 May 11 16:53 ca.pem
--rw------- 1 root root 1679 May 12 11:19 etcd-peer-key.pem	#注意私钥权限600
--rw-r--r-- 1 root root 1424 May 12 11:19 etcd-peer.pem
+-rw-r--r-- 1 root root 1338 May 15 10:37 ca.pem
+-rw------- 1 root root 1679 May 15 11:25 etcd-peer-key.pem	#注意私钥权限600
+-rw-r--r-- 1 root root 1424 May 15 11:25 etcd-peer.pem
 #启动etcd的脚本
-[root@hdss7-128 etcd]# vi etcd-server-startup.sh 
+[root@hdss7-12 etcd]# vim /opt/etcd/etcd-server-startup.sh 
+[root@hdss7-12 etcd]# chmod +x /opt/etcd/etcd-server-startup.sh 
 #!/bin/sh
-./etcd --name etcd-server-7-128 \
+./etcd --name etcd-server-7-12 \
        --data-dir /data/etcd/etcd-server \
-       --listen-peer-urls https://192.168.56.128:2380 \
-       --listen-client-urls https://192.168.56.128:2379,http://1287.0.0.1:2379 \
+       --listen-peer-urls https://192.168.56.12:2380 \
+       --listen-client-urls https://192.168.56.12:2379,http://127.0.0.1:2379 \
        --quota-backend-bytes 8000000000 \
-       --initial-advertise-peer-urls https://192.168.56.128:2380 \
-       --advertise-client-urls https://192.168.56.128:2379,http://1287.0.0.1:2379 \
-       --initial-cluster  etcd-server-7-128=https://192.168.56.128:2380,etcd-server-7-129=https://192.168.56.129:2380,etcd-server-7-130=https://192.168.56.130:2380 \
-       --ca-file ./certss/ca.pem \
-       --certs-file ./certss/etcd-peer.pem \
-       --key-file ./certss/etcd-peer-key.pem \
-       --client-certs-auth  \
-       --trusted-ca-file ./certss/ca.pem \
-       --peer-ca-file ./certss/ca.pem \
-       --peer-certs-file ./certss/etcd-peer.pem \
-       --peer-key-file ./certss/etcd-peer-key.pem \
-       --peer-client-certs-auth \
-       --peer-trusted-ca-file ./certss/ca.pem \
+       --initial-advertise-peer-urls https://192.168.56.12:2380 \
+       --advertise-client-urls https://192.168.56.12:2379,http://127.0.0.1:2379 \
+       --initial-cluster  etcd-server-7-12=https://192.168.56.12:2380,etcd-server-7-21=https://192.168.56.21:2380,etcd-server-7-22=https://192.168.56.22:2380 \
+       --ca-file ./certs/ca.pem \
+       --cert-file ./certs/etcd-peer.pem \
+       --key-file ./certs/etcd-peer-key.pem \
+       --client-cert-auth  \
+       --trusted-ca-file ./certs/ca.pem \
+       --peer-ca-file ./certs/ca.pem \
+       --peer-cert-file ./certs/etcd-peer.pem \
+       --peer-key-file ./certs/etcd-peer-key.pem \
+       --peer-client-cert-auth \
+       --peer-trusted-ca-file ./certs/ca.pem \
        --log-output stdout
 [root@hdss7-128 etcd]# chmod +x etcd-server-startup.sh 
 #更改属主
-[root@hdss7-128 etcd]# chown -R etcd:etcd /opt/etcd-v3.1.20/
-[root@hdss7-128 etcd]# chown -R etcd:etcd /data/etcd/
-[root@hdss7-128 etcd]# chown -R etcd:etcd /data/logs/etcd-server/
+chown -R etcd:etcd /opt/etcd-v3.1.20/
+chown -R etcd:etcd /data/etcd/
+chown -R etcd:etcd /data/logs/etcd-server/
 #安装管理后台进程的软件
 yum install supervisor -y
 systemctl start supervisord 
 systemctl enable supervisord
-[root@hdss7-128 etcd]# vi /etc/supervisord.d/etcd-server.ini
-[program:etcd-server-7-128]
+vi /etc/supervisord.d/etcd-server.ini
+[program:etcd-server-7-12]
 command=/opt/etcd/etcd-server-startup.sh                        ; the program (relative uses PATH, can take args)
 numprocs=1                                                      ; number of processes copies to start (def 1)
 directory=/opt/etcd                                             ; directory to cwd to before exec (def no cwd)
@@ -379,15 +380,13 @@ stdout_logfile_maxbytes=64MB                                    ; max # logfile 
 stdout_logfile_backups=4                                        ; # of stdout logfile backups (default 10)
 stdout_capture_maxbytes=1MB                                     ; number of bytes in 'capturemode' (default 0)
 stdout_events_enabled=false                                     ; emit events on stdout writes (default false)
-[root@hdss7-128 etcd]# supervisorctl update
-etcd-server-7-128: added process group
-[root@hdss7-128 etcd]# supervisorctl status
-etcd-server-7-128                STARTING  
-[root@hdss7-128 etcd]# chown etcd:etcd /data/etcd/etcd-server/ -R	
-[root@hdss7-128 member]# netstat -luntp|grep etcd
-tcp        0      0 192.168.56.128:2379     0.0.0.0:*               LISTEN      20906/./etcd        
-tcp        0      0 127.0.0.1:2379          0.0.0.0:*               LISTEN      20906/./etcd        
-tcp        0      0 192.168.56.128:2380     0.0.0.0:*               LISTEN      20906/./etcd  
+
+supervisorctl update
+supervisorctl status
+[root@hdss7-12 etcd]# netstat -luntp|grep etcd
+tcp        0      0 192.168.56.12:2379      0.0.0.0:*               LISTEN      3118/./etcd         
+tcp        0      0 127.0.0.1:2379          0.0.0.0:*               LISTEN      3118/./etcd         
+tcp        0      0 192.168.56.12:2380      0.0.0.0:*               LISTEN      3118/./etcd 
 #其他俩台机器配置跟上面一样，就是etcd-server-startup.sh( --initial-cluster不需要改) ，/etc/supervisord.d/etcd-server.ini 略有改动
 ```
 ##### 查看集群的健康状态
