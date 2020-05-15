@@ -390,15 +390,15 @@ tcp        0      0 192.168.56.12:2380      0.0.0.0:*               LISTEN      
 ```
 ##### 查看集群的健康状态
 ```
-[root@hdss7-130 etcd]# ./etcdctl cluster-health
-member 3d34a470df8f1443 is healthy: got healthy result from http://127.0.0.1:2379
-member bef04d370192e0b0 is healthy: got healthy result from http://127.0.0.1:2379
-member d7c4f71ecbf42673 is healthy: got healthy result from http://127.0.0.1:2379
+[root@hdss7-12 etcd]# ./etcdctl cluster-health
+member 2c14ec94752d5694 is healthy: got healthy result from http://127.0.0.1:2379
+member a654cb086123e8d9 is healthy: got healthy result from http://127.0.0.1:2379
+member c0df55494e9634b3 is healthy: got healthy result from http://127.0.0.1:2379
 cluster is healthy
-[root@hdss7-130 etcd]# ./etcdctl member list	#查看集群健康状态，可以看到https://192.168.56.128:2380 是isLeader
-3d34a470df8f1443: name=etcd-server-7-130 peerURLs=https://192.168.56.130:2380 clientURLs=http://127.0.0.1:2379,https://192.168.56.130:2379 isLeader=false
-bef04d370192e0b0: name=etcd-server-7-128 peerURLs=https://192.168.56.128:2380 clientURLs=http://127.0.0.1:2379,https://192.168.56.128:2379 isLeader=true
-d7c4f71ecbf42673: name=etcd-server-7-129 peerURLs=https://192.168.56.129:2380 clientURLs=http://127.0.0.1:2379,https://192.168.56.129:2379 isLeader=false
+[root@hdss7-12 etcd]# ./etcdctl member list
+2c14ec94752d5694: name=etcd-server-7-12 peerURLs=https://192.168.56.12:2380 clientURLs=http://127.0.0.1:2379,https://192.168.56.12:2379 isLeader=true
+a654cb086123e8d9: name=etcd-server-7-21 peerURLs=https://192.168.56.21:2380 clientURLs=http://127.0.0.1:2379,https://192.168.56.21:2379 isLeader=false
+c0df55494e9634b3: name=etcd-server-7-22 peerURLs=https://192.168.56.22:2380 clientURLs=http://127.0.0.1:2379,https://192.168.56.22:2379 isLeader=false
 ```
 + ### 部署kube-apiserver集群
 https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.15.md#downloads-for-v11512  找到Server Binaries 下载kubernetes-server-linux-amd64.tar.gz
