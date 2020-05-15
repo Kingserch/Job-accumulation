@@ -105,10 +105,11 @@ nameserver 192.168.56.2
 ```
 + ### 配置证书
 ```
-[root@hdss7-132 ~]# wget https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 -O /usr/bin/cfssl
-[root@hdss7-132 ~]# wget https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 -O /usr/bin/cfssl-json
-[root@hdss7-132 ~]# wget https://pkg.cfssl.org/R1.2/cfssl-certsinfo_linux-amd64 -O /usr/bin/cfssl-certsinfo
-[root@hdss7-132 ~]# chmod +x /usr/bin/cfssl*
+hdss7-200
+wget https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 -O /usr/bin/cfssl
+wget https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 -O /usr/bin/cfssl-json
+wget https://pkg.cfssl.org/R1.2/cfssl-certsinfo_linux-amd64 -O /usr/bin/cfssl-certsinfo
+chmod +x /usr/bin/cfssl*
 [root@hdss7-132 ~]# which cfssl
 /usr/bin/cfssl
 [root@hdss7-132 ~]# which cfssl-json
