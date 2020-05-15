@@ -186,13 +186,14 @@ hostname: harbor.od.com
    port: 180
 harbor_admin_password: Harbor12345
 data_volume: /data/docker
+location: /data/harbor/logs
 #安装docker-compose，harbor基于单机编排
 yum install docker-compose -y
-[root@hdss7-132 harbor]# rpm -qa docker-compose
+[root@hdss7-200 harbor]# rpm -qa docker-compose
 docker-compose-1.18.0-4.el7.noarch
-[root@hdss7-132 harbor]# ./install.sh
-[root@hdss7-132 harbor]# yum install nginx -y  #使用nginx反代
-[root@hdss7-132 harbor]# vim /etc/nginx/conf.d/harbor.od.com.conf
+[root@hdss7-200 harbor]# ./install.sh
+[root@hdss7-200 harbor]# yum install nginx -y  #使用nginx反代
+[root@hdss7-200 harbor]# vim /etc/nginx/conf.d/harbor.od.com.conf
 server {
     listen       80;
     server_name  harbor.od.com;
@@ -203,7 +204,7 @@ server {
         proxy_pass http://127.0.0.1:180;
     }
 }
-[root@hdss7-132 harbor]# systemctl restart nginx
+[root@hdss7-200 harbor]# systemctl restart nginx
 hdss7-129上:
 [root@hdss7-129 ~]# vi /var/named/od.com.zone
 harbor             A    192.168.56.132
