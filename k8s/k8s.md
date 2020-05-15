@@ -158,7 +158,7 @@ curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
   "storage-driver": "overlay2",
   "insecure-registries": ["registry.access.redhat.com","quay.io","harbor.od.com"],		#添加harbor.od.com字段，把仓库设置为可信任
   "registry-mirrors": ["https://q2gr04ke.mirror.aliyuncs.com"],
-  "bip": "172.7.132.1/24",	#bip 取linux主机的ip后一位，方便管理
+  "bip": "172.7.200.1/24",	#bip 取linux主机的ip后一位，方便管理
   "exec-opts": ["native.cgroupdriver=systemd"],
   "live-restore": true
 }
@@ -181,7 +181,7 @@ drwx--x--x. 4 root root  28 May 11 12:06 containerd
 lrwxrwxrwx  1 root root  19 May 15 10:52 harbor -> /opt/harbor-v1.8.3/
 drwxr-xr-x  2 root root 100 May 15 10:51 harbor-v1.8.3
 drwxr-xr-x  2 root root  49 May 15 10:48 src
-[root@hdss7-132 harbor]# vim harbor.yml
+[root@hdss7-200 harbor]# vim harbor.yml
 hostname: harbor.od.com
    port: 180
 harbor_admin_password: Harbor12345
@@ -206,15 +206,15 @@ server {
 }
 [root@hdss7-200 harbor]# systemctl restart nginx
 hdss7-129上:
-[root@hdss7-129 ~]# vi /var/named/od.com.zone
-harbor             A    192.168.56.132
+[root@hdss7-11 ~]# vi /var/named/od.com.zone
+harbor             A    192.168.56.200
 ```
 浏览器打开http://harbor.od.com
 ![](https://github.com/Kingserch/Job-accumulation/blob/Kubernetes/images/harbor.png)
 ```
-[root@hdss7-132 conf.d]# docker pull nginx:1.7.9
-[root@hdss7-132 conf.d]# docker tag 84581e99d807 harbor.od.com/public/nginx:v1.7.9
-[root@hdss7-132 conf.d]# docker login harbor.od.com
+[root@hdss7-200 conf.d]# docker pull nginx:1.7.9
+[root@hdss7-200 conf.d]# docker tag 84581e99d807 harbor.od.com/public/nginx:v1.7.9
+[root@hdss7-200 conf.d]# docker login harbor.od.com
 Username: admin
 Password: 
 WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
@@ -222,7 +222,7 @@ Configure a credential helper to remove this warning. See
 https://docs.docker.com/engine/reference/commandline/login/#credentials-store
 
 Login Succeeded
-[root@hdss7-132 ~]# docker push harbor.od.com/public/nginx:v1.7.9
+[root@hdss7-200 ~]# docker push harbor.od.com/public/nginx:v1.7.9
 The push refers to repository [harbor.od.com/public/nginx]
 5f70bf18a086: Pushed 
 4b26ab29a475: Pushed 
@@ -237,7 +237,7 @@ v1.7.9: digest: sha256:b1f5935eb2e9e2ae89c0b3e2e148c19068d91ca502e857052f14db230
 
 #### 1)配置etcd证书
 ```
-[root@hdss7-132 certss]# vim /opt/certss/ca-config.json
+[root@hdss7-200 certss]# vim /opt/certss/ca-config.json
 {
     "signing": {
         "default": {
@@ -272,14 +272,14 @@ v1.7.9: digest: sha256:b1f5935eb2e9e2ae89c0b3e2e148c19068d91ca502e857052f14db230
         }
     }
 }
-[root@hdss7-132 certss]# vi etcd-peer-csr.json
+[root@hdss7-200 certss]# vi etcd-peer-csr.json
 {
     "CN": "k8s-etcd",
     "hosts": [
         "192.168.56.128",
         "192.168.56.129",
         "192.168.56.130",
-        "192.168.56.132"
+        "192.168.56.200"
     ],
     "key": {
         "algo": "rsa",
@@ -296,7 +296,7 @@ v1.7.9: digest: sha256:b1f5935eb2e9e2ae89c0b3e2e148c19068d91ca502e857052f14db230
     ]
 }
 #生产etcd证书和私钥
-[root@hdss7-132 certss]# cfssl gencerts -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=peer etcd-peer-csr.json |cfssl-json -bare etcd-peer
+[root@hdss7-200 certss]# cfssl gencerts -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=peer etcd-peer-csr.json |cfssl-json -bare etcd-peer
 2020/05/12 11:19:23 [INFO] generate received request
 2020/05/12 11:19:23 [INFO] received CSR
 2020/05/12 11:19:23 [INFO] generating key: rsa-2048
@@ -306,7 +306,7 @@ v1.7.9: digest: sha256:b1f5935eb2e9e2ae89c0b3e2e148c19068d91ca502e857052f14db230
 websites. For more information see the Baseline Requirements for the Issuance and Management
 of Publicly-Trusted certsificates, v.1.1.6, from the CA/Browser Forum (https://cabforum.org);
 specifically, section 10.2.3 ("Information Requirements").
-[root@hdss7-132 certss]# ll
+[root@hdss7-200 certss]# ll
 total 36
 -rw-r--r-- 1 root root  836 May 12 11:04 ca-config.json
 -rw-r--r-- 1 root root  993 May 11 16:53 ca.csr
@@ -463,9 +463,9 @@ total 884636
 ```
 #### 2)签发(client)证书(apiserver)
 
-##### 2.1)#在hdss7-132主机上
+##### 2.1)#在hdss7-200主机上
 ```
-[root@hdss7-132 certs]# vi  /opt/certss/client-csr.json
+[root@hdss7-200 certs]# vi  /opt/certss/client-csr.json
 
 {
     "CN": "k8s-node",
@@ -485,11 +485,11 @@ total 884636
         }
     ]
 }
-[root@hdss7-132 certs]# cfssl gencerts -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=client client-csr.json |cfssl-json -bare client
+[root@hdss7-200 certs]# cfssl gencerts -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=client client-csr.json |cfssl-json -bare client
 ```
 ##### 2.2)创建生成证书签名请求的(csr)的json文件
 ```
-[root@hdss7-132 certs]# vi /opt/certss/apiserver-csr.json
+[root@hdss7-200 certs]# vi /opt/certss/apiserver-csr.json
 
 {
     "CN": "k8s-apiserver",
@@ -503,7 +503,7 @@ total 884636
         "192.168.56.128",
         "192.168.56.129",
         "192.168.56.130",
-        "192.168.56.132"
+        "192.168.56.200"
     ],
     "key": {
         "algo": "rsa",
@@ -737,7 +737,7 @@ vrrp_instance VI_1 {
          chk_nginx
     }    
     virtual_ipaddress {
-        192.168.56.132
+        192.168.56.200
     }   
 } 
 [root@hdss7-128 ~]# systemctl start keepalived
@@ -771,7 +771,7 @@ vrrp_instance VI_1 {
                 chk_nginx
         }
         virtual_ipaddress {
-                192.168.56.132
+                192.168.56.200
         }
 }
 [root@hdss7-129 bin]# systemctl start keepalived
@@ -785,7 +785,7 @@ vrrp_instance VI_1 {
     link/ether 00:0c:29:ab:43:5d brd ff:ff:ff:ff:ff:ff
     inet 192.168.56.128/24 brd 192.168.56.255 scope global noprefixroute dynamic ens33
        valid_lft 1743sec preferred_lft 1743sec
-    inet 192.168.56.132/32 scope global ens33		#可以看到keepalived代理成功
+    inet 192.168.56.200/32 scope global ens33		#可以看到keepalived代理成功
        valid_lft forever preferred_lft forever
 .....
 [root@hdss7-128 ~]# nginx -s stop	#在keepal主上停掉nginx，nginx四层代理也就停了
@@ -796,7 +796,7 @@ vrrp_instance VI_1 {
     link/ether 00:0c:29:72:cb:12 brd ff:ff:ff:ff:ff:ff
     inet 192.168.56.129/24 brd 192.168.56.255 scope global noprefixroute dynamic ens33
        valid_lft 1359sec preferred_lft 1359sec
-    inet 192.168.56.132/32 scope global ens33		#可以看到飘过来了哦
+    inet 192.168.56.200/32 scope global ens33		#可以看到飘过来了哦
        valid_lft forever preferred_lft forever
 ...
 ```
@@ -876,7 +876,7 @@ stdout_events_enabled=false                                              ; emit 
 etcd-server-7-129                RUNNING   pid 1024, uptime 1:18:51
 kube-apiserver-7-129             RUNNING   pid 1909, uptime 1:18:27
 kube-controller-manager-7-129    RUNNING   pid 16376, uptime 0:01:00
-kube-scheduler-7-129             RUNNING   pid 16132, uptime 0:02:13
+kube-scheduler-7-129             RUNNING   pid 16200, uptime 0:02:13
 ```
 ##### 验证apiserver集群健康状态
 ```
@@ -893,7 +893,7 @@ etcd-2               Healthy   {"health": "true"}
 
 ##### 1)部署node节点服务(129-130),签发证书
 ```
-#在132机器上
+#在200机器上
 vim /opt/certs/kubelet-csr.json
 cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=server kubelet-csr.json | cfssl-json -bare kubelet
 #把认证好的证书kubelet.pem，kubelet-key.pem放在/opt/kubernetes/server/bin/certs目录下，私钥权限600
