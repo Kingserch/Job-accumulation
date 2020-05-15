@@ -237,11 +237,11 @@ v1.7.9: digest: sha256:b1f5935eb2e9e2ae89c0b3e2e148c19068d91ca502e857052f14db230
 
 #### 1)配置etcd证书
 ```
-[root@hdss7-200 certss]# vim /opt/certss/ca-config.json
+[root@hdss7-200 certs]# vim /opt/certs/ca-config.json
 {
     "signing": {
         "default": {
-            "expiry": "175200h"	#证书过期时间
+            "expiry": "175200h"
         },
         "profiles": {
             "server": {
@@ -252,7 +252,7 @@ v1.7.9: digest: sha256:b1f5935eb2e9e2ae89c0b3e2e148c19068d91ca502e857052f14db230
                     "server auth"
                 ]
             },
-            "client": {		#客户端
+            "client": {
                 "expiry": "175200h",
                 "usages": [
                     "signing",
@@ -260,7 +260,7 @@ v1.7.9: digest: sha256:b1f5935eb2e9e2ae89c0b3e2e148c19068d91ca502e857052f14db230
                     "client auth"
                 ]
             },
-            "peer": {			#互相通信
+            "peer": {
                 "expiry": "175200h",
                 "usages": [
                     "signing",
@@ -272,14 +272,14 @@ v1.7.9: digest: sha256:b1f5935eb2e9e2ae89c0b3e2e148c19068d91ca502e857052f14db230
         }
     }
 }
-[root@hdss7-200 certss]# vi etcd-peer-csr.json
+[root@hdss7-200 certs]# vim /opt/certs/etcd-peer-csr.json
 {
     "CN": "k8s-etcd",
     "hosts": [
-        "192.168.56.128",
-        "192.168.56.129",
-        "192.168.56.130",
-        "192.168.56.200"
+        "192.168.56.11",
+        "192.168.56.12",
+        "192.168.56.21",
+        "192.168.56.22"
     ],
     "key": {
         "algo": "rsa",
@@ -295,50 +295,33 @@ v1.7.9: digest: sha256:b1f5935eb2e9e2ae89c0b3e2e148c19068d91ca502e857052f14db230
         }
     ]
 }
+[root@hdss7-200 certs]# cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=peer etcd-peer-csr.json |cfssl-json -bare etcd-peer
+
 #生产etcd证书和私钥
-[root@hdss7-200 certss]# cfssl gencerts -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=peer etcd-peer-csr.json |cfssl-json -bare etcd-peer
-2020/05/12 11:19:23 [INFO] generate received request
-2020/05/12 11:19:23 [INFO] received CSR
-2020/05/12 11:19:23 [INFO] generating key: rsa-2048
-2020/05/12 11:19:23 [INFO] encoded CSR
-2020/05/12 11:19:23 [INFO] signed certsificate with serial number 65897943636016508687974124617311544054963979665
-2020/05/12 11:19:23 [WARNING] This certsificate lacks a "hosts" field. This makes it unsuitable for
-websites. For more information see the Baseline Requirements for the Issuance and Management
-of Publicly-Trusted certsificates, v.1.1.6, from the CA/Browser Forum (https://cabforum.org);
-specifically, section 10.2.3 ("Information Requirements").
-[root@hdss7-200 certss]# ll
+cfssl gencerts -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=peer etcd-peer-csr.json |cfssl-json -bare etcd-peer
+[root@hdss7-200 certs]# ll
 total 36
--rw-r--r-- 1 root root  836 May 12 11:04 ca-config.json
--rw-r--r-- 1 root root  993 May 11 16:53 ca.csr
--rw-r--r-- 1 root root  326 May 11 16:49 ca-csr.json
--rw------- 1 root root 1679 May 11 16:53 ca-key.pem
--rw-r--r-- 1 root root 1338 May 11 16:53 ca.pem
--rw-r--r-- 1 root root 1062 May 12 11:19 etcd-peer.csr
--rw-r--r-- 1 root root  383 May 12 11:11 etcd-peer-csr.json
--rw------- 1 root root 1679 May 12 11:19 etcd-peer-key.pem
--rw-r--r-- 1 root root 1424 May 12 11:19 etcd-peer.pem
+-rw-r--r-- 1 root root  836 May 15 11:24 ca-config.json
+-rw-r--r-- 1 root root  993 May 15 10:37 ca.csr
+-rw-r--r-- 1 root root  326 May 15 10:37 ca-csr.json
+-rw------- 1 root root 1679 May 15 10:37 ca-key.pem
+-rw-r--r-- 1 root root 1338 May 15 10:37 ca.pem
+-rw-r--r-- 1 root root 1062 May 15 11:25 etcd-peer.csr
+-rw-r--r-- 1 root root  379 May 15 11:25 etcd-peer-csr.json
+-rw------- 1 root root 1679 May 15 11:25 etcd-peer-key.pem
+-rw-r--r-- 1 root root 1424 May 15 11:25 etcd-peer.pem
 ```
 #### 2)部署etcd集群
 https://github.com/etcd-io/etcd/tags
 ```
-[root@hdss7-128 opt]# mkdir src
-[root@hdss7-128 opt]# cd src
-[root@hdss7-128 src]# useradd  -s /sbin/nologin -M etcd
-[root@hdss7-128 src]# id etcd
-uid=1001(etcd) gid=1001(etcd) groups=1001(etcd)
-[root@hdss7-128 src]# tar xvf etcd-v3.1.20-linux-amd64.tar.gz -C /opt/ 
-[root@hdss7-128 src]# cd /opt/
-[root@hdss7-128 opt]# ls
-containerd  etcd-v3.1.20-linux-amd64  src
-[root@hdss7-128 opt]# mv etcd-v3.1.20-linux-amd64/ etcd-v3.1.20
-[root@hdss7-128 opt]# ln -s /opt/etcd-v3.1.20/ /opt/etcd		#做个软连接方便以后升级
-[root@hdss7-128 opt]# ll
-total 0
-drwx--x--x. 4 root   root   28 May 11 12:06 containerd
-lrwxrwxrwx  1 root   root   18 May 12 11:41 etcd -> /opt/etcd-v3.1.20/
-drwxr-xr-x  3 478493 89939 123 Oct 11  2018 etcd-v3.1.20
-drwxr-xr-x  2 root   root   45 May 12 11:37 src
-[root@hdss7-128 opt]# cd etcd
+useradd  -s /sbin/nologin -M etcd
+mkdir /opt/src -p
+cd /opt/src
+tar xvf etcd-v3.1.20-linux-amd64.tar.gz -C /opt/ 
+cd /opt/
+mv etcd-v3.1.20-linux-amd64/ etcd-v3.1.20
+ln -s /opt/etcd-v3.1.20/ /opt/etcd		#做个软连接方便以后升级
+cd etcd
 [root@hdss7-128 etcd]# mkdir -p /opt/etcd/certss /data/etcd /data/logs/etcd-server
 [root@hdss7-128 etcd]# cd certs
 [root@hdss7-128 certs]# ll		#把etcd的证书和私钥放在这个目录下
