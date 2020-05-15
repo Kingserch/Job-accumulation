@@ -507,16 +507,15 @@ specifically, section 10.2.3 ("Information Requirements").
 ```
 ##### 2.3)把创建好的证书分发
 ```
-[root@hdss7-130 certs]# pwd
-/opt/kubernetes/server/bin/certs
-[root@hdss7-130 certs]# ll
+mkdir -p /opt/kubernetes/server/bin/certs
+[root@hdss7-21 certs]# ll
 total 24
--rw------- 1 root root 1679 May 12 17:16 apiserver-key.pem
--rw-r--r-- 1 root root 1594 May 12 17:16 apiserver.pem
--rw------- 1 root root 1679 May 11 16:53 ca-key.pem
--rw-r--r-- 1 root root 1338 May 11 16:53 ca.pem
--rw------- 1 root root 1679 May 12 17:06 client-key.pem
--rw-r--r-- 1 root root 1363 May 12 17:06 client.pem
+-rw------- 1 root root 1675 May 15 12:54 apiserver-key.pem
+-rw-r--r-- 1 root root 1586 May 15 12:54 apiserver.pem
+-rw------- 1 root root 1679 May 15 10:37 ca-key.pem
+-rw-r--r-- 1 root root 1338 May 15 10:37 ca.pem
+-rw------- 1 root root 1679 May 15 12:28 client-key.pem
+-rw-r--r-- 1 root root 1363 May 15 12:28 client.pem
 ```
 ##### 2.4)创建apiserver需要的配置文件
 ```
