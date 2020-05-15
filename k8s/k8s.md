@@ -636,17 +636,10 @@ stdout_events_enabled=false                                     ; emit events on
 ```
 ##### 验证
 ```
-[root@hdss7-128 certs]# supervisorctl status
-etcd-server-7-128                RUNNING   pid 22474, uptime 0:07:25
-kube-apiserver-7-128             RUNNING   pid 22473, uptime 0:07:25
-[root@hdss7-129 bin]# supervisorctl status
-etcd-server-7-129                RUNNING   pid 24018, uptime 0:10:53
-kube-apiserver-7-129             RUNNING   pid 24017, uptime 0:10:53
-[root@hdss7-129 bin]#
-[root@hdss7-130 conf]# supervisorctl status
-etcd-server-7-130                RUNNING   pid 24014, uptime 0:15:44
-kube-apiserver-7-130             RUNNING   pid 24015, uptime 0:15:44
-[root@hdss7-130 conf]# netstat -lntup |grep api	 
+[root@hdss7-22 bin]# supervisorctl status
+etcd-server-7-22                 RUNNING   pid 3442, uptime 0:00:40
+kube-apiserver-7-22              RUNNING   pid 3441, uptime 0:00:40
+[root@hdss7-21 conf]# netstat -lntup |grep api	 
 tcp        0      0 127.0.0.1:8080          0.0.0.0:*               LISTEN      24017/./kube-apiser 	#监听本地回环地址上的8080端口
 tcp6       0      0 :::6443                 :::*                    LISTEN      24017/./kube-apiser 	#监听6443端口
 ```
