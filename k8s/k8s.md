@@ -866,10 +866,36 @@ etcd-0               Healthy   {"health": "true"}
 ```
 + ### 部署运算节点服务kubelet
 
-##### 1)部署node节点服务(129-130),签发证书
+##### 1)部署node节点服务(21-22),签发证书
 ```
 #在200机器上
-vim /opt/certs/kubelet-csr.json
+[root@hdss7-200 certs]# vim /opt/certs/kubelet-csr.json
+
+{
+    "CN": "k8s-kubelet",
+    "hosts": [
+    "127.0.0.1",
+    "192.168.56.10",
+    "192.168.56.21",
+    "192.168.56.22",
+    "192.168.56.12",
+    "192.168.56.11"
+    ],
+    "key": {
+        "algo": "rsa",
+        "size": 2048
+    },
+    "names": [
+        {
+            "C": "CN",
+            "ST": "beijing",
+            "L": "beijing",
+            "O": "od",
+            "OU": "ops"
+        }
+    ]
+}
+
 cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=server kubelet-csr.json | cfssl-json -bare kubelet
 #把认证好的证书kubelet.pem，kubelet-key.pem放在/opt/kubernetes/server/bin/certs目录下，私钥权限600
 ```
