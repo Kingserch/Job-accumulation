@@ -110,24 +110,16 @@ wget https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 -O /usr/bin/cfssl
 wget https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 -O /usr/bin/cfssl-json
 wget https://pkg.cfssl.org/R1.2/cfssl-certsinfo_linux-amd64 -O /usr/bin/cfssl-certsinfo
 chmod +x /usr/bin/cfssl*
-[root@hdss7-132 ~]# which cfssl
-/usr/bin/cfssl
-[root@hdss7-132 ~]# which cfssl-json
-/usr/bin/cfssl-json
-[root@hdss7-132 ~]# which cfssl-certsinfo
-/usr/bin/cfssl-certsinfo
-[root@hdss7-132 ~]# mkdir -p /opt/certss
-[root@hdss7-132 ~]# cd /opt/certss/
-[root@hdss7-132 certss]# pwd
-/opt/certss
-[root@hdss7-132 certss]# vi ca-csr.json
+[root@hdss7-200 ~]# mkdir -p /opt/certs
+[root@hdss7-200 ~]# cd /opt/certs/
+vi ca-csr.json
 {
     "CN": "kingEdu",
     "hosts": [
     ],
     "key": {
-        "algo": "rsa",	#rsa加密算法
-        "size": 2048	#长度2048
+        "algo": "rsa",
+        "size": 2048
     },
     "names": [
         {
@@ -139,22 +131,22 @@ chmod +x /usr/bin/cfssl*
         }
     ],
     "ca": {
-        "expiry": "175200h"		#证书过期时间
+        "expiry": "175200h"
     }
 }
-[root@hdss7-132 certss]# cfssl gencerts -initca ca-csr.json | cfssl-json -bare ca
-2020/05/11 16:53:28 [INFO] generating a new CA key and certsificate from CSR
-2020/05/11 16:53:28 [INFO] generate received request
-2020/05/11 16:53:28 [INFO] received CSR
-2020/05/11 16:53:28 [INFO] generating key: rsa-2048
-2020/05/11 16:53:28 [INFO] encoded CSR
-2020/05/11 16:53:28 [INFO] signed certsificate with serial number 217885965496432947483112196286183500766512119525
-[root@hdss7-132 certss]# ll
+[root@hdss7-200 certs]# cfssl gencert -initca ca-csr.json | cfssl-json -bare ca
+2020/05/15 10:37:52 [INFO] generating a new CA key and certificate from CSR
+2020/05/15 10:37:52 [INFO] generate received request
+2020/05/15 10:37:52 [INFO] received CSR
+2020/05/15 10:37:52 [INFO] generating key: rsa-2048
+2020/05/15 10:37:52 [INFO] encoded CSR
+2020/05/15 10:37:52 [INFO] signed certificate with serial number 388036735966994309569210230507424560707123263181
+[root@hdss7-200 certs]# ll
 total 16
--rw-r--r-- 1 root root  993 May 11 16:53 ca.csr
--rw-r--r-- 1 root root  326 May 11 16:49 ca-csr.json
--rw------- 1 root root 1679 May 11 16:53 ca-key.pem		#根证书的私钥
--rw-r--r-- 1 root root 1338 May 11 16:53 ca.pem			#根证书的私钥
+-rw-r--r-- 1 root root  993 May 15 10:37 ca.csr
+-rw-r--r-- 1 root root  326 May 15 10:37 ca-csr.json
+-rw------- 1 root root 1679 May 15 10:37 ca-key.pem
+-rw-r--r-- 1 root root 1338 May 15 10:37 ca.pem
 ```
 + ### 安装docker
 ```
