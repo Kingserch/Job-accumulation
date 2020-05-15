@@ -665,7 +665,7 @@ stream {
 ##### 在128 129机器上安装keepalived
 ```
 yum install keepalived -y		#128,129都安装
-[root@hdss7-128 etcd]# vim /etc/keepalived/check_port.sh	#129也添加脚本
+[root@hdss7-11 ~]# vim /etc/keepalived/check_port.sh
 #!/bin/bash
 CHK_PORT=$1
 if [ -n "$CHK_PORT" ];then
@@ -677,16 +677,14 @@ if [ -n "$CHK_PORT" ];then
 else
         echo "Check Port Cant Be Empty!"
 fi
-[root@hdss7-128 etcd]# chmod +x /etc/keepalived/check_port.sh
-```
 ##### keepalived 主:
 ```
-[root@hdss7-128 ~]# vim /etc/keepalived/keepalived.conf 
+[root@hdss7-11 ~]# vim /etc/keepalived/keepalived.conf 
 
 ! Configuration File for keepalived
 
 global_defs {
-   router_id 192.168.56.128
+   router_id 192.168.56.11
 
 }
 
@@ -701,7 +699,7 @@ vrrp_instance VI_1 {
     virtual_router_id 251
     priority 100
     advert_int 1
-    mcast_src_ip 192.168.56.128
+    mcast_src_ip 192.168.56.11
     nopreempt	#非强占式，这样配置vip不会自动回到keepalived上，
     
     authentication {
@@ -712,19 +710,19 @@ vrrp_instance VI_1 {
          chk_nginx
     }    
     virtual_ipaddress {
-        192.168.56.200
+        192.168.56.10
     }   
 } 
-[root@hdss7-128 ~]# systemctl start keepalived
-[root@hdss7-128 ~]# systemctl enable  keepalived
+systemctl start keepalived
+systemctl enable  keepalived
 ```
 ##### keepalived从:
 ```
-[root@hdss7-129 bin]# vim  /etc/keepalived/keepalived.conf 
+[root@hdss7-12 bin]# vim  /etc/keepalived/keepalived.conf 
 
 ! Configuration File for keepalived
 global_defs {
-        router_id 192.168.56.129
+        router_id 192.168.56.122
 }
 vrrp_script chk_nginx {
         script "/etc/keepalived/check_port.sh 7443"
@@ -735,7 +733,7 @@ vrrp_instance VI_1 {
         state BACKUP
         interface ens33
         virtual_router_id 251
-        mcast_src_ip 192.168.56.129
+        mcast_src_ip 192.168.56.12
         priority 90
         advert_int 1
         authentication {
@@ -746,34 +744,35 @@ vrrp_instance VI_1 {
                 chk_nginx
         }
         virtual_ipaddress {
-                192.168.56.200
+                192.168.56.10
         }
 }
-[root@hdss7-129 bin]# systemctl start keepalived
-[root@hdss7-129 bin]# systemctl enable  keepalived
+systemctl start keepalived
+systemctl enable  keepalived
 ```
 ##### 验证keepalived代理是否成功
 ```
-[root@hdss7-128 ~]# ip add		#在keepalived主上验证
-...
-2: ens33: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
-    link/ether 00:0c:29:ab:43:5d brd ff:ff:ff:ff:ff:ff
-    inet 192.168.56.128/24 brd 192.168.56.255 scope global noprefixroute dynamic ens33
-       valid_lft 1743sec preferred_lft 1743sec
-    inet 192.168.56.200/32 scope global ens33		#可以看到keepalived代理成功
+[root@hdss7-11 ~]# ip add
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
        valid_lft forever preferred_lft forever
-.....
-[root@hdss7-128 ~]# nginx -s stop	#在keepal主上停掉nginx，nginx四层代理也就停了
-[root@hdss7-128 ~]# netstat -lnutp|grep 7443
-[root@hdss7-129 /]# ip add		#在keepalived从上查看
-...
-2: ens33: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
-    link/ether 00:0c:29:72:cb:12 brd ff:ff:ff:ff:ff:ff
-    inet 192.168.56.129/24 brd 192.168.56.255 scope global noprefixroute dynamic ens33
-       valid_lft 1359sec preferred_lft 1359sec
-    inet 192.168.56.200/32 scope global ens33		#可以看到飘过来了哦
+    inet6 ::1/128 scope host 
        valid_lft forever preferred_lft forever
-...
+2: ens33: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 00:0c:29:85:05:bb brd ff:ff:ff:ff:ff:ff
+    inet 192.168.56.11/24 brd 192.168.56.255 scope global noprefixroute ens33
+       valid_lft forever preferred_lft forever
+    inet 192.168.56.10/32 scope global ens33			#可以看到10
+       valid_lft forever preferred_lft forever
+    inet6 fe80::bacb:6a60:105d:fffa/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+    inet6 fe80::6428:9d44:5bfa:6519/64 scope link tentative noprefixroute dadfailed 
+       valid_lft forever preferred_lft forever
+3: docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default 
+    link/ether 02:42:37:55:44:34 brd ff:ff:ff:ff:ff:ff
+    inet 172.7.68.37/24 brd 172.7.68.255 scope global docker0
+       valid_lft forever preferred_lft forever
 ```
 ##### 在129和130机器上
 ```
