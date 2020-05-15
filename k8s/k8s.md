@@ -467,7 +467,6 @@ specifically, section 10.2.3 ("Information Requirements").
 ##### 2.2)创建生成证书签名请求的(csr)的json文件
 ```
 [root@hdss7-200 certs]# vi /opt/certss/apiserver-csr.json
-
 {
     "CN": "k8s-apiserver",
     "hosts": [
@@ -477,10 +476,9 @@ specifically, section 10.2.3 ("Information Requirements").
         "kubernetes.default.svc",
         "kubernetes.default.svc.cluster",
         "kubernetes.default.svc.cluster.local",
-        "192.168.56.128",
-        "192.168.56.129",
-        "192.168.56.130",
-        "192.168.56.200"
+        "192.168.56.10",
+        "192.168.56.21",
+        "192.168.56.22"
     ],
     "key": {
         "algo": "rsa",
