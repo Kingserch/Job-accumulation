@@ -494,6 +494,16 @@ specifically, section 10.2.3 ("Information Requirements").
         }
     ]
 }
+[root@hdss7-200 certs]#  cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=server apiserver-csr.json |cfssl-json -bare apiserver
+2020/05/15 12:54:58 [INFO] generate received request
+2020/05/15 12:54:58 [INFO] received CSR
+2020/05/15 12:54:58 [INFO] generating key: rsa-2048
+2020/05/15 12:54:58 [INFO] encoded CSR
+2020/05/15 12:54:58 [INFO] signed certificate with serial number 11143975357037667623080709510948988507168459320
+2020/05/15 12:54:58 [WARNING] This certificate lacks a "hosts" field. This makes it unsuitable for
+websites. For more information see the Baseline Requirements for the Issuance and Management
+of Publicly-Trusted Certificates, v.1.1.6, from the CA/Browser Forum (https://cabforum.org);
+specifically, section 10.2.3 ("Information Requirements").
 ```
 ##### 2.3)把创建好的证书发到hdss7-130主机上
 ```
