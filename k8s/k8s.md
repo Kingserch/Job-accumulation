@@ -791,8 +791,8 @@ vim /opt/kubernetes/server/bin/kube-controller-manager.sh
 
 chmod +x /opt/kubernetes/server/bin/kube-controller-manager.sh
 mkdir -p /data/logs/kubernetes/kube-controller-manager
-vim /etc/supervisord.d/kube-conntroller-manager.ini
-[program:kube-controller-manager-7-130]
+[root@hdss7-21 ~]# cat  /etc/supervisord.d/kube-conntroller-manager.ini 
+[program:kube-controller-manager-7-21]
 command=/opt/kubernetes/server/bin/kube-controller-manager.sh                     ; the program (relative uses PATH, can take args)
 numprocs=1                                                                        ; number of processes copies to start (def 1)
 directory=/opt/kubernetes/server/bin                                              ; directory to cwd to before exec (def no cwd)
@@ -827,7 +827,7 @@ chmod +x /opt/kubernetes/server/bin/kube-scheduler.sh
 mkdir -p /data/logs/kubernetes/kube-scheduler
 
 vim /etc/supervisord.d/kube-scheduler.ini
-[program:kube-scheduler-7-130]
+[program:kube-scheduler-7-21]
 command=/opt/kubernetes/server/bin/kube-scheduler.sh                     ; the program (relative uses PATH, can take args)
 numprocs=1                                                               ; number of processes copies to start (def 1)
 directory=/opt/kubernetes/server/bin                                     ; directory to cwd to before exec (def no cwd)
@@ -846,22 +846,23 @@ stdout_logfile_backups=4                                                 ; # of 
 stdout_capture_maxbytes=1MB                                              ; number of bytes in 'capturemode' (default 0)
 stdout_events_enabled=false                                              ; emit events on stdout writes (default false)
 
-[root@hdss7-129 kubernetes]# supervisorctl status
-etcd-server-7-129                RUNNING   pid 1024, uptime 1:18:51
-kube-apiserver-7-129             RUNNING   pid 1909, uptime 1:18:27
-kube-controller-manager-7-129    RUNNING   pid 16376, uptime 0:01:00
-kube-scheduler-7-129             RUNNING   pid 16200, uptime 0:02:13
+[root@hdss7-21 ~]# supervisorctl status
+etcd-server-7-21                 RUNNING   pid 4112, uptime 0:02:50
+kube-apiserver-7-21              RUNNING   pid 4113, uptime 0:02:50
+kube-controller-manager-7-21     RUNNING   pid 4199, uptime 0:00:32
+kube-scheduler-7-22              RUNNING   pid 4114, uptime 0:02:50
+[root@hdss7-21 ~]#
 ```
 ##### 验证apiserver集群健康状态
 ```
-`ln -s /opt/kubernetes/server/bin/kubectl /usr/bin/kubectl`
-[root@hdss7-130 /]# kubectl get cs
+ln -s /opt/kubernetes/server/bin/kubectl /usr/bin/kubectl
+[root@hdss7-22 ~]# kubectl get cs
 NAME                 STATUS    MESSAGE              ERROR
-controller-manager   Healthy   ok                   
 scheduler            Healthy   ok                   
+controller-manager   Healthy   ok                   
+etcd-2               Healthy   {"health": "true"}   
 etcd-1               Healthy   {"health": "true"}   
-etcd-0               Healthy   {"health": "true"}   
-etcd-2               Healthy   {"health": "true"}  
+etcd-0               Healthy   {"health": "true"} 
 ```
 + ### 部署运算节点服务kubelet
 
