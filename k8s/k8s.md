@@ -519,10 +519,8 @@ total 24
 ```
 ##### 2.4)创建apiserver需要的配置文件
 ```
-[root@hdss7-130 bin]# mkdir conf & cd conf
-[root@hdss7-130 conf]# pwd
-/opt/kubernetes/server/bin/conf
-[root@hdss7-130 conf]# vim /opt/kubernetes/server/bin/conf/audit.yaml	#创建审计策略文件
+mkdir -p /opt/kubernetes/server/bin/conf
+[root@hdss7-21 conf]# vim /opt/kubernetes/server/bin/conf/audit.yaml	#创建审计策略文件
 apiVersion: audit.k8s.io/v1beta1 # This is required.
 kind: Policy
 # Don't generate audit events for all requests in RequestReceived stage.
