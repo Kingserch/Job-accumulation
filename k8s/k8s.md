@@ -645,14 +645,14 @@ tcp6       0      0 :::6443                 :::*                    LISTEN      
 ```
 + ### nginx四层反向代理
 
-##### 在128 129机器上安装nginx
+##### 在11 12机器上安装nginx
 ```
 yum install nginx -y
-[root@hdss7-128 etcd]# vim /etc/nginx/nginx.conf #在nginx主配置文件最后配置以下字段
-[root@hdss7-129 bin]# vim /etc/nginx/nginx.conf	#在nginx主配置文件最后配置以下字段
+vim /etc/nginx/nginx.conf #在nginx主配置文件最后配置以下字段
 stream {
     upstream kube-apiserver {
-        server 192.168.56.130:6443     max_fails=3 fail_timeout=30s;
+        server 192.168.56.21:6443     max_fails=3 fail_timeout=30s;
+        server 192.168.56.22:6443     max_fails=3 fail_timeout=30s;
     }
     server {
         listen 7443;
@@ -661,6 +661,7 @@ stream {
         proxy_pass kube-apiserver;
     }
 }
+
 ```
 ##### 在128 129机器上安装keepalived
 ```
