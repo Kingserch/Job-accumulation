@@ -321,9 +321,8 @@ tar xvf etcd-v3.1.20-linux-amd64.tar.gz -C /opt/
 cd /opt/
 mv etcd-v3.1.20-linux-amd64/ etcd-v3.1.20
 ln -s /opt/etcd-v3.1.20/ /opt/etcd		#做个软连接方便以后升级
-cd etcd
-mkdir -p /opt/etcd/certss /data/etcd /data/logs/etcd-server
-cd certs
+mkdir -p /opt/etcd/certs /data/etcd /data/logs/etcd-server
+cd /opt/etcd/certs/
 [root@hdss7-12 certs]# ll	#把etcd的证书和私钥放在这个目录下
 total 12
 -rw-r--r-- 1 root root 1338 May 15 10:37 ca.pem
