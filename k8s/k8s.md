@@ -351,7 +351,6 @@ total 12
        --peer-client-cert-auth \
        --peer-trusted-ca-file ./certs/ca.pem \
        --log-output stdout
-[root@hdss7-128 etcd]# chmod +x etcd-server-startup.sh 
 #更改属主
 chown -R etcd:etcd /opt/etcd-v3.1.20/
 chown -R etcd:etcd /data/etcd/
