@@ -661,7 +661,6 @@ stream {
         proxy_pass kube-apiserver;
     }
 }
-
 ```
 ##### 在128 129机器上安装keepalived
 ```
