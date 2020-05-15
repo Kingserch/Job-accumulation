@@ -897,7 +897,7 @@ etcd-0               Healthy   {"health": "true"}
 }
 
 cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=server kubelet-csr.json | cfssl-json -bare kubelet
-#把认证好的证书kubelet.pem，kubelet-key.pem放在/opt/kubernetes/server/bin/certs目录下，私钥权限600
+#把认证好的证书kubelet.pem，kubelet-key.pem放在/opt/kubernetes/server/bin/certs目录下，私钥权限600(21-22主机上)
 ```
 ##### 2)创建配置(/opt/kubernetes/server/bin/conf)
 ##### 2.1)set-cluster
