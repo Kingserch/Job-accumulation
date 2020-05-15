@@ -151,8 +151,8 @@ total 16
 + ### 安装docker
 ```
 curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
-#每台机器都安装docker
-[root@hdss7-132 docker]# cat daemon.json
+#在21 22 200上安装docker
+[root@hdss7-200 docker]# cat daemon.json
 {
   "graph": "/data/docker",
   "storage-driver": "overlay2",
@@ -163,24 +163,24 @@ curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
   "live-restore": true
 }
 https://github.com/goharbor/harbor  #使用harbor搭建docker私有仓库
-[root@hdss7-132]# mkdir /opt/src -p
-[root@hdss7-132 src]# pwd
+[root@hdss7-200]# mkdir /opt/src -p
+[root@hdss7-200 src]# pwd
 /opt/src
-[root@hdss7-132 src]# tar xvf harbor-offline-installer-v1.8.3.tgz -C/opt 
+[root@hdss7-200 src]# tar xvf harbor-offline-installer-v1.8.3.tgz -C/opt 
 harbor/harbor.v1.8.3.tar.gz
 harbor/prepare
 harbor/LICENSE
 harbor/install.sh
 harbor/harbor.yml
-[root@hdss7-132 opt]# mv harbor/ harbor-v1.8.3
-[root@hdss7-132 opt]# ln -s /opt/harbor-v1.8.3/ /opt/harbor	#软连接到/opt/src下，方便以后升级
-[root@hdss7-132 opt]# ll
+[root@hdss7-200 opt]# mv harbor/ harbor-v1.8.3
+[root@hdss7-200 opt]# ln -s /opt/harbor-v1.8.3/ /opt/harbor	#软连接到/opt/src下，方便以后升级
+[root@hdss7-200 opt]# ll
 total 0
-drwxr-xr-x  2 root root  71 May 11 16:53 certss
+drwxr-xr-x  2 root root  71 May 15 10:37 certs
 drwx--x--x. 4 root root  28 May 11 12:06 containerd
-lrwxrwxrwx  1 root root  19 May 11 17:37 harbor -> /opt/harbor-v1.8.3/
-drwxr-xr-x  2 root root 100 May 11 17:36 harbor-v1.8.3
-drwxr-xr-x  2 root root  49 May 11 17:34 src
+lrwxrwxrwx  1 root root  19 May 15 10:52 harbor -> /opt/harbor-v1.8.3/
+drwxr-xr-x  2 root root 100 May 15 10:51 harbor-v1.8.3
+drwxr-xr-x  2 root root  49 May 15 10:48 src
 [root@hdss7-132 harbor]# vim harbor.yml
 hostname: harbor.od.com
    port: 180
