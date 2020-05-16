@@ -929,7 +929,7 @@ kubectl config use-context myk8s-context --kubeconfig=kubelet.kubeconfig
 ```
 ##### 2.5)创建
 ```
-[root@hdss7-130 conf]# vim /opt/kubernetes/server/bin/conf/k8s-node.yaml
+vim /opt/kubernetes/server/bin/conf/k8s-node.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
@@ -942,17 +942,17 @@ subjects:
 - apiGroup: rbac.authorization.k8s.io
   kind: User
   name: k8s-node
-[root@hdss7-129 conf]# kubectl create -f k8s-node.yaml 
+[root@hdss7-21 conf]#  kubectl create -f k8s-node.yaml
 clusterrolebinding.rbac.authorization.k8s.io/k8s-node created
-[root@hdss7-129 conf]# kubectl get clusterrolebinding k8s-node -o yaml
+[root@hdss7-21 conf]#  kubectl get clusterrolebinding k8s-node -o yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  creationTimestamp: "2020-05-13T06:26:32Z"
+  creationTimestamp: "2020-05-15T08:54:28Z"
   name: k8s-node
-  resourceVersion: "16968"
+  resourceVersion: "2491"
   selfLink: /apis/rbac.authorization.k8s.io/v1/clusterrolebindings/k8s-node
-  uid: d66c735e-6b50-4a15-a785-ee1e1fb47b1a
+  uid: d94d0520-883f-41c4-943a-0e9206b491ac
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -961,7 +961,6 @@ subjects:
 - apiGroup: rbac.authorization.k8s.io
   kind: User
   name: k8s-node
-
 ```
 ##### 3)准备pause基础镜像
 
@@ -976,9 +975,9 @@ docker push harbor.od.com/public/pause:latest
 
 ##### 4)创建kubelet的启动脚本
 
-##### 4.1)创建129-130主机上启动脚本
+##### 4.1)创建21-22主机上启动脚本
 ```
-[root@hdss7-130 conf]# vim /opt/kubernetes/server/bin/kubelet.sh
+[root@hdss7-21 conf]# vim /opt/kubernetes/server/bin/kubelet.sh
 #!/bin/sh
 ./kubelet \
   --anonymous-auth=false \		#不允许匿名登录，必须经过apiserver才能指挥kublet干活
@@ -1004,7 +1003,7 @@ chmod +x  /opt/kubernetes/server/bin/kubelet.sh
 ```
 ##### 4.2)创建supervisor配置
 ```
-[root@hdss7-130 conf]# vim /etc/supervisord.d/kube-kubelet.ini
+[root@hdss7-21 conf]# vim /etc/supervisord.d/kube-kubelet.ini
 [program:kube-kubelet-7-130]
 command=/opt/kubernetes/server/bin/kubelet.sh     ; the program (relative uses PATH, can take args)
 numprocs=1                                        ; number of processes copies to start (def 1)
