@@ -677,6 +677,7 @@ if [ -n "$CHK_PORT" ];then
 else
         echo "Check Port Cant Be Empty!"
 fi
+```
 ##### keepalived 主:
 ```
 [root@hdss7-11 ~]# vim /etc/keepalived/keepalived.conf 
