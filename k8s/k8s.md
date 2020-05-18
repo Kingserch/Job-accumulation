@@ -1005,7 +1005,7 @@ chmod +x  /opt/kubernetes/server/bin/kubelet.sh
 ##### 4.2)创建supervisor配置
 ```
 [root@hdss7-21 conf]# vim /etc/supervisord.d/kube-kubelet.ini
-[program:kube-kubelet-7-130]
+[program:kube-kubelet-7-21]
 command=/opt/kubernetes/server/bin/kubelet.sh     ; the program (relative uses PATH, can take args)
 numprocs=1                                        ; number of processes copies to start (def 1)
 directory=/opt/kubernetes/server/bin              ; directory to cwd to before exec (def no cwd)
@@ -1023,10 +1023,10 @@ stdout_logfile_maxbytes=64MB                      ; max # logfile bytes b4 rotat
 stdout_logfile_backups=4                          ; # of stdout logfile backups (default 10)
 stdout_capture_maxbytes=1MB                       ; number of bytes in 'capturemode' (default 0)
 stdout_events_enabled=false                       ; emit events on stdout writes (default false)
-[root@hdss7-130 bin]# supervisorctl status
-etcd-server-7-130                STARTING  
-kube-apiserver-7-130             STARTING  
-kube-controller-manager-7-130    STARTING  
-kube-kubelet-7-130               STARTING  
-kube-scheduler-7-130             STARTING 
+[root@hdss7-21 bin]# supervisorctl status
+etcd-server-7-21                STARTING  
+kube-apiserver-7-21             STARTING  
+kube-controller-manager-7-21    STARTING  
+kube-kubelet-7-21               STARTING  
+kube-scheduler-7-21             STARTING 
 ```
