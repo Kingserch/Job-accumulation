@@ -991,7 +991,7 @@ docker push harbor.od.com/public/pause:latest
   --client-ca-file ./certs/ca.pem \
   --tls-cert-file ./certs/kubelet.pem \
   --tls-private-key-file ./certs/kubelet-key.pem \
-  --hostname-override hdss7-130.host.com \		#hostname-override要根据主机的名字来改
+  --hostname-override hdss7-21.host.com \		#hostname-override要根据主机的名字来改
   --image-gc-high-threshold 20 \
   --image-gc-low-threshold 10 \
   --kubeconfig ./conf/kubelet.kubeconfig \
