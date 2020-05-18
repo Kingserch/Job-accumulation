@@ -589,7 +589,7 @@ rules:
     # generate an audit event in RequestReceived.
     omitStages:
       - "RequestReceived"
-[root@hdss7-130 bin]# vim /opt/kubernetes/server/bin/kube-apiserver.sh	#创建启动apiserver脚本
+[root@hdss7-21 bin]# vim /opt/kubernetes/server/bin/kube-apiserver.sh	#创建启动apiserver脚本
 #!/bin/bash
 ./kube-apiserver \
   --apiserver-count 2 \
