@@ -928,7 +928,7 @@ kubectl config set-context myk8s-context \
 ```
 kubectl config use-context myk8s-context --kubeconfig=kubelet.kubeconfig
 ```
-##### 2.5)创建
+##### 2.5)创建k8s-node.yml资源文件
 ```
 vim /opt/kubernetes/server/bin/conf/k8s-node.yaml
 apiVersion: rbac.authorization.k8s.io/v1
