@@ -8,6 +8,7 @@
     + [配置nginx反向代理L4,keepalived反向代理](#nginx四层反向代理)
 	+ [部署主控制节点控制器和调度控制器服务](#在129和130机器上)
 	+ [部署运算节点服务kubelet](#部署运算节点服务kubelet)
+	+ [部署kube-proxy](#部署kube-proxy)
 + ### 环境准备
 `yum install epel-release -y`   
 `yum install wget net-tools telnet tree nmap sysstat lrzsz dos2unix bind-utils -y`  
@@ -1034,3 +1035,5 @@ NAME                STATUS   ROLES         AGE   VERSION
 hdss7-21.host.com   Ready    master,node   90m   v1.15.2
 hdss7-22.host.com   Ready    master,node   90m   v1.15.2
 ```
++ ### 部署kube-proxy
+
