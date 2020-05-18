@@ -1024,9 +1024,13 @@ stdout_logfile_backups=4                          ; # of stdout logfile backups 
 stdout_capture_maxbytes=1MB                       ; number of bytes in 'capturemode' (default 0)
 stdout_events_enabled=false                       ; emit events on stdout writes (default false)
 [root@hdss7-21 bin]# supervisorctl status
-etcd-server-7-21                STARTING  
-kube-apiserver-7-21             STARTING  
-kube-controller-manager-7-21    STARTING  
-kube-kubelet-7-21               STARTING  
-kube-scheduler-7-21             STARTING 
+etcd-server-7-21                 RUNNING   pid 24175, uptime 0:13:20
+kube-apiserver-7-21              RUNNING   pid 24177, uptime 0:13:20
+kube-controller-manager-7-21     RUNNING   pid 24172, uptime 0:13:20
+kube-kubelet-7-21                RUNNING   pid 24173, uptime 0:13:20
+kube-scheduler-7-22              RUNNING   pid 24179, uptime 0:13:20
+[root@hdss7-21 bin]# kubectl get nodes
+NAME                STATUS   ROLES         AGE   VERSION
+hdss7-21.host.com   Ready    master,node   90m   v1.15.2
+hdss7-22.host.com   Ready    master,node   90m   v1.15.2
 ```
