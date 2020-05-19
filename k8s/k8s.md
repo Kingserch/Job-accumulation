@@ -1036,4 +1036,62 @@ hdss7-21.host.com   Ready    master,node   90m   v1.15.2
 hdss7-22.host.com   Ready    master,node   90m   v1.15.2
 ```
 + ### 部署kube-proxy
+```
+# 在200机器上
+vim /opt/certs/kube-proxy-csr.json
+{
+    "CN": "system:kube-proxy",
+    "key": {
+        "algo": "rsa",
+        "size": 2048
+    },
+    "names": [
+        {
+            "C": "CN",
+            "ST": "beijing",
+            "L": "beijing",
+            "O": "od",
+            "OU": "ops"
+        }
+    ]
+}
+
+cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=client kube-proxy-csr.json |cfssl-json -bare kube-proxy-client
+#分发证书(kube-proxy-client.pem和kube-proxy-client-key.pem)到21 22 主机上，然后在21 22 主机conf目录下
+conf]# kubectl config set-cluster myk8s \
+  --certificate-authority=/opt/kubernetes/server/bin/certs/ca.pem \
+  --embed-certs=true \
+  --server=https://192.168.56.10:7443 \
+  --kubeconfig=kube-proxy.kubeconfig
+  
+conf]# kubectl config set-credentials kube-proxy \
+  --client-certificate=/opt/kubernetes/server/bin/certs/kube-proxy-client.pem \
+  --client-key=/opt/kubernetes/server/bin/certs/kube-proxy-client-key.pem \
+  --embed-certs=true \
+  --kubeconfig=kube-proxy.kubeconfig
+  
+conf]# kubectl config set-context myk8s-context \
+  --cluster=myk8s \
+  --user=kube-proxy \
+  --kubeconfig=kube-proxy.kubeconfig
+  
+conf]# kubectl config use-context myk8s-context --kubeconfig=kube-proxy.kubeconfig
+```
+#### 加载ipvs模块
+```
+[root@hdss7-21 ~]# lsmod |grep ip_vs
+[root@hdss7-21 ~]# vi ipvs.sh
+#!/bin/bash
+ipvs_mods_dir="/usr/lib/modules/$(uname -r)/kernel/net/netfilter/ipvs"
+for i in $(ls $ipvs_mods_dir|grep -o "^[^.]*")
+do
+  /sbin/modinfo -F filename $i &>/dev/null
+  if [ $? -eq 0 ];then
+    /sbin/modprobe $i
+  fi
+done
+[root@hdss7-21 ~]# chmod +x ipvs.sh 
+[root@hdss7-21 ~]# ./ipvs.sh 
+[root@hdss7-21 ~]# lsmod |grep ip_vs
+```
 
