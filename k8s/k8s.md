@@ -6,7 +6,7 @@
     + [部署master节点服务(etcd证书，etcd集群)](#部署master节点服务)
     + [部署kube-apiserver集群](#部署kube-apiserver集群)
     + [配置nginx反向代理L4,keepalived反向代理](#nginx四层反向代理)
-	+ [部署主控制节点控制器和调度控制器服务](#在129和130机器上)
+	+ [部署主控制节点控制器和调度控制器服务](#在21和22机器上)
 	+ [部署运算节点服务kubelet](#部署运算节点服务kubelet)
 	+ [部署kube-proxy](#部署kube-proxy)
 + ### 环境准备
