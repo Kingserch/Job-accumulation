@@ -1142,3 +1142,44 @@ NAME         TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)   AGE
 kubernetes   ClusterIP   192.168.0.1   <none>        443/TCP   7d2h
 ```
 #### 配置资源配置清单
+```
+vim /root/nginx-ds.yaml
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: nginx-ds
+spec:
+  template:
+    metadata:
+      labels:
+        app: nginx-ds
+    spec:
+      containers:
+      - name: my-nginx
+        image: harbor.od.com/public/nginx:v1.7.9
+        ports:
+        - containerPort: 80
+# kubectl create -f nginx-ds.yaml 
+daemonset.extensions/nginx-ds created
+
+# kubectl get pods 
+NAME             READY   STATUS              RESTARTS   AGE
+nginx-ds-qz7nk   0/1     ContainerCreating   0          12s
+nginx-ds-rvplm   0/1     ContainerCreating   0          12s
+
+[root@hdss7-22 bin]# kubectl get cs
+NAME                 STATUS    MESSAGE              ERROR
+scheduler            Healthy   ok                   
+etcd-1               Healthy   {"health": "true"}   
+etcd-2               Healthy   {"health": "true"}   
+etcd-0               Healthy   {"health": "true"}   
+controller-manager   Healthy   ok                   
+[root@hdss7-22 bin]# kubectl get node
+NAME                STATUS   ROLES         AGE   VERSION
+hdss7-21.host.com   Ready    master,node   35m   v1.15.2
+hdss7-22.host.com   Ready    master,node   35m   v1.15.2
+[root@hdss7-22 bin]# kubectl get pods
+NAME             READY   STATUS    RESTARTS   AGE
+nginx-ds-qz7nk   1/1     Running   0          113s
+nginx-ds-rvplm   1/1     Running   0          113s
+```
