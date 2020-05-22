@@ -1130,4 +1130,15 @@ stdout_events_enabled=false                                          ; emit even
 
 supervisorctl update
 yum install -y ipvsadm
+[root@hdss7-21 ~]# ipvsadm -Ln
+IP Virtual Server version 1.2.1 (size=4096)
+Prot LocalAddress:Port Scheduler Flags
+  -> RemoteAddress:Port           Forward Weight ActiveConn InActConn
+TCP  192.168.0.1:443 nq
+  -> 192.168.56.21:6443           Masq    1      0          0         
+  -> 192.168.56.22:6443           Masq    1      0          0         
+[root@hdss7-21 ~]# kubectl get svc
+NAME         TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   192.168.0.1   <none>        443/TCP   7d2h
 ```
+#### 配置资源配置清单
